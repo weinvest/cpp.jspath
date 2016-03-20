@@ -5,12 +5,12 @@
 #include <boost/property_tree/ptree.hpp>
 namespace jspath
 {
-class JSQuery;
-std::shared_ptr<JSQuery> compile(const std::string& queryExpr);
+class Expression;
+std::shared_ptr<Expression> compile(const std::string& applyExpr);
 
 using boost::property_tree::ptree;
 
-ptree query(const ptree& root, std::shared_ptr<JSQuery> pQuery);
-void query(ptree& outRoot, const ptree& root, std::shared_ptr<JSQuery> pQuery);
+ptree apply(const ptree& root, std::shared_ptr<Expression> pExpression);
+void apply(ptree& outRoot, const ptree& root, std::shared_ptr<Expression> pExpression);
 }
 #endif

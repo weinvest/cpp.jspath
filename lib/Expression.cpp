@@ -1,5 +1,5 @@
 #include "Expression.h"
-
+#include "Context.h"
 namespace jspath
 {
 void Expression::setSuccessor(std::shared_ptr<Expression> pSuccessor)
@@ -9,9 +9,14 @@ void Expression::setSuccessor(std::shared_ptr<Expression> pSuccessor)
 
 void Expression::apply(Context &cxt)
 {
-    doApply(cxt);
-    if(nullptr != mSuccessor)
+    for(auto pInput : cxt.getInput())
     {
+        doApply(cxt, *pInput);
+    }
+
+    if(nullptr != mSuccessor && !cxt.getOutput().empty())
+    {
+	cxt.newStep();
         mSuccessor->apply(cxt);
     }
 }

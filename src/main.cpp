@@ -46,7 +46,7 @@ int main(int argc, char** argv)
 
         auto queryExpr = vm["query"].as<std::string>();
         auto query = jspath::compile(queryExpr);
-        auto result = jspath::query(inputJson, query);
+        auto result = jspath::apply(inputJson, query);
 
         write_json(std::cout, result);
         return 0;

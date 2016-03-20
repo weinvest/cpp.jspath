@@ -1,23 +1,31 @@
 #include "JSPath.h"
-#include "JSQuery.h"
+#include "Context.h"
+#include "Expression.h"
+#include "DotLocationPath.h"
 namespace jspath
 {
-std::shared_ptr<JSQuery> compile(const std::string& queryExpr)
+std::shared_ptr<Expression> compile(const std::string& applyExpr)
 {
-    auto query = std::make_shared<JSQuery>();
-    query->compile(queryExpr);
-    return query;
+    auto pResultExpression = std::make_shared<DotLocationPath>("ee");
+    //pResultExpression->compile(applyExpr);
+    return pResultExpression;
 }
 
-ptree query(const ptree& root, std::shared_ptr<JSQuery> pQuery)
+ptree apply(const ptree& root, std::shared_ptr<Expression> pExpression)
 {
     ptree outRoot;
-    query(outRoot, root, pQuery);
+    apply(outRoot, root, pExpression);
     return outRoot;
 }
 
-void query(ptree& outRoot, const ptree& root, std::shared_ptr<JSQuery> pQuery)
+void apply(ptree& outRoot, const ptree& root, std::shared_ptr<Expression> pExpression)
 {
+    Context cxt(root);
+    pExpression->apply(cxt);
 
+    for(auto pResultNode : cxt.getOutput())
+    {
+	outRoot.put_child("", *pResultNode);
+    }
 }
 }
