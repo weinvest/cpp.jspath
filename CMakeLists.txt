@@ -10,5 +10,6 @@ project(jspath)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1y -Werror=uninitialized -Werror=return-type")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -D_DEBUG")
 
+add_subdirectory(lib)
 add_subdirectory(src)
 add_subdirectory(tests)
