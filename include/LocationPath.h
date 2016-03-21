@@ -6,12 +6,14 @@ namespace jspath
 class LocationPath: public Expression
 {
 public:
-    LocationPath(const std::string& path);
+    LocationPath(const std::string& path, bool isAbsolute = false);
 
     const std::string& getPath() const { return mPath; }
 
+    bool isAbsolute() const { return mIsAbsolute; }
 private:
     std::string mPath;
+    bool mIsAbsolute;
 };
 }
 #endif

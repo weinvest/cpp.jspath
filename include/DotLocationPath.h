@@ -3,14 +3,15 @@
 #include "LocationPath.h"
 namespace jspath
 {
-    class DotLocationPath: public LocationPath
-    {
-    public:
-       DotLocationPath(const std::string& path);	
+class DotLocationPath: public LocationPath
+{
+public:
+    DotLocationPath(const std::string& path);
 
-    protected:
-       void doApply(Context& cxt, const ptree& input) override;
-    };
+protected:
+    void doApply(Context& cxt, const ptree& input) override;
+
+};
 }
 #endif
 

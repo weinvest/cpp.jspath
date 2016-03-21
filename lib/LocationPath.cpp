@@ -2,8 +2,9 @@
 
 namespace jspath
 {
-    LocationPath::LocationPath(const std::string& path)
-	:mPath(path)
-    {}
+LocationPath::LocationPath(const std::string& path, bool isAbsolute)
+    :mPath(path)
+    ,mIsAbsolute(isAbsolute)
+{}
 }
 

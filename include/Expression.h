@@ -13,7 +13,7 @@ namespace jspath
         virtual void apply(Context& cxt);
 
         void setSuccessor(std::shared_ptr<Expression> pSuccessor);
-
+        std::shared_ptr<Expression> getSuccessor() { return mSuccessor; }
     protected:
         virtual void doApply(Context& cxt, const ptree& input) = 0;
 
