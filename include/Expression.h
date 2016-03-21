@@ -10,7 +10,7 @@ namespace jspath
     {
     public:
         virtual ~Expression() {}
-        void apply(Context& cxt);
+        virtual void apply(Context& cxt);
 
         void setSuccessor(std::shared_ptr<Expression> pSuccessor);
 

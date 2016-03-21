@@ -2,16 +2,16 @@
 #include "Context.h"
 namespace jspath
 {
-    DotLocationPath::DotLocationPath(const std::string& path)
-	:LocationPath(path)
-    {}
+DotLocationPath::DotLocationPath(const std::string& path)
+    :LocationPath(path)
+{}
 
-    void DotLocationPath::doApply(Context& cxt, const ptree& input)
+void DotLocationPath::doApply(Context& cxt, const ptree& input)
+{
+    if(input.count(getPath()))
     {
-	if(input.count(getPath()))
-	{
-	    cxt.getOutput().push_back(&input.get_child(getPath()));
-	}
+        cxt.getOutput().push_back(&input.get_child(getPath()));
     }
+}
 }
 

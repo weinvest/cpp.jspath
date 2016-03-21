@@ -3,16 +3,16 @@
 #include "Expression.h"
 namespace jspath
 {
-    class LocationPath: public Expression
-    {
-    public:
-	LocationPath(const std::string& path);
+class LocationPath: public Expression
+{
+public:
+    LocationPath(const std::string& path);
 
-        const std::string& getPath() const { return mPath; }
+    const std::string& getPath() const { return mPath; }
 
-    private:
-	std::string mPath;
-    };
+private:
+    std::string mPath;
+};
 }
 #endif
 

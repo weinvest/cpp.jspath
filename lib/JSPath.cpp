@@ -25,7 +25,7 @@ void apply(ptree& outRoot, const ptree& root, std::shared_ptr<Expression> pExpre
 
     for(auto pResultNode : cxt.getOutput())
     {
-	outRoot.put_child("", *pResultNode);
+        outRoot.put_child("", *pResultNode);
     }
 }
 }

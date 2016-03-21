@@ -16,7 +16,7 @@ void Expression::apply(Context &cxt)
 
     if(nullptr != mSuccessor && !cxt.getOutput().empty())
     {
-	cxt.newStep();
+        cxt.newStep();
         mSuccessor->apply(cxt);
     }
 }
