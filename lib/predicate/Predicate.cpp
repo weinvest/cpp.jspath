@@ -3,5 +3,9 @@
 namespace jspath
 {
 
+Predicate::Predicate()
+{}
 
+Predicate::~Predicate()
+{}
 }
