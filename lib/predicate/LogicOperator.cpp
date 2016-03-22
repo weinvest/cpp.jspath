@@ -1,4 +1,3 @@
-#include "predicate/Operator.h"
 #include "predicate/LogicOperator.h"
 namespace jspath
 {

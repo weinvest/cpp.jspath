@@ -7,9 +7,12 @@ namespace jspath
 class Add: public Operand
 {
 public:
+    Add(std::shared_ptr<Operand> pOperand1 , std::shared_ptr<Operand> pOperand2);
     double getNumericValue(const Context& cxt, const ptree& input, bool convert) override;
     std::string getStringValue(const Context& cxt, const ptree& input, bool convert) override;
 
+private:
+    
 };
 }
 #endif
