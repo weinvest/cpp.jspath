@@ -1,4 +1,4 @@
-#include "DotLocationPath.h"
+#include "location/DotLocationPath.h"
 #include "Context.h"
 namespace jspath
 {

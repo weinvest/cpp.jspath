@@ -1,7 +1,7 @@
 #include "JSPath.h"
 #include "Context.h"
 #include "Expression.h"
-#include "DotLocationPath.h"
+#include "location/DotLocationPath.h"
 namespace jspath
 {
 std::shared_ptr<Expression> compile(const std::string& applyExpr)

@@ -1,5 +1,4 @@
-#include "Positional.h"
-#include "Positional.h"
+#include "positional/Positional.h"
 #include "Context.h"
 namespace jspath
 {

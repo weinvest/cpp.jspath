@@ -1,4 +1,4 @@
-#include "RegexLocationPath.h"
+#include "location/RegexLocationPath.h"
 #include "Context.h"
 namespace jspath
 {

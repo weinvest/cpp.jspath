@@ -1,5 +1,5 @@
 #include <boost/algorithm/string.hpp>
-#include "WildcardLocationPath.h"
+#include "location/WildcardLocationPath.h"
 
 namespace jspath
 {

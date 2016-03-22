@@ -1,4 +1,4 @@
-#include "MultiLocationPath.h"
+#include "location/MultiLocationPath.h"
 #include "Context.h"
 namespace jspath
 {
