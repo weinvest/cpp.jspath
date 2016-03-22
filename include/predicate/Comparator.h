@@ -2,103 +2,68 @@
 #define _JSPATH_COMPARATOR_H
 
 #include "predicate/Operand.h"
+#include "predicate/BinaryOperator.hpp"
 namespace jspath
 {
-class Equal: public Predicate
+typedef BinaryOperator<Operand, Predicate> CompareBase;
+class Equal: public CompareBase
 {
 public:
-    Equal(std::shared_ptr<Operand> pOperand1 , std::shared_ptr<Operand> pOperand2);
+    using CompareBase::CompareBase;
 
     bool eval(const Context& cxt, const ptree& input) override;
-
-private:
-    std::shared_ptr<Operand> mOperand1;
-    std::shared_ptr<Operand> mOperand2;
 };
 
-class StrictlyEqual: public Predicate
+class StrictlyEqual: public CompareBase
 {
 public:
-    StrictlyEqual(std::shared_ptr<Operand> pOperand1 , std::shared_ptr<Operand> pOperand2);
+    using CompareBase::CompareBase;
 
     bool eval(const Context& cxt, const ptree& input) override;
-
-private:
-    std::shared_ptr<Operand> mOperand1;
-    std::shared_ptr<Operand> mOperand2;
-
 };
 
-class NonEqual: public Predicate
+class NonEqual: public CompareBase
 {
 public:
-    NonEqual(std::shared_ptr<Operand> pOperand1 , std::shared_ptr<Operand> pOperand2);
+    using CompareBase::CompareBase;
 
     bool eval(const Context& cxt, const ptree& input) override;
-
-private:
-    std::shared_ptr<Operand> mOperand1;
-    std::shared_ptr<Operand> mOperand2;
 };
 
-class StrictlyNonEqual: public Predicate
+class StrictlyNonEqual: public CompareBase
 {
 public:
-    StrictlyNonEqual(std::shared_ptr<Operand> pOperand1 , std::shared_ptr<Operand> pOperand2);
+    using CompareBase::CompareBase;
 
     bool eval(const Context& cxt, const ptree& input) override;
-
-private:
-    std::shared_ptr<Operand> mOperand1;
-    std::shared_ptr<Operand> mOperand2;
 };
 
-class GreatThan: public Predicate
+class GreatThan: public CompareBase
 {
 public:
-    GreatThan(std::shared_ptr<Operand> pOperand1 , std::shared_ptr<Operand> pOperand2);
-
+    using CompareBase::CompareBase;
     bool eval(const Context& cxt, const ptree& input) override;
-
-private:
-    std::shared_ptr<Operand> mOperand1;
-    std::shared_ptr<Operand> mOperand2;
 };
 
-class GreatEqual: public Predicate
+class GreatEqual: public CompareBase
 {
 public:
-    GreatEqual(std::shared_ptr<Operand> pOperand1 , std::shared_ptr<Operand> pOperand2);
-
+    using CompareBase::CompareBase;
     bool eval(const Context& cxt, const ptree& input) override;
-
-private:
-    std::shared_ptr<Operand> mOperand1;
-    std::shared_ptr<Operand> mOperand2;
 };
 
-class LessThan: public Predicate
+class LessThan: public CompareBase
 {
 public:
-    LessThan(std::shared_ptr<Operand> pOperand1 , std::shared_ptr<Operand> pOperand2);
-
+    using CompareBase::CompareBase;
     bool eval(const Context& cxt, const ptree& input) override;
-
-private:
-    std::shared_ptr<Operand> mOperand1;
-    std::shared_ptr<Operand> mOperand2;
 };
 
-class LessEqual: public Predicate
+class LessEqual: public CompareBase
 {
 public:
-    LessEqual(std::shared_ptr<Operand> pOperand1 , std::shared_ptr<Operand> pOperand2);
-
+    using CompareBase::CompareBase;
     bool eval(const Context& cxt, const ptree& input) override;
-
-private:
-    std::shared_ptr<Operand> mOperand1;
-    std::shared_ptr<Operand> mOperand2;
 };
 }
 #endif

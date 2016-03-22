@@ -1,3 +1,6 @@
 *.swp
 .user*
 build
+.cproject
+.project
+.autosave

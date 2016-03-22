@@ -2,95 +2,65 @@
 #define _JSPATH_STRING_OPERATOR_H
 #include "predicate/Predicate.h"
 #include "predicate/Operand.h"
+#include "predicate/BinaryOperator.hpp"
 namespace jspath
 {
 
-class SensitiveEqual: public Predicate
+typedef BinaryOperator<Operand, Predicate> StringOperator;
+class SensitiveEqual: public StringOperator
 {
 public:
-    SensitiveEqual(std::shared_ptr<Operand> pOperand1 , std::shared_ptr<Operand> pOperand2);
+    using StringOperator::StringOperator;
     bool eval(const Context& cxt, const ptree& input) override;
-
-private:
-    std::shared_ptr<Operand> mOperand1;
-    std::shared_ptr<Operand> mOperand2;
 };
 
-class InsensitiveEqual: public Predicate
+class InsensitiveEqual: public StringOperator
 {
 public:
-    InsensitiveEqual(std::shared_ptr<Operand> pOperand1 , std::shared_ptr<Operand> pOperand2);
+    using StringOperator::StringOperator;
     bool eval(const Context& cxt, const ptree& input) override;
-
-private:
-    std::shared_ptr<Operand> mOperand1;
-    std::shared_ptr<Operand> mOperand2;
 };
 
-class StartsWith: public Predicate
+class StartsWith: public StringOperator
 {
 public:
-    StartsWith(std::shared_ptr<Operand> pOperand1 , std::shared_ptr<Operand> pOperand2);
+    using StringOperator::StringOperator;
     bool eval(const Context& cxt, const ptree& input) override;
-
-private:
-    std::shared_ptr<Operand> mOperand1;
-    std::shared_ptr<Operand> mOperand2;
 };
 
-class InsensitiveStartsWith: public Predicate
+class InsensitiveStartsWith: public StringOperator
 {
 public:
-    InsensitiveStartsWith(std::shared_ptr<Operand> pOperand1 , std::shared_ptr<Operand> pOperand2);
+    using StringOperator::StringOperator;
     bool eval(const Context& cxt, const ptree& input) override;
-
-private:
-    std::shared_ptr<Operand> mOperand1;
-    std::shared_ptr<Operand> mOperand2;
 };
 
-class EndsWith: public Predicate
+class EndsWith: public StringOperator
 {
 public:
-    EndsWith(std::shared_ptr<Operand> pOperand1 , std::shared_ptr<Operand> pOperand2);
+    using StringOperator::StringOperator;
     bool eval(const Context& cxt, const ptree& input) override;
-
-private:
-    std::shared_ptr<Operand> mOperand1;
-    std::shared_ptr<Operand> mOperand2;
 };
 
-class InsensitiveEndsWith: public Predicate
+class InsensitiveEndsWith: public StringOperator
 {
 public:
-    InsensitiveEndsWith(std::shared_ptr<Operand> pOperand1 , std::shared_ptr<Operand> pOperand2);
+    using StringOperator::StringOperator;
     bool eval(const Context& cxt, const ptree& input) override;
-
-private:
-    std::shared_ptr<Operand> mOperand1;
-    std::shared_ptr<Operand> mOperand2;
 };
 
-class Contains: public Predicate
+class Contains: public StringOperator
 {
 public:
-    Contains(std::shared_ptr<Operand> pOperand1 , std::shared_ptr<Operand> pOperand2);
+    using StringOperator::StringOperator;
     bool eval(const Context& cxt, const ptree& input) override;
-
-private:
-    std::shared_ptr<Operand> mOperand1;
-    std::shared_ptr<Operand> mOperand2;
 };
 
-class InsensitiveContains: public Predicate
+class InsensitiveContains: public StringOperator
 {
 public:
-    InsensitiveContains(std::shared_ptr<Operand> pOperand1 , std::shared_ptr<Operand> pOperand2);
+    using StringOperator::StringOperator;
     bool eval(const Context& cxt, const ptree& input) override;
-
-private:
-    std::shared_ptr<Operand> mOperand1;
-    std::shared_ptr<Operand> mOperand2;
 };
 }
 #endif

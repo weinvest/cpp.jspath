@@ -4,11 +4,6 @@
 namespace jspath
 {
 //================================sensitive equal=========================
-SensitiveEqual::SensitiveEqual(std::shared_ptr<Operand> pOperand1 , std::shared_ptr<Operand> pOperand2)
-    :mOperand1(pOperand1)
-    ,mOperand2(pOperand2)
-{}
-
 bool SensitiveEqual::eval(const Context& cxt, const ptree& input)
 {
     auto str1 = mOperand1->getStringValue(cxt, input);
@@ -18,11 +13,6 @@ bool SensitiveEqual::eval(const Context& cxt, const ptree& input)
 }
 
 //================================insensitive equal=========================
-InsensitiveEqual::InsensitiveEqual(std::shared_ptr<Operand> pOperand1 , std::shared_ptr<Operand> pOperand2)
-    :mOperand1(pOperand1)
-    ,mOperand2(pOperand2)
-{}
-
 bool InsensitiveEqual::eval(const Context& cxt, const ptree& input)
 {
     auto str1 = mOperand1->getStringValue(cxt, input);
@@ -32,11 +22,6 @@ bool InsensitiveEqual::eval(const Context& cxt, const ptree& input)
 }
 
 //================================starts with =========================
-StartsWith::StartsWith(std::shared_ptr<Operand> pOperand1 , std::shared_ptr<Operand> pOperand2)
-    :mOperand1(pOperand1)
-    ,mOperand2(pOperand2)
-{}
-
 bool StartsWith::eval(const Context& cxt, const ptree& input)
 {
     auto str1 = mOperand1->getStringValue(cxt, input);
@@ -45,11 +30,6 @@ bool StartsWith::eval(const Context& cxt, const ptree& input)
 }
 
 //================================insensitive starts with =========================
-InsensitiveStartsWith::InsensitiveStartsWith(std::shared_ptr<Operand> pOperand1 , std::shared_ptr<Operand> pOperand2)
-    :mOperand1(pOperand1)
-    ,mOperand2(pOperand2)
-{}
-
 bool InsensitiveStartsWith::eval(const Context& cxt, const ptree& input)
 {
     auto str1 = mOperand1->getStringValue(cxt, input);
@@ -59,11 +39,6 @@ bool InsensitiveStartsWith::eval(const Context& cxt, const ptree& input)
 }
 
 //================================ends with =========================
-EndsWith::EndsWith(std::shared_ptr<Operand> pOperand1 , std::shared_ptr<Operand> pOperand2)
-    :mOperand1(pOperand1)
-    ,mOperand2(pOperand2)
-{}
-
 bool EndsWith::eval(const Context& cxt, const ptree& input)
 {
     auto str1 = mOperand1->getStringValue(cxt, input);
@@ -72,11 +47,6 @@ bool EndsWith::eval(const Context& cxt, const ptree& input)
 }
 
 //================================insensitive ends with =========================
-InsensitiveEndsWith::InsensitiveEndsWith(std::shared_ptr<Operand> pOperand1 , std::shared_ptr<Operand> pOperand2)
-    :mOperand1(pOperand1)
-    ,mOperand2(pOperand2)
-{}
-
 bool InsensitiveEndsWith::eval(const Context& cxt, const ptree& input)
 {
     auto str1 = mOperand1->getStringValue(cxt, input);
@@ -86,11 +56,6 @@ bool InsensitiveEndsWith::eval(const Context& cxt, const ptree& input)
 }
 
 //===============================contains===========================================
-Contains::Contains(std::shared_ptr<Operand> pOperand1 , std::shared_ptr<Operand> pOperand2)
-    :mOperand1(pOperand1)
-    ,mOperand2(pOperand2)
-{}
-
 bool Contains::eval(const Context& cxt, const ptree& input)
 {
     auto str1 = mOperand1->getStringValue(cxt, input);
@@ -100,11 +65,6 @@ bool Contains::eval(const Context& cxt, const ptree& input)
 }
 
 //===============================insensitive contains===========================================
-InsensitiveContains::InsensitiveContains(std::shared_ptr<Operand> pOperand1 , std::shared_ptr<Operand> pOperand2)
-    :mOperand1(pOperand1)
-    ,mOperand2(pOperand2)
-{}
-
 bool InsensitiveContains::eval(const Context& cxt, const ptree& input)
 {
     auto str1 = mOperand1->getStringValue(cxt, input);

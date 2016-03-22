@@ -2,28 +2,22 @@
 #define _JSPATH_LOGIC_OPERATOR_H
 #include <memory>
 #include "predicate/Predicate.h"
+#include "predicate/BinaryOperator.hpp"
 namespace jspath
 {
-class And: public Predicate
+typedef BinaryOperator<Predicate, Predicate> LogicBase;
+class And: public LogicBase
 {
 public:
-    And(std::shared_ptr<Predicate> pred1, std::shared_ptr<Predicate> pred2);
+    using LogicBase::LogicBase;
     bool eval(const Context& cxt, const ptree& input) override;
-
-private:
-    std::shared_ptr<Predicate> mChildPred1;
-    std::shared_ptr<Predicate> mChildPred2;
 };
 
-class Or: public Predicate
+class Or: public LogicBase
 {
 public:
-    Or(std::shared_ptr<Predicate> pred1, std::shared_ptr<Predicate> pred2);
+    using LogicBase::LogicBase;
     bool eval(const Context& cxt, const ptree& input) override;
-
-private:
-    std::shared_ptr<Predicate> mChildPred1;
-    std::shared_ptr<Predicate> mChildPred2;
 };
 
 class Not: public Predicate
