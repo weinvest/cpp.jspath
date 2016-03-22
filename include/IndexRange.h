@@ -17,7 +17,7 @@ public:
 
     int getStep() const { return mStep; }
 private:
-    bool isBlank(const std::string& str, size_t& from, size_t to);
+    int parseIndex(const std::string& str, size_t& from, int blankValue);
 
     bool mIsRange;
     int mFrom;

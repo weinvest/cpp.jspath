@@ -8,51 +8,63 @@ namespace jspath
 {
 IndexRange::IndexRange(const std::string& index)
     :mIsRange(true)
+    ,mFrom(END)
+    ,mTo(-1)
     ,mStep(1)
 {
-	auto firstPos = index.find_first_of(':');
-	if(std::string::npos == firstPos)
-	{
-		mIsRange = false;
-	    mFrom = boost::lexical_cast<int>(index);
-	}
-	else
-	{
-        size_t fromBeg = 0;
-        if(isBlank(index, fromBeg, firstPos))
-        {
-        	mFrom = 0;
-        }
-        else
-        {
-            mFrom = boost::lexical_cast<int>(index.substr(fromBeg, firstPos - fromBeg));
-        }
+    size_t pos = 0;
+    mFrom = parseIndex(index, pos, 0);
 
-        size_t toBeg = firstPos + 1;
-        auto secondPos = index.find_first_of(toBeg + 1, ':');
-        if(std::string::npos == secondPos)
-        {
-            if(isBlank(index, toBeg, std::string::npos))
-            {
-            	mTo = END;
-            }
-            else
-            {
-            	mTo = boost::lexical_cast<int>(index.substr(toBeg));
-            }
-        }
-        else
-        {
-            mTo = boost::lexical_cast<int>(index.substr(toBeg, secondPos));
-            mStep = boost::lexical_cast<int>(index.substr(secondPos + 1));
-        }
-	}
+    if(pos == index.length())
+    {
+        mIsRange = false;
+    }
+    else
+    {
+        mTo = parseIndex(index, pos, END);
+        mStep = parseIndex(index, pos, 1);
+    }
 }
 
-bool IndexRange::isBlank(const std::string& str, size_t& from, size_t to)
+int IndexRange::parseIndex(const std::string& str, size_t& from, int blankValue)
 {
-    for(; !std::isdigit(str.at(from)) && from < to; ++from){}
-    return from == to;
+    for(; from < str.length() && std::isspace(str.at(from)); ++from)
+    {}
+
+    if(from >= str.length())
+    {
+        return blankValue;
+    }
+
+    if(':' == str.at(from))
+    {
+        from += 1;
+        return blankValue;
+    }
+
+    int value = 0;
+    for(; from < str.length() && std::isdigit(str.at(from)); ++from)
+    {
+        value *= 10;
+        value += (str.at(from) - '0');
+    }
+
+    for(; from < str.length() && std::isspace(str.at(from)); ++from)
+    {}
+
+    if(from < str.length())
+    {
+        if(':' == str.at(from))
+        {
+            from += 1;
+        }
+        else
+        {
+            throw std::logic_error("The primitive 4 array index must be in set{0,1,2,3,4,5,6,7,8,9,space,':'} and index range should be divided by ':'");
+        }
+    }
+
+    return value;
 }
 
 int IndexRange::begin(int size)
