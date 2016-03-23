@@ -10,8 +10,8 @@ class Add: public ArthemeticOperator
 public:
     using ArthemeticOperator::ArthemeticOperator;
 
-    double getNumericValue(const Context& cxt, const ptree& input, bool convert) override;
-    std::string getStringValue(const Context& cxt, const ptree& input, bool convert) override;
+    double getRealValue(const Context& cxt, const ptree& inputg) override;
+    const std::string& getStringValue(const Context& cxt, const ptree& inputg) override;
 };
 
 class Sub: public ArthemeticOperator
@@ -19,8 +19,8 @@ class Sub: public ArthemeticOperator
 public:
     using ArthemeticOperator::ArthemeticOperator;
 
-    double getNumericValue(const Context& cxt, const ptree& input, bool convert) override;
-    std::string getStringValue(const Context& cxt, const ptree& input, bool convert) override;
+    double getRealValue(const Context& cxt, const ptree& inputg) override;
+    const std::string& getStringValue(const Context& cxt, const ptree& inputg) override;
 };
 
 class Multiply: public ArthemeticOperator
@@ -28,8 +28,8 @@ class Multiply: public ArthemeticOperator
 public:
     using ArthemeticOperator::ArthemeticOperator;
 
-    double getNumericValue(const Context& cxt, const ptree& input, bool convert) override;
-    std::string getStringValue(const Context& cxt, const ptree& input, bool convert) override;
+    double getRealValue(const Context& cxt, const ptree& inputg) override;
+    const std::string& getStringValue(const Context& cxt, const ptree& inputg) override;
 };
 
 class Divide: public ArthemeticOperator
@@ -37,8 +37,8 @@ class Divide: public ArthemeticOperator
 public:
     using ArthemeticOperator::ArthemeticOperator;
 
-    double getNumericValue(const Context& cxt, const ptree& input, bool convert) override;
-    std::string getStringValue(const Context& cxt, const ptree& input, bool convert) override;
+    double getRealValue(const Context& cxt, const ptree& inputg) override;
+    const std::string& getStringValue(const Context& cxt, const ptree& inputg) override;
 };
 
 class Module: public ArthemeticOperator
@@ -46,8 +46,8 @@ class Module: public ArthemeticOperator
 public:
     using ArthemeticOperator::ArthemeticOperator;
 
-    double getNumericValue(const Context& cxt, const ptree& input, bool convert) override;
-    std::string getStringValue(const Context& cxt, const ptree& input, bool convert) override;
+    double getRealValue(const Context& cxt, const ptree& inputg) override;
+    const std::string& getStringValue(const Context& cxt, const ptree& inputg) override;
 };
 }
 #endif
