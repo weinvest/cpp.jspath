@@ -32,6 +32,7 @@ int Compare(std::shared_ptr<Operand> op1, std::shared_ptr<Operand> op2, const Co
         }
     case Operand::Array:
 	{
+
 	}
     }
 
@@ -44,13 +45,23 @@ bool Equal::eval(const Context &cxt, const boost::property_tree::ptree &input)
     auto t1 = mOperand1->getType(cxt, input);
     auto t2 = mOperand2->getType(cxt, input);
     auto t = t1;
-    if(t1 != t2)
+    if(t1 < t2)
     {
-                
+        if(!mOperand2->canConvert2(t1, cxt, input))
+	{
+	    return false;
+	}
+    }
+    else if(t1 > t2)
+    {
+	if(!mOperand1->canConvert2(t2, cxt, input))
+	{
+	    return false;
+	}
+	t = t2;
     }
     
     return 0 == Compare(mOperand1, mOperand2, cxt, input, t);
-
 }
 
 //=================================strictly equal==============================
@@ -67,7 +78,26 @@ bool StrictlyEqual::eval(const Context &cxt, const boost::property_tree::ptree &
 //=================================non equal==============================
 bool NonEqual::eval(const Context &cxt, const boost::property_tree::ptree &input)
 {
-    return false;
+    auto t1 = mOperand1->getType(cxt, input);
+    auto t2 = mOperand2->getType(cxt, input);
+    auto t = t1;
+    if(t1 < t2)
+    {
+        if(!mOperand2->canConvert2(t1, cxt, input))
+	{
+	    return false;
+	}
+    }
+    else if(t1 > t2)
+    {
+	if(!mOperand1->canConvert2(t2, cxt, input))
+	{
+	    return false;
+	}
+	t = t2;
+    }
+    
+    return 0 != Compare(mOperand1, mOperand2, cxt, input, t);
 }
 
 //=================================strictly non equal==============================

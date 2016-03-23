@@ -22,6 +22,7 @@ public:
     Operand(type t);
     virtual ~Operand();
 
+    virtual bool canConvert2(type t, const Context& cxt, const ptree& input) { return false; }
     virtual bool getBoolValue(const Context& cxt, const ptree& input) = 0;
     virtual int getIntValue(const Context& cxt, const ptree& input) = 0;
     virtual double getRealValue(const Context& cxt, const ptree& input) = 0;
