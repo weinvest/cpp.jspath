@@ -16,7 +16,7 @@ IF(win32)
     ADD_DEFINITIONS(-DBOOST_ALL_NO_LIB BOOST_ASIO_DISABLE_STD_ATOMIC)
 ENDIF()
 
-SET(${TARGET}_SUBDIRS location  positional  predicate)
+SET(${TARGET}_SUBDIRS location  positional  predicate compiler)
 Add_Subs(${TARGET}_SUBDIRS)
 
 GET_SRCS(${TARGET}_SRCLISTS ${TARGET}_SUBDIRS)
