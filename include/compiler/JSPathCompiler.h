@@ -2,34 +2,134 @@
 #define _JSPATH_COMPILER_H
 #include <stack>
 #include <memory>
+#include <map>
 namespace jspath
 {
 class Expression;
 struct SubExpressionParser
 {
 public:
+	enum type
+	{
+		Init,
+		Dot,
+		GenericLocation,
+		RegexLocation,
+		QuoteLocation,
+		TwoDotLocation,
+		ArrayIndex,
+		PredicateExp,
+	};
     virtual ~SubExpressionParser();
 
     virtual void onEntry();
-    virtual bool parse(char c) = 0;
-    virtual std::shared_ptr<Expression> createExpression() = 0;
+    virtual size_t parse(const std::string& fullExpression, size_t fromPos) = 0;
+    virtual std::shared_ptr<Expression> onExit() = 0;
+    virtual type getCode() const = 0;
 };
+
+struct InitParser: public SubExpressionParser
+{
+	size_t parse(const std::string& fullExpression, size_t fromPos) override { return fromPos; }
+	std::shared_ptr<Expression> onExit() override { return nullptr; }
+	type getCode() const override { return Init; }
+};
+
+struct DotParser: public SubExpressionParser
+{
+	size_t parse(const std::string& fullExpression, size_t fromPos) { return fromPos + 1; }
+	std::shared_ptr<Expression> onExit() override { return nullptr; }
+	type getCode() const override { return Dot; }
+};
+
 
 struct RegexLocationParser: public SubExpressionParser
 {
 public:
-    bool parse(char c) override;
-    std::shared_ptr<Expression> createExpression() override;
+	void onEntry() override;
+	size_t parse(const std::string& fullExpression, size_t fromPos) override;
+    std::shared_ptr<Expression> onExit() override;
+    type getCode() const override { return RegexLocation; }
 
 private:
+    std::string mRegexText;
+};
 
+struct QuoteLocationParser : public SubExpressionParser
+{
+public:
+	void onEntry() override;
+	size_t parse(const std::string& fullExpression, size_t fromPos) override;
+	std::shared_ptr<Expression> onExit() override;
+	type getCode() const override { return QuoteLocation; }
+
+private:
+	std::string mLocation;
+};
+
+class GenericLocationParser: public SubExpressionParser
+{
+public:
+	void onEntry() override;
+	size_t parse(const std::string& fullExpression, size_t fromPos) override;
+	std::shared_ptr<Expression> onExit() override;
+
+	type getCode() const override { return GenericLocation; }
+private:
+	bool mIsWildcard;
+	std::string mLocation;
+};
+
+struct TwoDotLocationParser: public SubExpressionParser
+{
+public:
+	size_t parse(const std::string& fullExpression, size_t fromPos) override { return fromPos + 1; }
+	std::shared_ptr<Expression> onExit() override;
+	type getCode() const override { return TwoDotLocation; }
+};
+
+struct PositionalParser: public SubExpressionParser
+{
+public:
+	void onEntry() override;
+	size_t parse(const std::string& fullExpression, size_t fromPos) override;
+	std::shared_ptr<Expression> onExit() override;
+	type getCode() const override { return ArrayIndex; }
+private:
+	std::string mIndex;
+};
+
+struct PredicateParser: public SubExpressionParser
+{
+public:
+	void onEntry() override;
+	size_t parse(const std::string& fullExpression, size_t fromPos) override;
+	std::shared_ptr<Expression> onExit() override;
+
+	type getCode() const override { return PredicateExp; }
+private:
+	std::string mPredicate;
 };
 
 struct Compiler
 {
-
+public:
+	Compiler();
+	std::shared_ptr<Expression> compile(const std::string& strExpression);
 private:
-    std::stack<std::shared_ptr<SubExpressionParser>> m;
+
+
+
+	typedef std::shared_ptr<SubExpressionParser> State;
+	typedef char Event;
+	typedef std::shared_ptr<std::map<Event, State>> SubTransaction;
+
+	std::map<SubExpressionParser::type, SubTransaction> mTransactions;
+    State mCurrentState;
+    SubTransaction mCurrentSubState;
+
+	void addTransaction(State fromState, Event, State toState);
+	std::shared_ptr<Expression> processEvent(Event event);
 };
 
 }

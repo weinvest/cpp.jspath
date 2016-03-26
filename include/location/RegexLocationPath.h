@@ -4,18 +4,18 @@
 #include "LocationPath.h"
 namespace jspath
 {
-    using boost::xpressive::sregex;
+using boost::xpressive::sregex;
 
-    class RegexLocationPath: public LocationPath
-    {
-    public:
+class RegexLocationPath: public LocationPath
+{
+public:
 	RegexLocationPath(const std::string& regex);
 
-    protected:
+protected:
 	void doApply(Context& cxt, const ptree& input);
 
-        sregex mPattern;
-    };
+	sregex mPattern;
+};
 }
 #endif
 

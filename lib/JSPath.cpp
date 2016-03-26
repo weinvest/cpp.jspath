@@ -1,14 +1,13 @@
 #include "JSPath.h"
 #include "Context.h"
 #include "Expression.h"
-#include "location/DotLocationPath.h"
+#include "compiler/JSPathCompiler.h"
 namespace jspath
 {
 std::shared_ptr<Expression> compile(const std::string& applyExpr)
 {
-    auto pResultExpression = std::make_shared<DotLocationPath>("ee");
-    //pResultExpression->compile(applyExpr);
-    return pResultExpression;
+	Compiler compiler;
+	return compiler.compile(applyExpr);
 }
 
 ptree apply(const ptree& root, std::shared_ptr<Expression> pExpression)
