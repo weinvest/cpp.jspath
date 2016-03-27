@@ -24,6 +24,7 @@ void Positional::apply(Context& cxt)
 
 void Positional::doApply(Context& cxt, const json& input)
 {
+#if 0
     int begin = mRange.begin(input.size());
     int end = mRange.end(input.size());
 
@@ -46,5 +47,6 @@ void Positional::doApply(Context& cxt, const json& input)
             cxt.getOutput().push_back(&(itCur.value()));
         }
     }
+#endif
 }
 }

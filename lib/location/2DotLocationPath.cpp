@@ -10,11 +10,17 @@ TwoDotLocationPath::TwoDotLocationPath()
 
 void TwoDotLocationPath::doApply(Context &cxt, const json &input)
 {
-    cxt.getOutput().push_back(&input);
-
-    for(auto& child : input)
+    if(!input.is_array())
     {
-        //doApply(cxt, child.second);
+        cxt.getOutput().push_back(&input);
+    }
+
+    if(!input.is_primitive())
+    {
+        for(auto& child : input)
+        {
+            doApply(cxt, &child);
+        }
     }
 }
 
