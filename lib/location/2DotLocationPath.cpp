@@ -8,13 +8,13 @@ TwoDotLocationPath::TwoDotLocationPath()
 
 }
 
-void TwoDotLocationPath::doApply(Context &cxt, const boost::property_tree::ptree &input)
+void TwoDotLocationPath::doApply(Context &cxt, const json &input)
 {
     cxt.getOutput().push_back(&input);
 
     for(auto& child : input)
     {
-        doApply(cxt, child.second);
+        //doApply(cxt, child.second);
     }
 }
 

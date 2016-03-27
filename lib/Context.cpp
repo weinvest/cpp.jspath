@@ -2,7 +2,7 @@
 
 namespace jspath
 {
-Context::Context(const ptree& root)
+Context::Context(const json& root)
     :mOutputContext(new StepContext())
 {
     newStep();

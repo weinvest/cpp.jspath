@@ -14,7 +14,7 @@ public:
     void apply(Context& cxt) override;
 
 protected:
-    void doApply(Context &cxt, const boost::property_tree::ptree &input);
+    void doApply(Context &cxt, const json &input);
 
     std::vector<std::shared_ptr<LocationPath>> mChildren;
 };

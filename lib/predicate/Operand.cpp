@@ -12,7 +12,7 @@ Operand::Operand(type t)
 Operand::~Operand()
 {}
 
-bool Operand::eval(const Context& cxt, const ptree& input)
+bool Operand::eval(const Context& cxt, const json& input)
 {
     return getBoolValue(cxt, input);
 }
@@ -60,22 +60,22 @@ BoolOperand::BoolOperand(const std::string& v)
     }
 }
 
-bool BoolOperand::getBoolValue(const Context& cxt, const ptree& input)
+bool BoolOperand::getBoolValue(const Context& cxt, const json& input)
 {
     return mBoolValue;
 }
 
-int BoolOperand::getIntValue(const Context& /*cxt*/, const ptree& /*input*/)
+int BoolOperand::getIntValue(const Context& /*cxt*/, const json& /*input*/)
 {
     return mBoolValue;
 }
 
-double BoolOperand::getRealValue(const Context& /*cxt*/, const ptree& /*input*/)
+double BoolOperand::getRealValue(const Context& /*cxt*/, const json& /*input*/)
 {
     return mBoolValue;
 }
 
-const std::string& BoolOperand::getStringValue(const Context& /*cxt*/, const ptree& /*input*/)
+const std::string& BoolOperand::getStringValue(const Context& /*cxt*/, const json& /*input*/)
 {
     return mRepresentation;
 }
@@ -87,22 +87,22 @@ IntOperand::IntOperand(const std::string& v)
     ,mRepresentation(v)
 {}
 
-bool IntOperand::getBoolValue(const Context& cxt, const ptree& input)
+bool IntOperand::getBoolValue(const Context& cxt, const json& input)
 {
     return 0 != mIntValue;
 }
 
-int IntOperand::getIntValue(const Context& /*cxt*/, const ptree& /*input*/)
+int IntOperand::getIntValue(const Context& /*cxt*/, const json& /*input*/)
 {
     return mIntValue;
 }
 
-double IntOperand::getRealValue(const Context& /*cxt*/, const ptree& /*input*/)
+double IntOperand::getRealValue(const Context& /*cxt*/, const json& /*input*/)
 {
     return mIntValue;
 }
 
-const std::string& IntOperand::getStringValue(const Context& /*cxt*/, const ptree& /*input*/)
+const std::string& IntOperand::getStringValue(const Context& /*cxt*/, const json& /*input*/)
 {
     return mRepresentation;
 }
@@ -114,22 +114,22 @@ RealOperand::RealOperand(const std::string& v)
     ,mRepresentation(v)
 {}
 
-bool RealOperand::getBoolValue(const Context& cxt, const ptree& input)
+bool RealOperand::getBoolValue(const Context& cxt, const json& input)
 {
     return std::abs(mRealValue) < 1e-8;
 }
 
-int RealOperand::getIntValue(const Context& /*cxt*/, const ptree& /*input*/)
+int RealOperand::getIntValue(const Context& /*cxt*/, const json& /*input*/)
 {
     return mRealValue;
 }
 
-double RealOperand::getRealValue(const Context& /*cxt*/, const ptree& /*input*/)
+double RealOperand::getRealValue(const Context& /*cxt*/, const json& /*input*/)
 {
     return mRealValue;
 }
 
-const std::string& RealOperand::getStringValue(const Context& /*cxt*/, const ptree& /*input*/)
+const std::string& RealOperand::getStringValue(const Context& /*cxt*/, const json& /*input*/)
 {
     return mRepresentation;
 }
@@ -140,22 +140,22 @@ StringOperand::StringOperand(const std::string& v)
     ,mValue(v)
 {}
 
-bool StringOperand::getBoolValue(const Context& cxt, const ptree& input)
+bool StringOperand::getBoolValue(const Context& cxt, const json& input)
 {
     return false;
 }
 
-int StringOperand::getIntValue(const Context& cxt, const ptree& input)
+int StringOperand::getIntValue(const Context& cxt, const json& input)
 {
     return 0;
 }
 
-double StringOperand::getRealValue(const Context& cxt, const ptree& input)
+double StringOperand::getRealValue(const Context& cxt, const json& input)
 {
     return 0;
 }
 
-const std::string& StringOperand::getStringValue(const Context& cxt, const ptree& input)
+const std::string& StringOperand::getStringValue(const Context& cxt, const json& input)
 {
     return mValue;
 }
@@ -165,22 +165,22 @@ ArrayOperand::ArrayOperand(const std::string& v)
     :Operand(Operand::Array)
 {}
 
-bool ArrayOperand::getBoolValue(const Context& cxt, const ptree& input)
+bool ArrayOperand::getBoolValue(const Context& cxt, const json& input)
 {
     return false;
 }
 
-int ArrayOperand::getIntValue(const Context& cxt, const ptree& input)
+int ArrayOperand::getIntValue(const Context& cxt, const json& input)
 {
     return 0;
 }
 
-double ArrayOperand::getRealValue(const Context& cxt, const ptree& input)
+double ArrayOperand::getRealValue(const Context& cxt, const json& input)
 {
     return 0;
 }
 
-const std::string& ArrayOperand::getStringValue(const Context& cxt, const ptree& input)
+const std::string& ArrayOperand::getStringValue(const Context& cxt, const json& input)
 {
     return "";
     //return mValue;
@@ -193,22 +193,22 @@ LocationOperand::LocationOperand(const std::shared_ptr<LocationPath> p)
     ,mLocation(p)
 {}
 
-bool LocationOperand::getBoolValue(const Context& cxt, const ptree& input)
+bool LocationOperand::getBoolValue(const Context& cxt, const json& input)
 {
     return false;
 }
 
-int LocationOperand::getIntValue(const Context& cxt, const ptree& input)
+int LocationOperand::getIntValue(const Context& cxt, const json& input)
 {
     return 0;
 }
 
-double LocationOperand::getRealValue(const Context& cxt, const ptree& input)
+double LocationOperand::getRealValue(const Context& cxt, const json& input)
 {
     return 0;
 }
 
-const std::string& LocationOperand::getStringValue(const Context& cxt, const ptree& input)
+const std::string& LocationOperand::getStringValue(const Context& cxt, const json& input)
 {
     return "";
     //return mValue;

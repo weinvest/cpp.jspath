@@ -11,7 +11,7 @@ public:
     Filter(std::shared_ptr<Predicate> predicate);
 
 private:
-    void doApply(Context& cxt, const ptree& input) override;
+    void doApply(Context& cxt, const json& input) override;
 
     std::shared_ptr<Predicate> mPredicate;
 };

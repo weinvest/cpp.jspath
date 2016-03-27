@@ -2,15 +2,15 @@
 #define _JSPATH_CONTEXT_H
 #include <vector>
 #include <memory>
-#include <boost/property_tree/ptree.hpp>
+#include "json.hpp"
 namespace jspath
 {
-    using boost::property_tree::ptree;
+    using nlohmann::json;
     class Context
     {
     public:
-	typedef std::vector<const ptree*> StepContext;
-	Context(const ptree& root);
+	typedef std::vector<const json*> StepContext;
+	Context(const json& root);
 
         Context(std::shared_ptr<StepContext> input, std::shared_ptr<StepContext> rootInput = nullptr);
 

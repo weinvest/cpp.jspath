@@ -10,7 +10,7 @@ public:
     TwoDotLocationPath();
 
 protected:
-    void doApply(Context &cxt, const boost::property_tree::ptree &input);
+    void doApply(Context &cxt, const json &input);
 };
 
 }

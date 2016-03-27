@@ -10,21 +10,21 @@ std::shared_ptr<Expression> compile(const std::string& applyExpr)
     return compiler.compile(applyExpr);
 }
 
-ptree apply(const ptree& root, std::shared_ptr<Expression> pExpression)
+json apply(const json& root, std::shared_ptr<Expression> pExpression)
 {
-    ptree outRoot;
+    json outRoot;
     apply(outRoot, root, pExpression);
     return outRoot;
 }
 
-void apply(ptree& outRoot, const ptree& root, std::shared_ptr<Expression> pExpression)
+void apply(json& outRoot, const json& root, std::shared_ptr<Expression> pExpression)
 {
     Context cxt(root);
     pExpression->apply(cxt);
 
     for(auto pResultNode : cxt.getOutput())
     {
-        outRoot.put_child("", *pResultNode);
+        outRoot.push_back(*pResultNode);
     }
 }
 }

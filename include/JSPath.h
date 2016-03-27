@@ -2,15 +2,13 @@
 #define _JSPATH_H
 #include <string>
 #include <memory>
-#include <boost/property_tree/ptree.hpp>
+#include "json.hpp"
 namespace jspath
 {
 class Expression;
 std::shared_ptr<Expression> compile(const std::string& applyExpr);
-
-using boost::property_tree::ptree;
-
-ptree apply(const ptree& root, std::shared_ptr<Expression> pExpression);
-void apply(ptree& outRoot, const ptree& root, std::shared_ptr<Expression> pExpression);
+using nlohmann::json;
+json apply(const json& root, std::shared_ptr<Expression> pExpression);
+void apply(json& outRoot, const json& root, std::shared_ptr<Expression> pExpression);
 }
 #endif

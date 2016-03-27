@@ -8,18 +8,34 @@ RegexLocationPath::RegexLocationPath(const std::string& regex)
     mPattern = sregex::compile(regex);
 }
 
-void RegexLocationPath::doApply(Context& cxt, const ptree& input)
+void RegexLocationPath::doApply(Context& cxt, const json& input)
 {
     using namespace boost::xpressive;
     smatch what;
 
-    for(const auto& child : input)
+    if(input.is_object())
     {
-        if(regex_match(child.first, what, mPattern))
+        for(auto itChild = input.begin(); itChild != input.end(); ++itChild)
         {
-            cxt.getOutput().push_back(&child.second);
-        }
-    }//foreach child
+            if(regex_match(itChild.key(), what, mPattern))
+            {
+                cxt.getOutput().push_back(&itChild.value());
+            }
+        }//foreach field
+    }
+    else if(input.is_array())
+    {
+        for(auto& child : input)
+        {
+            for(auto itChild = child.begin(); itChild != child.end(); ++itChild)
+            {
+                if(regex_match(itChild.key(), what, mPattern))
+                {
+                    cxt.getOutput().push_back(&itChild.value());
+                }
+            }
+        }//foreach child
+    }
 }
 }//namespace jspath
 

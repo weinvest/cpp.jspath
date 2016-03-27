@@ -4,7 +4,7 @@
 namespace jspath
 {
 //================================sensitive equal=========================
-bool SensitiveEqual::eval(const Context& cxt, const ptree& input)
+bool SensitiveEqual::eval(const Context& cxt, const json& input)
 {
     const auto& str1 = mOperand1->getStringValue(cxt, input);
     const auto& str2 = mOperand2->getStringValue(cxt, input);
@@ -13,7 +13,7 @@ bool SensitiveEqual::eval(const Context& cxt, const ptree& input)
 }
 
 //================================insensitive equal=========================
-bool InsensitiveEqual::eval(const Context& cxt, const ptree& input)
+bool InsensitiveEqual::eval(const Context& cxt, const json& input)
 {
     const auto& str1 = mOperand1->getStringValue(cxt, input);
     const auto& str2 = mOperand2->getStringValue(cxt, input);
@@ -22,7 +22,7 @@ bool InsensitiveEqual::eval(const Context& cxt, const ptree& input)
 }
 
 //================================starts with =========================
-bool StartsWith::eval(const Context& cxt, const ptree& input)
+bool StartsWith::eval(const Context& cxt, const json& input)
 {
     const auto& str1 = mOperand1->getStringValue(cxt, input);
     const auto& str2 = mOperand2->getStringValue(cxt, input);
@@ -30,7 +30,7 @@ bool StartsWith::eval(const Context& cxt, const ptree& input)
 }
 
 //================================insensitive starts with =========================
-bool InsensitiveStartsWith::eval(const Context& cxt, const ptree& input)
+bool InsensitiveStartsWith::eval(const Context& cxt, const json& input)
 {
     const auto& str1 = mOperand1->getStringValue(cxt, input);
     const auto& str2 = mOperand2->getStringValue(cxt, input);
@@ -39,7 +39,7 @@ bool InsensitiveStartsWith::eval(const Context& cxt, const ptree& input)
 }
 
 //================================ends with =========================
-bool EndsWith::eval(const Context& cxt, const ptree& input)
+bool EndsWith::eval(const Context& cxt, const json& input)
 {
     const auto& str1 = mOperand1->getStringValue(cxt, input);
     const auto& str2 = mOperand2->getStringValue(cxt, input);
@@ -47,7 +47,7 @@ bool EndsWith::eval(const Context& cxt, const ptree& input)
 }
 
 //================================insensitive ends with =========================
-bool InsensitiveEndsWith::eval(const Context& cxt, const ptree& input)
+bool InsensitiveEndsWith::eval(const Context& cxt, const json& input)
 {
     const auto& str1 = mOperand1->getStringValue(cxt, input);
     const auto& str2 = mOperand2->getStringValue(cxt, input);
@@ -56,7 +56,7 @@ bool InsensitiveEndsWith::eval(const Context& cxt, const ptree& input)
 }
 
 //===============================contains===========================================
-bool Contains::eval(const Context& cxt, const ptree& input)
+bool Contains::eval(const Context& cxt, const json& input)
 {
     const auto& str1 = mOperand1->getStringValue(cxt, input);
     const auto& str2 = mOperand2->getStringValue(cxt, input);
@@ -65,7 +65,7 @@ bool Contains::eval(const Context& cxt, const ptree& input)
 }
 
 //===============================insensitive contains===========================================
-bool InsensitiveContains::eval(const Context& cxt, const ptree& input)
+bool InsensitiveContains::eval(const Context& cxt, const json& input)
 {
     const auto& str1 = mOperand1->getStringValue(cxt, input);
     const auto& str2 = mOperand2->getStringValue(cxt, input);

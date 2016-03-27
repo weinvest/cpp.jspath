@@ -9,7 +9,7 @@ public:
     DotLocationPath(const std::string& path);
 
 protected:
-    void doApply(Context& cxt, const ptree& input) override;
+    void doApply(Context& cxt, const json& input) override;
 
 };
 }

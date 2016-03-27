@@ -1,7 +1,8 @@
 #include "JSPath.h"
+#include "json.hpp"
 #include <iostream>
+#include <fstream>
 #include <boost/program_options.hpp>
-#include <boost/property_tree/json_parser.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/exception/all.hpp>
 int main(int argc, char** argv)
@@ -40,15 +41,17 @@ int main(int argc, char** argv)
 
     try
     {
-        using namespace boost::property_tree;
-        ptree inputJson;
-        read_json(inputFileName, inputJson);
+        using nlohmann::json;
+        std::ifstream jsStream(inputFileName.c_str(), std::ios_base::in | std::ios_base::binary);
+        json inputJson;
+
+        jsStream >> inputJson;
 
         auto queryExpr = vm["query"].as<std::string>();
         auto query = jspath::compile(queryExpr);
         auto result = jspath::apply(inputJson, query);
 
-        write_json(std::cout, result);
+        std::cout << result.dump(4) << std::endl;
         return 0;
     }
     catch(boost::exception& ex)

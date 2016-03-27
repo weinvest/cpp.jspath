@@ -2,7 +2,7 @@
 #include "predicate/Comparator.h"
 namespace jspath
 {
-int Compare(std::shared_ptr<Operand> op1, std::shared_ptr<Operand> op2, const Context& cxt, const ptree& input, Operand::type t)
+int Compare(std::shared_ptr<Operand> op1, std::shared_ptr<Operand> op2, const Context& cxt, const json& input, Operand::type t)
 {
     switch(t)
     {
@@ -40,7 +40,7 @@ int Compare(std::shared_ptr<Operand> op1, std::shared_ptr<Operand> op2, const Co
 }
 
 //=================================equal==============================
-bool Equal::eval(const Context &cxt, const boost::property_tree::ptree &input)
+bool Equal::eval(const Context &cxt, const json &input)
 {
     auto t1 = mOperand1->getType(cxt, input);
     auto t2 = mOperand2->getType(cxt, input);
@@ -65,7 +65,7 @@ bool Equal::eval(const Context &cxt, const boost::property_tree::ptree &input)
 }
 
 //=================================strictly equal==============================
-bool StrictlyEqual::eval(const Context &cxt, const boost::property_tree::ptree &input)
+bool StrictlyEqual::eval(const Context &cxt, const json &input)
 {
     if(mOperand1->getType(cxt, input) != mOperand2->getType(cxt, input))
     {
@@ -76,7 +76,7 @@ bool StrictlyEqual::eval(const Context &cxt, const boost::property_tree::ptree &
 }
 
 //=================================non equal==============================
-bool NonEqual::eval(const Context &cxt, const boost::property_tree::ptree &input)
+bool NonEqual::eval(const Context &cxt, const json &input)
 {
     auto t1 = mOperand1->getType(cxt, input);
     auto t2 = mOperand2->getType(cxt, input);
@@ -101,7 +101,7 @@ bool NonEqual::eval(const Context &cxt, const boost::property_tree::ptree &input
 }
 
 //=================================strictly non equal==============================
-bool StrictlyNonEqual::eval(const Context &cxt, const boost::property_tree::ptree &input)
+bool StrictlyNonEqual::eval(const Context &cxt, const json &input)
 {
     if(mOperand1->getType(cxt, input) != mOperand2->getType(cxt, input))
     {
@@ -111,7 +111,7 @@ bool StrictlyNonEqual::eval(const Context &cxt, const boost::property_tree::ptre
 }
 
 //=================================great than==============================
-bool GreatThan::eval(const Context &cxt, const boost::property_tree::ptree &input)
+bool GreatThan::eval(const Context &cxt, const json &input)
 {
     if(mOperand1->getType(cxt, input) != mOperand2->getType(cxt, input))
     {
@@ -122,7 +122,7 @@ bool GreatThan::eval(const Context &cxt, const boost::property_tree::ptree &inpu
 }
 
 //=================================great equal==============================
-bool GreatEqual::eval(const Context &cxt, const boost::property_tree::ptree &input)
+bool GreatEqual::eval(const Context &cxt, const json &input)
 {
     if(mOperand1->getType(cxt, input) != mOperand2->getType(cxt, input))
     {
@@ -133,7 +133,7 @@ bool GreatEqual::eval(const Context &cxt, const boost::property_tree::ptree &inp
 }
 
 //=================================less than ==============================
-bool LessThan::eval(const Context &cxt, const boost::property_tree::ptree &input)
+bool LessThan::eval(const Context &cxt, const json &input)
 {
     if(mOperand1->getType(cxt, input) != mOperand2->getType(cxt, input))
     {
@@ -144,7 +144,7 @@ bool LessThan::eval(const Context &cxt, const boost::property_tree::ptree &input
 }
 
 //=================================less equal ==============================
-bool LessEqual::eval(const Context &cxt, const boost::property_tree::ptree &input)
+bool LessEqual::eval(const Context &cxt, const json &input)
 {
     if(mOperand1->getType(cxt, input) != mOperand2->getType(cxt, input))
     {

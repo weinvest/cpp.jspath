@@ -12,7 +12,7 @@ class Equal: public CompareBase
 public:
     using CompareBase::CompareBase;
 
-    bool eval(const Context& cxt, const ptree& input) override;
+    bool eval(const Context& cxt, const json& input) override;
 };
 
 class StrictlyEqual: public CompareBase
@@ -20,7 +20,7 @@ class StrictlyEqual: public CompareBase
 public:
     using CompareBase::CompareBase;
 
-    bool eval(const Context& cxt, const ptree& input) override;
+    bool eval(const Context& cxt, const json& input) override;
 };
 
 class NonEqual: public CompareBase
@@ -28,7 +28,7 @@ class NonEqual: public CompareBase
 public:
     using CompareBase::CompareBase;
 
-    bool eval(const Context& cxt, const ptree& input) override;
+    bool eval(const Context& cxt, const json& input) override;
 };
 
 class StrictlyNonEqual: public CompareBase
@@ -36,41 +36,41 @@ class StrictlyNonEqual: public CompareBase
 public:
     using CompareBase::CompareBase;
 
-    bool eval(const Context& cxt, const ptree& input) override;
+    bool eval(const Context& cxt, const json& input) override;
 };
 
 class GreatThan: public CompareBase
 {
 public:
     using CompareBase::CompareBase;
-    bool eval(const Context& cxt, const ptree& input) override;
+    bool eval(const Context& cxt, const json& input) override;
 };
 
 class GreatEqual: public CompareBase
 {
 public:
     using CompareBase::CompareBase;
-    bool eval(const Context& cxt, const ptree& input) override;
+    bool eval(const Context& cxt, const json& input) override;
 };
 
 class LessThan: public CompareBase
 {
 public:
     using CompareBase::CompareBase;
-    bool eval(const Context& cxt, const ptree& input) override;
+    bool eval(const Context& cxt, const json& input) override;
 };
 
 class LessEqual: public CompareBase
 {
 public:
     using CompareBase::CompareBase;
-    bool eval(const Context& cxt, const ptree& input) override;
+    bool eval(const Context& cxt, const json& input) override;
 };
 
 int Compare(std::shared_ptr<Operand> op1
 	, std::shared_ptr<Operand> op2
 	, const Context& cxt
-	, const ptree& input
+	, const json& input
 	, Operand::type t);
 }
 #endif

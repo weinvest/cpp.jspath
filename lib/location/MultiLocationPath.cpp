@@ -31,7 +31,7 @@ void MultiLocationPath::apply(Context& cxt)
     LocationPath::apply(cxt);
 }
 
-void MultiLocationPath::doApply(Context &/*cxt*/, const boost::property_tree::ptree &/*input*/)
+void MultiLocationPath::doApply(Context &/*cxt*/, const json &/*input*/)
 {
 }
 }
