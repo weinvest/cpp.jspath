@@ -3,8 +3,9 @@
 #include <string>
 namespace jspath
 {
-    size_t SkipString(const std::string& input, size_t pos);
-    size_t Skip2(const std::string& input, size_t pos, char c, size_t defEndPos = std::string::npos);
+    size_t skipString(const std::string& input, size_t pos);
+    size_t skip2(const std::string& input, size_t pos, char c, size_t defEndPos = std::string::npos);
+    size_t skip2Any(const std::string& input, size_t pos, const std::string& eodChars, size_t defEndPos);
 }
 #endif
 

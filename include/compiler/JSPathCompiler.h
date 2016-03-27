@@ -20,6 +20,7 @@ public:
         TwoDotLocation,
         ArrayIndex,
         PredicateExp,
+        Exception
     };
     virtual ~SubExpressionParser();
 
@@ -65,6 +66,7 @@ public:
     type getCode() const override { return QuoteLocation; }
 
 private:
+    bool mIsWildcard;
     std::string mLocation;
 };
 
@@ -112,6 +114,14 @@ private:
     std::string mPredicate;
 };
 
+struct ExceptionParser: public SubExpressionParser
+{
+    void onEntry() override {}
+    size_t parse(const std::string& fullExpression, size_t fromPos) override;
+    std::shared_ptr<Expression> onExit() override { return nullptr; }
+
+    type getCode() const override { return Exception; }
+};
 struct Compiler
 {
 public:

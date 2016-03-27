@@ -23,7 +23,8 @@ void RegexLocationParser::onEntry()
 
 size_t RegexLocationParser::parse(const std::string& fullExpression, size_t fromPos)
 {
-    auto endPos = Skip2(fullExpression, fromPos, '/');
+    ++fromPos;
+    auto endPos = skip2(fullExpression, fromPos, '/');
     mRegexText = fullExpression.substr(fromPos, endPos - fromPos);
     return endPos + 1;
 }
@@ -40,14 +41,23 @@ void QuoteLocationParser::onEntry()
 
 size_t QuoteLocationParser::parse(const std::string& fullExpression, size_t fromPos)
 {
-    auto endPos = Skip2(fullExpression, fromPos, '"');
+    ++fromPos;
+    auto endPos = skip2(fullExpression, fromPos, '"');
     mLocation = fullExpression.substr(fromPos, endPos - fromPos);
+    mIsWildcard = std::string::npos != mLocation.find('*');
     return endPos + 1;
 }
 
 std::shared_ptr<Expression> QuoteLocationParser::onExit()
 {
-    return std::make_shared<DotLocationPath>(mLocation);
+    if(mIsWildcard)
+    {
+        return std::make_shared<WildcardLocationPath>(mLocation);
+    }
+    else
+    {
+        return std::make_shared<DotLocationPath>(mLocation);
+    }
 }
 
 //========================GenericLocationParser===================================
@@ -60,8 +70,9 @@ size_t GenericLocationParser::parse(const std::string& fullExpression, size_t fr
 {
     assert(0 != fromPos);
     size_t endPos = fromPos;
-    endPos = Skip2(fullExpression, fromPos, '.', fullExpression.length());
+    endPos = skip2Any(fullExpression, fromPos, ".{[", fullExpression.length());
     mLocation = fullExpression.substr(fromPos, endPos - fromPos);
+    mIsWildcard = std::string::npos != mLocation.find('*');
     return endPos;
 }
 
@@ -91,10 +102,11 @@ void PositionalParser::onEntry()
 size_t PositionalParser::parse(const std::string& fullExpression, size_t fromPos)
 {
     assert(0 != fromPos);
+    ++fromPos;
     size_t endPos = fromPos;
-    endPos = Skip2(fullExpression, fromPos, ']');
+    endPos = skip2(fullExpression, fromPos, ']');
     mIndex = fullExpression.substr(fromPos, endPos - fromPos);
-    return endPos;
+    return endPos + 1;
 }
 
 std::shared_ptr<Expression> PositionalParser::onExit()
@@ -111,7 +123,7 @@ size_t PredicateParser::parse(const std::string& fullExpression, size_t fromPos)
 {
     assert(0 != fromPos);
     size_t endPos = fromPos;
-    endPos = Skip2(fullExpression, fromPos, '}');
+    endPos = skip2(fullExpression, fromPos, '}');
     mPredicate = fullExpression.substr(fromPos, endPos - fromPos);
     return endPos;
 }
@@ -120,6 +132,12 @@ std::shared_ptr<Expression> PredicateParser::onExit()
 {
     return nullptr;
 }
+//=============================ExceptionParser===========================
+size_t ExceptionParser::parse(const std::string& fullExpression, size_t fromPos)
+{
+    throw std::logic_error("syntax error ");
+}
+
 //==========================Compiler======================================
 
 Compiler::Compiler()
@@ -133,20 +151,23 @@ Compiler::Compiler()
     auto pTwoDotLocationState = std::make_shared<TwoDotLocationParser>();
     auto pPositionalState = std::make_shared<PositionalParser>();
     auto pPredicateState = std::make_shared<PredicateParser>();
+    auto pExceptionState = std::make_shared<ExceptionParser>();
 
 
 
-    //------------+---------------+----------+-------------------
-    addTransaction(pInitState,    DotEvent,  pDotState);
+    //------------+---------------+-----------+-------------------
+    addTransaction(pInitState,    DotEvent,   pDotState);
 
-    //------------+---------------+----------+-------------------
-    addTransaction(pDotState,     SlashEvent,pRegexLocationState);
-    addTransaction(pDotState,     QuoteEvent,pQuoteLocationState);
-    addTransaction(pDotState,     DotEvent,  pTwoDotLocationState);
-    addTransaction(pDotState,     OtherEvent,pGenericLocationState);
+    //------------+---------------+-----------+-------------------
+    addTransaction(pDotState,     SlashEvent, pRegexLocationState);
+    addTransaction(pDotState,     QuoteEvent, pQuoteLocationState);
+    addTransaction(pDotState,     DotEvent,   pTwoDotLocationState);
+    addTransaction(pDotState,     OpenBracket,pPositionalState);
+    addTransaction(pDotState,     OtherEvent, pGenericLocationState);
 
-    addTransaction(pAnyState,     DotEvent,  pDotState);
-    addTransaction(pAnyState,     EOFEvent,  pInitState);
+    addTransaction(pAnyState,     DotEvent,   pDotState);
+    addTransaction(pAnyState,     EOFEvent,   pInitState);
+    addTransaction(pAnyState,     OpenBracket,pPositionalState);
     //addTransaction()
 
 

@@ -10,7 +10,7 @@ class Positional: public Expression
 public:
     Positional(IndexRange range);
 
-
+    void apply(Context& cxt) override;
 private:
     void doApply(Context& cxt, const json& input) override;
 

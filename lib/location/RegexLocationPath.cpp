@@ -13,6 +13,7 @@ void RegexLocationPath::doApply(Context& cxt, const json& input)
     using namespace boost::xpressive;
     smatch what;
 
+#if 0
     if(input.is_object())
     {
         for(auto itChild = input.begin(); itChild != input.end(); ++itChild)
@@ -36,6 +37,25 @@ void RegexLocationPath::doApply(Context& cxt, const json& input)
             }
         }//foreach child
     }
+#else
+    for(auto itChild = input.begin(); itChild != input.end(); ++itChild)
+    {
+        if(regex_match(itChild.key(), what, mPattern))
+        {
+            if(itChild.value().is_array())
+            {
+                for(auto& ele : itChild.value())
+                {
+                    cxt.getOutput().push_back(&ele);
+                }
+            }
+            else
+            {
+                cxt.getOutput().push_back(&itChild.value());
+            }
+        }
+    }
+#endif
 }
 }//namespace jspath
 

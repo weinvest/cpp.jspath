@@ -7,6 +7,20 @@ Positional::Positional(IndexRange range)
     :mRange(range)
 {}
 
+void Positional::apply(Context& cxt)
+{
+    int begin = mRange.begin(cxt.getInput().size());
+    int end = mRange.end(cxt.getInput().size());
+
+    if(begin < end)
+    {
+        for(int iCur = begin; iCur != end; ++iCur)
+        {
+            cxt.getOutput().push_back(cxt.getInput()[iCur]);
+        }
+    }
+}
+
 void Positional::doApply(Context& cxt, const json& input)
 {
     int begin = mRange.begin(input.size());
