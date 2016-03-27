@@ -9,12 +9,13 @@ Positional::Positional(IndexRange range)
 
 void Positional::apply(Context& cxt)
 {
-    int begin = mRange.begin(cxt.getInput().size());
-    int end = mRange.end(cxt.getInput().size());
+    auto size = cxt.getInput().size();
+    int begin = mRange.begin(size);
+    int end = mRange.end(size);
 
     if(begin < end)
     {
-        for(int iCur = begin; iCur < end; iCur += mRange.getStep())
+        for(int iCur = begin; iCur < end && iCur < size; iCur += mRange.getStep())
         {
             cxt.getOutput().push_back(cxt.getInput()[iCur]);
         }

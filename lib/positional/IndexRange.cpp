@@ -76,14 +76,21 @@ int IndexRange::parseIndex(const std::string& str, size_t& from, int blankValue)
 
 int IndexRange::begin(int size)
 {
-	if(mFrom <= -size)
-	{
-		return 0;
-	}
-	else if(mFrom >= size)
-	{
-		return END;
-	}
+    if(mIsRange)
+    {
+        if(mFrom <= -size)
+        {
+            return 0;
+        }
+        else if(mFrom >= size)
+        {
+            return END;
+        }
+    }
+    else if(mFrom < -size || mFrom >= size)
+    {
+        return END;
+    }
 
     return (mFrom + size) % size;
 }
