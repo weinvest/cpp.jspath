@@ -27,17 +27,17 @@ size_t SkipString(const std::string& input, size_t pos)
 //    return std::string::npos;
 }
 
-size_t Skip2(const std::string& input, size_t pos, char c)
+size_t Skip2(const std::string& input, size_t pos, char c, size_t defEndPos)
 {
     size_t escapeCount = 0;
     for(; pos < input.length(); ++pos)
     {
-        char c = input[pos];
-        if(c == c && (0 == (escapeCount % 2)))
+        char cc = input[pos];
+        if(cc == c && (0 == (escapeCount % 2)))
         {
-            return pos + 1;
+            return pos;
         }
-        else if('\\' == c)
+        else if('\\' == cc)
         {
             ++escapeCount;
         }
@@ -47,7 +47,7 @@ size_t Skip2(const std::string& input, size_t pos, char c)
         }
     }
 
-    return std::string::npos;
+    return defEndPos;
 }
 }
 

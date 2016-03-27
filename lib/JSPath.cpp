@@ -6,8 +6,8 @@ namespace jspath
 {
 std::shared_ptr<Expression> compile(const std::string& applyExpr)
 {
-	Compiler compiler;
-	return compiler.compile(applyExpr);
+    Compiler compiler;
+    return compiler.compile(applyExpr);
 }
 
 ptree apply(const ptree& root, std::shared_ptr<Expression> pExpression)

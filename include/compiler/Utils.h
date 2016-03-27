@@ -4,7 +4,7 @@
 namespace jspath
 {
     size_t SkipString(const std::string& input, size_t pos);
-    size_t Skip2(const std::string& input, size_t pos, char c);
+    size_t Skip2(const std::string& input, size_t pos, char c, size_t defEndPos = std::string::npos);
 }
 #endif
 
