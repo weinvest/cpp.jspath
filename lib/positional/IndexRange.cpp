@@ -21,8 +21,8 @@ IndexRange::IndexRange(const std::string& index)
     }
     else
     {
-        mTo = parseIndex(index, pos, END);
-        mStep = parseIndex(index, pos, 1);
+        mTo = parseIndex(index, ++pos, END);
+        mStep = parseIndex(index, ++pos, 1);
     }
 }
 
@@ -38,27 +38,34 @@ int IndexRange::parseIndex(const std::string& str, size_t& from, int blankValue)
 
     if(':' == str.at(from))
     {
-        from += 1;
         return blankValue;
     }
 
-    int value = 0;
+    int value = 0, sign = 1;
+    if('-' == str.at(from))
+    {
+        sign = -1;
+        ++from;
+    }
+    else if('+' == str.at(from))
+    {
+        ++from;
+    }
+
     for(; from < str.length() && std::isdigit(str.at(from)); ++from)
     {
         value *= 10;
         value += (str.at(from) - '0');
     }
+    value *= sign;
+
 
     for(; from < str.length() && std::isspace(str.at(from)); ++from)
     {}
 
     if(from < str.length())
     {
-        if(':' == str.at(from))
-        {
-            from += 1;
-        }
-        else
+        if(':' != str.at(from))
         {
             throw std::logic_error("The primitive 4 array index must be in set{0,1,2,3,4,5,6,7,8,9,space,':'} and index range should be divided by ':'");
         }

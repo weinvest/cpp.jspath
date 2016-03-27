@@ -14,7 +14,7 @@ void Positional::apply(Context& cxt)
 
     if(begin < end)
     {
-        for(int iCur = begin; iCur != end; ++iCur)
+        for(int iCur = begin; iCur < end; iCur += mRange.getStep())
         {
             cxt.getOutput().push_back(cxt.getInput()[iCur]);
         }
