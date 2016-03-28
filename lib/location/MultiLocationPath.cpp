@@ -2,8 +2,11 @@
 #include "Context.h"
 namespace jspath
 {
+MultiLocationPath::MultiLocationPath()
+    :LocationPath("")
+{}
 
-void MultiLocationPath::AddChild(std::shared_ptr<LocationPath> pChild)
+void MultiLocationPath::addChild(std::shared_ptr<Expression> pChild)
 {
     if(nullptr != pChild)
     {

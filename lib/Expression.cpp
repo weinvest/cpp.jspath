@@ -2,6 +2,10 @@
 #include "Context.h"
 namespace jspath
 {
+Expression::Expression(bool isAbsolute)
+    :mIsAbsolute(isAbsolute)
+{}
+
 void Expression::setSuccessor(std::shared_ptr<Expression> pSuccessor)
 {
     mSuccessor = pSuccessor;

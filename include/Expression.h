@@ -4,21 +4,25 @@
 #include "json.hpp"
 namespace jspath
 {
-    using nlohmann::json;
-    class Context;
-    class Expression
-    {
-    public:
-        virtual ~Expression() {}
-        virtual void apply(Context& cxt);
+using nlohmann::json;
+class Context;
+class Expression
+{
+public:
+    Expression(bool isAbsolute = false);
 
-        void setSuccessor(std::shared_ptr<Expression> pSuccessor);
-        std::shared_ptr<Expression> getSuccessor() { return mSuccessor; }
-    protected:
-        virtual void doApply(Context& cxt, const json& input) = 0;
+    virtual ~Expression() {}
+    virtual void apply(Context& cxt);
 
-        std::shared_ptr<Expression> mSuccessor;
-    };
+    void setSuccessor(std::shared_ptr<Expression> pSuccessor);
+    std::shared_ptr<Expression> getSuccessor() { return mSuccessor; }
+    bool isAbsolute() const { return mIsAbsolute; }
+protected:
+    virtual void doApply(Context& cxt, const json& input) = 0;
+
+    std::shared_ptr<Expression> mSuccessor;
+    bool mIsAbsolute;
+};
 }
 #endif
 

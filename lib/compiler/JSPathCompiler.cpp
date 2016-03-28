@@ -4,6 +4,7 @@
 #include "location/WildcardLocationPath.h"
 #include "location/DotLocationPath.h"
 #include "location/2DotLocationPath.h"
+#include "location/MultiLocationPath.h"
 #include "positional/Positional.h"
 namespace jspath
 {
@@ -21,12 +22,12 @@ void RegexLocationParser::onEntry()
     mRegexText.clear();
 }
 
-size_t RegexLocationParser::parse(const std::string& fullExpression, size_t fromPos)
+size_t RegexLocationParser::parse(const std::string& fullExpression, size_t fromPos, size_t endPos)
 {
     ++fromPos;
-    auto endPos = skip2(fullExpression, fromPos, '/');
-    mRegexText = fullExpression.substr(fromPos, endPos - fromPos);
-    return endPos + 1;
+    auto toPos = skip2(fullExpression, fromPos, '/');
+    mRegexText = fullExpression.substr(fromPos, toPos - fromPos);
+    return toPos + 1;
 }
 
 std::shared_ptr<Expression> RegexLocationParser::onExit()
@@ -39,13 +40,13 @@ std::shared_ptr<Expression> RegexLocationParser::onExit()
 void QuoteLocationParser::onEntry()
 {}
 
-size_t QuoteLocationParser::parse(const std::string& fullExpression, size_t fromPos)
+size_t QuoteLocationParser::parse(const std::string& fullExpression, size_t fromPos, size_t endPos)
 {
     ++fromPos;
-    auto endPos = skip2(fullExpression, fromPos, '"');
-    mLocation = fullExpression.substr(fromPos, endPos - fromPos);
+    auto toPos = skip2(fullExpression, fromPos, '"');
+    mLocation = fullExpression.substr(fromPos, toPos - fromPos);
     mIsWildcard = std::string::npos != mLocation.find('*');
-    return endPos + 1;
+    return toPos + 1;
 }
 
 std::shared_ptr<Expression> QuoteLocationParser::onExit()
@@ -66,14 +67,13 @@ void GenericLocationParser::onEntry()
     mIsWildcard = false;
 }
 
-size_t GenericLocationParser::parse(const std::string& fullExpression, size_t fromPos)
+size_t GenericLocationParser::parse(const std::string& fullExpression, size_t fromPos, size_t endPos)
 {
     assert(0 != fromPos);
-    size_t endPos = fromPos;
-    endPos = skip2Any(fullExpression, fromPos, ".{[", fullExpression.length());
-    mLocation = fullExpression.substr(fromPos, endPos - fromPos);
+    size_t toPos = skip2Any(fullExpression, fromPos, ".{[", endPos);
+    mLocation = fullExpression.substr(fromPos, toPos - fromPos);
     mIsWildcard = std::string::npos != mLocation.find('*');
-    return endPos;
+    return toPos;
 }
 
 std::shared_ptr<Expression> GenericLocationParser::onExit()
@@ -99,14 +99,14 @@ std::shared_ptr<Expression> TwoDotLocationParser::onExit()
 void PositionalParser::onEntry()
 {}
 
-size_t PositionalParser::parse(const std::string& fullExpression, size_t fromPos)
+size_t PositionalParser::parse(const std::string& fullExpression, size_t fromPos, size_t endPos)
 {
     assert(0 != fromPos);
     ++fromPos;
-    size_t endPos = fromPos;
-    endPos = skip2(fullExpression, fromPos, ']');
-    mIndex = fullExpression.substr(fromPos, endPos - fromPos);
-    return endPos + 1;
+    size_t toPos = fromPos;
+    toPos = skip2(fullExpression, fromPos, ']');
+    mIndex = fullExpression.substr(fromPos, toPos - fromPos);
+    return toPos + 1;
 }
 
 std::shared_ptr<Expression> PositionalParser::onExit()
@@ -114,18 +114,134 @@ std::shared_ptr<Expression> PositionalParser::onExit()
     auto index = IndexRange(mIndex);
     return std::make_shared<Positional>(index);
 }
+
+//==========================MultiLocationParser============================
+MultiLocationParser::MultiLocationParser()
+    :mFullExpression(nullptr)
+{}
+
+void MultiLocationParser::onEntry()
+{
+    mFullExpression = nullptr;
+    mSubExpressionIndices.clear();
+}
+
+size_t MultiLocationParser::parse(const std::string& fullExpression, size_t fromPos, size_t endPos)
+{
+    mFullExpression = &fullExpression;
+    mSubExpressionIndices.push_back(fromPos);
+    ++fromPos;
+
+
+    bool finish = false;
+    std::stack<char> unmatch;
+    for(; fromPos < endPos && !finish; ++fromPos)
+    {
+        char c = fullExpression.at(fromPos);
+        switch (c)
+        {
+        case '(':
+        case '[':
+        case '{':
+            unmatch.push(c);
+            break;
+        case ')':
+            {
+                if(unmatch.empty())
+                {
+                    finish = true;
+                }
+                else if('(' != unmatch.top())
+                {
+                    throw std::logic_error("')' unmatch");
+                }
+                else
+                {
+                    unmatch.pop();
+                }
+            }//')'
+        case ']':
+            {
+                if(unmatch.empty() || '[' != unmatch.top())
+                {
+                    throw std::logic_error("']' unmatch");
+                }
+                else
+                {
+                    unmatch.pop();
+                }
+            }//']'
+        case '}':
+            {
+                if(unmatch.empty() || '{' != unmatch.top())
+                {
+                    throw std::logic_error("']' unmatch");
+                }
+                else
+                {
+                    unmatch.pop();
+                }
+            }//'}'
+            break;
+        case '"':
+            {
+                auto toPos = skipString(fullExpression, fromPos + 1);
+                if(std::string::npos == toPos)
+                {
+                    throw std::logic_error("'\"' not found");
+                }
+                fromPos = toPos;
+            }
+            break;
+        case '|':
+            if(unmatch.empty())
+            {
+                mSubExpressionIndices.push_back(fromPos);
+            }
+            break;
+        default:
+            break;
+        };
+    }
+
+    if(!finish)
+    {
+        throw std::logic_error("can not found match ')' for multi location after scan to end");
+    }
+
+    mSubExpressionIndices.push_back(fromPos - 1);
+    return fromPos;
+}
+
+std::shared_ptr<Expression> MultiLocationParser::onExit()
+{
+    auto pMultiLocation = std::make_shared<MultiLocationPath>();
+    for(size_t i = 1; i < mSubExpressionIndices.size(); ++i)
+    {
+        auto fromPos = mSubExpressionIndices[i - 1] + 1;
+        Compiler subCompiler;
+        auto pSubLocation = subCompiler.compile(*mFullExpression, fromPos, mSubExpressionIndices[i - 1]);
+        if(nullptr != pSubLocation)
+        {
+            pMultiLocation->addChild(pSubLocation);
+        }
+    }
+
+    return pMultiLocation;
+}
+
 //==========================PredicateParser================================
 
 void PredicateParser::onEntry()
 {}
 
-size_t PredicateParser::parse(const std::string& fullExpression, size_t fromPos)
+size_t PredicateParser::parse(const std::string& fullExpression, size_t fromPos, size_t endPos)
 {
     assert(0 != fromPos);
-    size_t endPos = fromPos;
-    endPos = skip2(fullExpression, fromPos, '}');
-    mPredicate = fullExpression.substr(fromPos, endPos - fromPos);
-    return endPos;
+    size_t toPos = fromPos;
+    toPos = skip2(fullExpression, fromPos, '}');
+    mPredicate = fullExpression.substr(fromPos, toPos - fromPos);
+    return toPos;
 }
 
 std::shared_ptr<Expression> PredicateParser::onExit()
@@ -133,7 +249,7 @@ std::shared_ptr<Expression> PredicateParser::onExit()
     return nullptr;
 }
 //=============================ExceptionParser===========================
-size_t ExceptionParser::parse(const std::string& fullExpression, size_t fromPos)
+size_t ExceptionParser::parse(const std::string& fullExpression, size_t fromPos, size_t endPos)
 {
     throw std::logic_error("syntax error ");
 }
@@ -152,22 +268,23 @@ Compiler::Compiler()
     auto pPositionalState = std::make_shared<PositionalParser>();
     auto pPredicateState = std::make_shared<PredicateParser>();
     auto pExceptionState = std::make_shared<ExceptionParser>();
+    auto pMultiLocationState = std::make_shared<MultiLocationParser>();
 
+    //------------+---------------+------------------+-------------------
+    addTransaction(pInitState,    DotEvent,          pDotState);
 
+    //------------+---------------+------------------+-------------------
+    addTransaction(pDotState,     SlashEvent,        pRegexLocationState);
+    addTransaction(pDotState,     QuoteEvent,        pQuoteLocationState);
+    addTransaction(pDotState,     DotEvent,          pTwoDotLocationState);
+    addTransaction(pDotState,     OpenBracket,       pPositionalState);
+    addTransaction(pDotState,     OtherEvent,        pGenericLocationState);
+    addTransaction(pDotState,     OpenParenthesis,   pMultiLocationState);
 
-    //------------+---------------+-----------+-------------------
-    addTransaction(pInitState,    DotEvent,   pDotState);
-
-    //------------+---------------+-----------+-------------------
-    addTransaction(pDotState,     SlashEvent, pRegexLocationState);
-    addTransaction(pDotState,     QuoteEvent, pQuoteLocationState);
-    addTransaction(pDotState,     DotEvent,   pTwoDotLocationState);
-    addTransaction(pDotState,     OpenBracket,pPositionalState);
-    addTransaction(pDotState,     OtherEvent, pGenericLocationState);
-
-    addTransaction(pAnyState,     DotEvent,   pDotState);
-    addTransaction(pAnyState,     EOFEvent,   pInitState);
-    addTransaction(pAnyState,     OpenBracket,pPositionalState);
+    //------------+---------------+------------------+-------------------
+    addTransaction(pAnyState,     DotEvent,          pDotState);
+    addTransaction(pAnyState,     EOFEvent,          pInitState);
+    addTransaction(pAnyState,     OpenBracket,       pPositionalState);
     //addTransaction()
 
 
@@ -216,41 +333,38 @@ std::shared_ptr<Expression> Compiler::processEvent(Event event)
     return pExpression;
 }
 
-std::shared_ptr<Expression> Compiler::compile(const std::string& strExpression)
+std::shared_ptr<Expression> Compiler::compile(const std::string& strExpression, size_t& pos, size_t endPos)
 {
     std::shared_ptr<Expression> pRetExpression;
     std::shared_ptr<Expression> pLastExpression;
-    size_t pos = 0;
-    try
-    {
-        for(; pos < strExpression.length(); )
-        {
-            pos = mCurrentState->parse(strExpression, pos);
-            Event event = EOFEvent;
-            if(pos < strExpression.length())
-            {
-                event = strExpression.at(pos);
-            }
 
-            auto pExpression = processEvent(event);
-            if(nullptr != pExpression)
+    if(std::string::npos == endPos)
+    {
+        endPos = strExpression.length();
+    }
+
+    while(pos < endPos)
+    {
+        pos = mCurrentState->parse(strExpression, pos, endPos);
+        Event event = EOFEvent;
+        if(pos < endPos)
+        {
+            event = strExpression.at(pos);
+        }
+
+        auto pExpression = processEvent(event);
+        if(nullptr != pExpression)
+        {
+            if(nullptr == pRetExpression)
             {
-                if(nullptr == pRetExpression)
-                {
-                    pRetExpression = pLastExpression = pExpression;
-                }
-                else
-                {
-                    pLastExpression->setSuccessor(pExpression);
-                    pLastExpression = pExpression;
-                }
+                pRetExpression = pLastExpression = pExpression;
+            }
+            else
+            {
+                pLastExpression->setSuccessor(pExpression);
+                pLastExpression = pExpression;
             }
         }
-    }
-    catch(const std::exception& ex)
-    {
-        std::cout << ex.what() << " at column " << pos << std::endl;
-        return nullptr;
     }
 
     return pRetExpression;

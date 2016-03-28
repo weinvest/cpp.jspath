@@ -6,8 +6,17 @@ namespace jspath
 {
 std::shared_ptr<Expression> compile(const std::string& applyExpr)
 {
-    Compiler compiler;
-    return compiler.compile(applyExpr);
+    size_t pos = 0;
+    try
+    {
+        Compiler compiler;
+        return compiler.compile(applyExpr, pos);
+    }
+    catch(const std::exception& ex)
+    {
+        std::cout << ex.what() << " at column " << pos << std::endl;
+        return nullptr;
+    }
 }
 
 json apply(const json& root, std::shared_ptr<Expression> pExpression)

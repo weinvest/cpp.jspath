@@ -9,14 +9,13 @@ class MultiLocationPath: public LocationPath
 {
 public:
     MultiLocationPath();
-
-    void AddChild(std::shared_ptr<LocationPath> pChild);
+    void addChild(std::shared_ptr<Expression> pChild);
     void apply(Context& cxt) override;
 
 protected:
     void doApply(Context &cxt, const json &input);
 
-    std::vector<std::shared_ptr<LocationPath>> mChildren;
+    std::vector<std::shared_ptr<Expression>> mChildren;
 };
 }
 #endif
