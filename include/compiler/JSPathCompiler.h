@@ -14,6 +14,7 @@ public:
     {
         Any,
         Init,
+        Space,
         Dot,
         GenericLocation,
         RegexLocation,
@@ -37,6 +38,13 @@ struct InitParser: public SubExpressionParser
     size_t parse(const std::string& fullExpression, size_t fromPos, size_t endPos) override { return fromPos; }
     std::shared_ptr<Expression> onExit() override { return nullptr; }
     type getCode() const override { return Init; }
+};
+
+struct SpaceParser: public SubExpressionParser
+{
+    size_t parse(const std::string& fullExpression, size_t fromPos, size_t endPos) override;
+    std::shared_ptr<Expression> onExit() override { return nullptr; }
+    type getCode() const override { return Space; }
 };
 
 struct DotParser: public SubExpressionParser

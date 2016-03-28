@@ -1,9 +1,10 @@
+#include <boost/algorithm/string.hpp>
 #include "location/DotLocationPath.h"
 #include "Context.h"
 namespace jspath
 {
 DotLocationPath::DotLocationPath(const std::string& path)
-    :LocationPath(path)
+    :LocationPath(boost::trim_copy(path))
 {}
 
 void DotLocationPath::doApply(Context& cxt, const json& input)
