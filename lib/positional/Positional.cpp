@@ -13,9 +13,16 @@ void Positional::apply(Context& cxt)
     int begin = mRange.begin(size);
     int end = mRange.end(size);
 
-    if(begin < end)
+    if((begin < end) && (mRange.getStep() > 0))
     {
         for(int iCur = begin; iCur < end && iCur < size; iCur += mRange.getStep())
+        {
+            cxt.getOutput().push_back(cxt.getInput()[iCur]);
+        }
+    }
+    else if((begin > end) && (mRange.getStep() < 0))
+    {
+        for(int iCur = begin; iCur > end && iCur >= 0; iCur += mRange.getStep())
         {
             cxt.getOutput().push_back(cxt.getInput()[iCur]);
         }

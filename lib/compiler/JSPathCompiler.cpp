@@ -250,6 +250,7 @@ std::shared_ptr<Expression> Compiler::compile(const std::string& strExpression)
     catch(const std::exception& ex)
     {
         std::cout << ex.what() << " at column " << pos << std::endl;
+        return nullptr;
     }
 
     return pRetExpression;

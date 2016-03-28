@@ -23,6 +23,14 @@ IndexRange::IndexRange(const std::string& index)
     {
         mTo = parseIndex(index, ++pos, END);
         mStep = parseIndex(index, ++pos, 1);
+        if(0 == mStep)
+        {
+            throw std::logic_error("The step for index range should not be 0");
+        }
+        else if((END == mTo) && mStep < 0)
+        {
+            mTo = -END;
+        }
     }
 }
 
@@ -84,7 +92,7 @@ int IndexRange::begin(int size)
         }
         else if(mFrom >= size)
         {
-            return END;
+            return size;
         }
     }
     else if(mFrom < -size || mFrom >= size)
@@ -102,14 +110,14 @@ int IndexRange::end(int size)
 	    return begin(size) + 1;
 	}
 
-	if(mTo >= size)
-	{
-		return size;
-	}
-	else if(mTo <= -size)
-	{
-		return -1;
-	}
+    if(mTo >= size)
+    {
+        return size;
+    }
+    else if(mTo <= -size)
+    {
+        return 0;
+    }
 
 	return (mTo + size) % size;
 }
