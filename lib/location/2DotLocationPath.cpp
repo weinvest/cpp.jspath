@@ -19,7 +19,7 @@ void TwoDotLocationPath::doApply(Context &cxt, const json &input)
     {
         for(auto& child : input)
         {
-            doApply(cxt, &child);
+            doApply(cxt, child);
         }
     }
 }

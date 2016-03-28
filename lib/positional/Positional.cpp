@@ -31,29 +31,5 @@ void Positional::apply(Context& cxt)
 
 void Positional::doApply(Context& cxt, const json& input)
 {
-#if 0
-    int begin = mRange.begin(input.size());
-    int end = mRange.end(input.size());
-
-    if(begin < end)
-    {
-        static auto walk2 = [](const json& input, int begin)
-        {
-            auto itCur = input.begin();
-            while(0 != (begin--))
-            {
-                ++itCur;
-            }
-            return itCur;
-        };
-
-        int count = end - begin;
-        int curCount = 0;
-        for(auto itCur = walk2(input, begin); curCount < count && itCur != input.end(); ++itCur, ++curCount)
-        {
-            cxt.getOutput().push_back(&(itCur.value()));
-        }
-    }
-#endif
 }
 }
