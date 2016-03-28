@@ -7,7 +7,7 @@ Filter::Filter(std::shared_ptr<Predicate> predicate):
     mPredicate(predicate)
 {}
 
-void Filter::doApply(Context& cxt, const json& input)
+void Filter::doApply(Context& cxt)
 {
     if( mPredicate->eval(cxt, input))
     {

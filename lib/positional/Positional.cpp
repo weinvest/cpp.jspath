@@ -29,7 +29,7 @@ void Positional::apply(Context& cxt)
     }
 }
 
-void Positional::doApply(Context& cxt, const json& input)
+void Positional::doApply(Context& cxt)
 {
 }
 }

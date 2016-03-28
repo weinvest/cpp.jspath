@@ -12,7 +12,7 @@ public:
 
     void apply(Context& cxt) override;
 private:
-    void doApply(Context& cxt, const json& input) override;
+    void doApply(Context& cxt) override;
 
     IndexRange mRange;
 };

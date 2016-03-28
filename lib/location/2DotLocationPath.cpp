@@ -8,7 +8,7 @@ TwoDotLocationPath::TwoDotLocationPath()
 
 }
 
-void TwoDotLocationPath::doApply(Context &cxt, const json &input)
+void TwoDotLocationPath::doApply(Context &cxt)
 {
     if(!input.is_array())
     {

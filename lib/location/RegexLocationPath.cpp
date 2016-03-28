@@ -8,19 +8,20 @@ RegexLocationPath::RegexLocationPath(const std::string& regex)
     mPattern = sregex::compile(regex);
 }
 
-void RegexLocationPath::doApply(Context& cxt, const json& input)
+void RegexLocationPath::doApply(Context& cxt)
 {
     using namespace boost::xpressive;
     smatch what;
 
-#if 0
+#if 1
+    auto &input = cxt.getInput();
     if(input.is_object())
     {
         for(auto itChild = input.begin(); itChild != input.end(); ++itChild)
         {
             if(regex_match(itChild.key(), what, mPattern))
             {
-                cxt.getOutput().push_back(&itChild.value());
+            	cxt.getOutput().push_back(&itChild.value());
             }
         }//foreach field
     }
