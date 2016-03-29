@@ -22,7 +22,9 @@ void MultiLocationPath::apply(Context& cxt)
         auto input = pChild->isAbsolute() ? cxt.getRootInput() : cxt.getInput();
         Context tmpCxt(input, cxt.getRootInput());
         pChild->apply(tmpCxt);
-        if(tmpCxt.getOutput()->is_array())
+        if(tmpCxt.getOutput()->is_null())
+        {}
+        else if(tmpCxt.getOutput()->is_array())
         {
             cxt.merge(tmpCxt);
         }

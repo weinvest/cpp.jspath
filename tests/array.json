@@ -1,5 +1,5 @@
 [
     {"Id":1, "Name":"michael"},
     {"Id":2, "Name":"tamago"},
-    [{"SubId":2, "SubName":"yisha.deng"}, {"SubId":3, "SUbName":"shugan.li"}]
+    [{"SubId":2, "SubName":"yisha.deng"}, {"SubId":3, "SubName":"shugan.li"}]
 ]
