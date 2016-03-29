@@ -13,10 +13,7 @@ void Expression::setSuccessor(std::shared_ptr<Expression> pSuccessor)
 
 void Expression::apply(Context &cxt)
 {
-    for(auto pInput : cxt.getInput())
-    {
-        doApply(cxt, *pInput);
-    }
+    doApply(cxt);
 
     if(nullptr != mSuccessor && !cxt.getOutput().empty())
     {

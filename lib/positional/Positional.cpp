@@ -31,7 +31,7 @@ void Positional::apply(Context& cxt)
     return Expression::apply(cxt);
 }
 
-void Positional::doApply(Context& cxt, const json& input)
+void Positional::doApply(Context& cxt)
 {
 }
 }

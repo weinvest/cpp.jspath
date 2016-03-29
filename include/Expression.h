@@ -18,7 +18,7 @@ public:
     std::shared_ptr<Expression> getSuccessor() { return mSuccessor; }
     bool isAbsolute() const { return mIsAbsolute; }
 protected:
-    virtual void doApply(Context& cxt, const json& input) = 0;
+    virtual void doApply(Context& cxt) = 0;
 
     std::shared_ptr<Expression> mSuccessor;
     bool mIsAbsolute;
