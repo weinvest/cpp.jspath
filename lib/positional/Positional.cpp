@@ -27,6 +27,8 @@ void Positional::apply(Context& cxt)
             cxt.getOutput().push_back(cxt.getInput()[iCur]);
         }
     }
+
+    return Expression::apply(cxt);
 }
 
 void Positional::doApply(Context& cxt, const json& input)
