@@ -5,6 +5,7 @@
 #include "location/DotLocationPath.h"
 #include "location/2DotLocationPath.h"
 #include "location/MultiLocationPath.h"
+#include "location/RootLocationPath.h"
 #include "positional/Positional.h"
 namespace jspath
 {
@@ -347,6 +348,7 @@ std::shared_ptr<Expression> Compiler::compile(const std::string& strExpression, 
     std::shared_ptr<Expression> pRetExpression;
     std::shared_ptr<Expression> pLastExpression;
 
+    pRetExpression = pLastExpression = std::make_shared<RootLocationPath>();
     if(std::string::npos == endPos)
     {
         endPos = strExpression.length();

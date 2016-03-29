@@ -10,7 +10,10 @@ DotLocationPath::DotLocationPath(const std::string& path)
 void DotLocationPath::doApply(Context& cxt)
 {
 	auto& input = cxt.getInput();
-    if(input->is_object())
+    if(input->is_primitive())
+    {
+    }
+    else if(input->is_object())
 	{
         if(input->count(getPath()))
 		{

@@ -16,18 +16,19 @@ void MultiLocationPath::addChild(std::shared_ptr<Expression> pChild)
 
 void MultiLocationPath::apply(Context& cxt)
 {
+    cxt.getOutput() = std::make_shared<json>(json::array());
     for(auto pChild : mChildren)
     {
-        if(nullptr == pChild->getSuccessor() && !pChild->isAbsolute())
+        auto input = pChild->isAbsolute() ? cxt.getRootInput() : cxt.getInput();
+        Context tmpCxt(input, cxt.getRootInput());
+        pChild->apply(tmpCxt);
+        if(tmpCxt.getOutput()->is_array())
         {
-            pChild->apply(cxt);
+            cxt.merge(tmpCxt);
         }
         else
         {
-            auto input = pChild->isAbsolute() ? cxt.getRootInput() : cxt.getInput();
-            Context tmpCxt(input, cxt.getRootInput());
-            pChild->apply(tmpCxt);
-            cxt.merge(tmpCxt);
+            cxt.getOutput()->push_back(*tmpCxt.getOutput());
         }
     }
 

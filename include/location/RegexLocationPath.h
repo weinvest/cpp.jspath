@@ -9,12 +9,12 @@ using boost::xpressive::sregex;
 class RegexLocationPath: public LocationPath
 {
 public:
-	RegexLocationPath(const std::string& regex);
+    RegexLocationPath(const std::string& regex);
 
 protected:
-	void doApply(Context& cxt);
-
-	sregex mPattern;
+    void doApply(Context& cxt);
+    void add2(Context& cxt, json& ele);
+    sregex mPattern;
 };
 }
 #endif
