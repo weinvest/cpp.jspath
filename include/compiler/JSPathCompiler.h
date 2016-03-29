@@ -127,18 +127,6 @@ private:
     std::string mIndex;
 };
 
-struct PredicateParser: public SubExpressionParser
-{
-public:
-    void onEntry() override;
-    size_t parse(const std::string& fullExpression, size_t fromPos, size_t endPos) override;
-    std::shared_ptr<Expression> onExit() override;
-
-    type getCode() const override { return PredicateExp; }
-private:
-    std::string mPredicate;
-};
-
 struct ExceptionParser: public SubExpressionParser
 {
     void onEntry() override {}
