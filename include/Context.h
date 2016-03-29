@@ -5,39 +5,38 @@
 #include "json.hpp"
 namespace jspath
 {
-    using nlohmann::json;
-    class Context
-    {
-    public:
-	typedef std::vector<const json*> StepContext;
-	Context(const json& root);
+using nlohmann::json;
+class Context
+{
+public:
+    typedef std::shared_ptr<json> StepInput;
+    typedef std::shared_ptr<json> StepOutput;
 
-        Context(std::shared_ptr<StepContext> input, std::shared_ptr<StepContext> rootInput = nullptr);
+    Context(const json& root);
 
-        const StepContext& getInput() const { return *mStepContexts.back(); }
-        const StepContext& getOutput() const { return *mOutputContext; }
-        const StepContext& getRootInput() const { return *mRootInputContext; }
+    Context(StepInput input, StepInput rootInput = nullptr);
 
-        StepContext& getInput() { return *mStepContexts.back(); }
-        StepContext& getOutput() { return *mOutputContext; }
-        StepContext& getRootInput() { return *mRootInputContext; }
+    const StepInput& getInput() const { return mStepContexts.back(); }
+    const StepOutput& getOutput() const { return mOutputContext; }
+    const StepInput& getRootInput() const { return mRootInputContext; }
 
-	StepContext& newStep();
+    StepInput& getInput() { return mStepContexts.back(); }
+    StepOutput& getOutput() { return mOutputContext; }
+    StepInput& getRootInput() { return mRootInputContext; }
 
-	auto& getStepContexts() { return mStepContexts; }
+    StepOutput& newStep();
 
-        auto getInputPtr() { return mStepContexts.back(); }
-        auto getOutputPtr() { return mOutputContext; }
-        auto getRootInputPtr() { return mRootInputContext; }
+    auto& getStepContexts() { return mStepContexts; }
 
-        void merge(const Context& other);
-    private:
-        Context(const Context&) = delete;
+    void merge(const Context& other);
+private:
+    Context(const Context&) = delete;
 
-        std::vector<std::shared_ptr<StepContext>> mStepContexts;
-        std::shared_ptr<StepContext> mRootInputContext;
-	std::shared_ptr<StepContext> mOutputContext;
-    };
+    std::allocator<json> mAllocator;
+    std::vector<StepInput> mStepContexts;
+    StepInput mRootInputContext;
+    StepOutput mOutputContext;
+};
 }
 #endif
 

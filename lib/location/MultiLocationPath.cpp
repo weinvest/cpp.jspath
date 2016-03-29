@@ -24,8 +24,8 @@ void MultiLocationPath::apply(Context& cxt)
         }
         else
         {
-            auto input = pChild->isAbsolute() ? cxt.getRootInputPtr() : cxt.getInputPtr();
-            Context tmpCxt(input, cxt.getRootInputPtr());
+            auto input = pChild->isAbsolute() ? cxt.getRootInput() : cxt.getInput();
+            Context tmpCxt(input, cxt.getRootInput());
             pChild->apply(tmpCxt);
             cxt.merge(tmpCxt);
         }
@@ -34,7 +34,7 @@ void MultiLocationPath::apply(Context& cxt)
     LocationPath::apply(cxt);
 }
 
-void MultiLocationPath::doApply(Context &/*cxt*/, const json &/*input*/)
+void MultiLocationPath::doApply(Context &/*cxt*/)
 {
 }
 }

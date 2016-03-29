@@ -13,7 +13,7 @@ public:
     void apply(Context& cxt) override;
 
 protected:
-    void doApply(Context &cxt, const json &input);
+    void doApply(Context &cxt);
 
     std::vector<std::shared_ptr<Expression>> mChildren;
 };

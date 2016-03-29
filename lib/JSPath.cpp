@@ -30,10 +30,6 @@ void apply(json& outRoot, const json& root, std::shared_ptr<Expression> pExpress
 {
     Context cxt(root);
     pExpression->apply(cxt);
-
-    for(auto pResultNode : cxt.getOutput())
-    {
-        outRoot.push_back(*pResultNode);
-    }
+    cxt.getOutput()->swap(outRoot);
 }
 }

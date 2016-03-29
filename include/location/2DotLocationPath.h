@@ -10,7 +10,8 @@ public:
     TwoDotLocationPath();
 
 protected:
-    void doApply(Context &cxt, const json &input);
+    void doApply(Context &cxt);
+    void doApply(Context &cxt, const json& input);
 };
 
 }

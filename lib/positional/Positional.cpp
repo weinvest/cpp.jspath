@@ -9,23 +9,40 @@ Positional::Positional(IndexRange range)
 
 void Positional::apply(Context& cxt)
 {
-    auto size = cxt.getInput().size();
+    if(!cxt.getInput()->is_array())
+    {
+        return;
+    }
+
+
+    auto size = cxt.getInput()->size();
     int begin = mRange.begin(size);
     int end = mRange.end(size);
 
-    if((begin < end) && (mRange.getStep() > 0))
+    if(!mRange.isRange())
+    {
+        if(begin >= 0 && begin < size)
+        {
+            cxt.getOutput() =Context::StepOutput(&(cxt.getInput()->at(begin)), [](void*){});
+        }
+    }
+    else if((begin < end) && (mRange.getStep() > 0))
     {
         for(int iCur = begin; iCur < end && iCur < size; iCur += mRange.getStep())
         {
-            cxt.getOutput().push_back(cxt.getInput()[iCur]);
+            cxt.getOutput()->push_back(cxt.getInput()->at(iCur));
         }
     }
     else if((begin > end) && (mRange.getStep() < 0))
     {
         for(int iCur = begin; iCur > end && iCur >= 0; iCur += mRange.getStep())
         {
-            cxt.getOutput().push_back(cxt.getInput()[iCur]);
+            cxt.getOutput()->push_back(cxt.getInput()->at(iCur));
         }
+    }
+    else
+    {
+        return;
     }
 
     return Expression::apply(cxt);

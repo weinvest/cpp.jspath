@@ -16,6 +16,8 @@ public:
     int end(int size);
 
     int getStep() const { return mStep; }
+
+    bool isRange() const { return mIsRange; }
 private:
     int parseIndex(const std::string& str, size_t& from, int blankValue);
 

@@ -13,50 +13,30 @@ void RegexLocationPath::doApply(Context& cxt)
     using namespace boost::xpressive;
     smatch what;
 
-#if 1
     auto &input = cxt.getInput();
-    if(input.is_object())
+    if(input->is_object())
     {
-        for(auto itChild = input.begin(); itChild != input.end(); ++itChild)
+        for(auto itChild = input->begin(); itChild != input->end(); ++itChild)
         {
             if(regex_match(itChild.key(), what, mPattern))
             {
-            	cxt.getOutput().push_back(&itChild.value());
+                cxt.getOutput()->push_back(itChild.value());
             }
         }//foreach field
     }
-    else if(input.is_array())
+    else if(input->is_array())
     {
-        for(auto& child : input)
+        for(auto& child : *input)
         {
             for(auto itChild = child.begin(); itChild != child.end(); ++itChild)
             {
                 if(regex_match(itChild.key(), what, mPattern))
                 {
-                    cxt.getOutput().push_back(&itChild.value());
+                    cxt.getOutput()->push_back(itChild.value());
                 }
             }
         }//foreach child
     }
-#else
-    for(auto itChild = input.begin(); itChild != input.end(); ++itChild)
-    {
-        if(regex_match(itChild.key(), what, mPattern))
-        {
-            if(itChild.value().is_array())
-            {
-                for(auto& ele : itChild.value())
-                {
-                    cxt.getOutput().push_back(&ele);
-                }
-            }
-            else
-            {
-                cxt.getOutput().push_back(&itChild.value());
-            }
-        }
-    }
-#endif
 }
 }//namespace jspath
 

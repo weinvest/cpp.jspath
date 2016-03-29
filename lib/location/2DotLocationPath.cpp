@@ -10,9 +10,14 @@ TwoDotLocationPath::TwoDotLocationPath()
 
 void TwoDotLocationPath::doApply(Context &cxt)
 {
+    doApply(cxt, *cxt.getInput());
+}
+
+void TwoDotLocationPath::doApply(Context &cxt, const json& input)
+{
     if(!input.is_array())
     {
-        cxt.getOutput().push_back(&input);
+        cxt.getOutput()->push_back(input);
     }
 
     if(!input.is_primitive())
@@ -23,5 +28,4 @@ void TwoDotLocationPath::doApply(Context &cxt)
         }
     }
 }
-
 }

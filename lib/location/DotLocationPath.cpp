@@ -10,20 +10,20 @@ DotLocationPath::DotLocationPath(const std::string& path)
 void DotLocationPath::doApply(Context& cxt)
 {
 	auto& input = cxt.getInput();
-	if(input.is_object())
+    if(input->is_object())
 	{
-		if(input.count(getPath()))
+        if(input->count(getPath()))
 		{
-			cxt.getOutput() = input[getPath()];
+            cxt.getOutput() = Context::StepOutput(&(*input)[getPath()], [](void*){});
 		}
 	}
-	else if(input.is_array())
+    else if(input->is_array())
 	{
-		for(auto& child : input)
+        for(auto& child : *input)
 		{
 			if(child.count(getPath()))
 			{
-				cxt.getOutput().push_back(child[getPath()]);
+                cxt.getOutput()->push_back(child[getPath()]);
 			}
 		}
 	}

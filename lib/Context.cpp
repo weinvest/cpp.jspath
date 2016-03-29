@@ -3,21 +3,20 @@
 namespace jspath
 {
 Context::Context(const json& root)
-    :mOutputContext(new StepContext())
+    :mOutputContext(std::allocate_shared<json>(mAllocator))
 {
-    newStep();
-    getInput().push_back(&root);
-    mRootInputContext = mStepContexts.front();
+    mStepContexts.emplace_back(const_cast<json*>(&root), [](void*){});
+    mRootInputContext = getInput();
 }
 
-Context::Context(std::shared_ptr<StepContext> input, std::shared_ptr<StepContext> rootInput)
-    :mOutputContext(new StepContext())
+Context::Context(StepInput input, StepInput rootInput)
+    :mOutputContext(std::allocate_shared<json>(mAllocator))
 {
     mStepContexts.push_back(input);
 
     if(nullptr == rootInput)
     {
-        mRootInputContext = getInputPtr();
+        mRootInputContext = getInput();
     }
     else
     {
@@ -25,16 +24,16 @@ Context::Context(std::shared_ptr<StepContext> input, std::shared_ptr<StepContext
     }
 }
 
-Context::StepContext& Context::newStep()
+Context::StepOutput& Context::newStep()
 {
     mStepContexts.push_back(mOutputContext);
-    mOutputContext.reset(new StepContext);
+    mOutputContext = std::allocate_shared<json>(mAllocator);
 
-    return *mOutputContext;
+    return mOutputContext;
 }
 
 void Context::merge(const Context& other)
 {
-    getOutput().insert(getOutput().end(), other.getOutput().cbegin(), other.getOutput().cend());
+    getOutput()->insert(getOutput()->end(), other.getOutput()->begin(), other.getOutput()->end());
 }
 }
