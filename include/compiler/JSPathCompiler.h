@@ -28,28 +28,28 @@ public:
     virtual ~SubExpressionParser();
 
     virtual void onEntry();
-    virtual size_t parse(const std::string& fullExpression, size_t fromPos, size_t endPos) = 0;
+    virtual void parse(const std::string& fullExpression, size_t& fromPos, size_t endPos) = 0;
     virtual std::shared_ptr<Expression> onExit() = 0;
     virtual type getCode() const = 0;
 };
 
 struct InitParser: public SubExpressionParser
 {
-    size_t parse(const std::string& fullExpression, size_t fromPos, size_t endPos) override { return fromPos; }
+    void parse(const std::string& fullExpression, size_t& fromPos, size_t endPos) override {}
     std::shared_ptr<Expression> onExit() override { return nullptr; }
     type getCode() const override { return Init; }
 };
 
 struct SpaceParser: public SubExpressionParser
 {
-    size_t parse(const std::string& fullExpression, size_t fromPos, size_t endPos) override;
+    void parse(const std::string& fullExpression, size_t& fromPos, size_t endPos) override;
     std::shared_ptr<Expression> onExit() override { return nullptr; }
     type getCode() const override { return Space; }
 };
 
 struct DotParser: public SubExpressionParser
 {
-    size_t parse(const std::string& fullExpression, size_t fromPos, size_t endPos) { return fromPos + 1; }
+    void parse(const std::string& fullExpression, size_t& fromPos, size_t endPos) { ++fromPos; }
     std::shared_ptr<Expression> onExit() override { return nullptr; }
     type getCode() const override { return Dot; }
 };
@@ -59,7 +59,7 @@ struct RegexLocationParser: public SubExpressionParser
 {
 public:
     void onEntry() override;
-    size_t parse(const std::string& fullExpression, size_t fromPos, size_t endPos) override;
+    void parse(const std::string& fullExpression, size_t& fromPos, size_t endPos) override;
     std::shared_ptr<Expression> onExit() override;
     type getCode() const override { return RegexLocation; }
 
@@ -71,7 +71,7 @@ struct QuoteLocationParser : public SubExpressionParser
 {
 public:
     void onEntry() override;
-    size_t parse(const std::string& fullExpression, size_t fromPos, size_t endPos) override;
+    void parse(const std::string& fullExpression, size_t& fromPos, size_t endPos) override;
     std::shared_ptr<Expression> onExit() override;
     type getCode() const override { return QuoteLocation; }
 
@@ -84,7 +84,7 @@ class GenericLocationParser: public SubExpressionParser
 {
 public:
     void onEntry() override;
-    size_t parse(const std::string& fullExpression, size_t fromPos, size_t endPos) override;
+    void parse(const std::string& fullExpression, size_t& fromPos, size_t endPos) override;
     std::shared_ptr<Expression> onExit() override;
 
     type getCode() const override { return GenericLocation; }
@@ -96,7 +96,7 @@ private:
 struct TwoDotLocationParser: public SubExpressionParser
 {
 public:
-    size_t parse(const std::string& fullExpression, size_t fromPos, size_t endPos) override { return fromPos + 1; }
+    void parse(const std::string& fullExpression, size_t& fromPos, size_t endPos) override { ++fromPos; }
     std::shared_ptr<Expression> onExit() override;
     type getCode() const override { return TwoDotLocation; }
 };
@@ -107,7 +107,7 @@ public:
     MultiLocationParser();
 
     void onEntry() override;
-    size_t parse(const std::string& fullExpression, size_t fromPos, size_t endPos) override;
+    void parse(const std::string& fullExpression, size_t& fromPos, size_t endPos) override;
     std::shared_ptr<Expression> onExit() override;
     type getCode() const override { return MultiLocation; }
 
@@ -120,7 +120,7 @@ struct PositionalParser: public SubExpressionParser
 {
 public:
     void onEntry() override;
-    size_t parse(const std::string& fullExpression, size_t fromPos, size_t endPos) override;
+    void parse(const std::string& fullExpression, size_t& fromPos, size_t endPos) override;
     std::shared_ptr<Expression> onExit() override;
     type getCode() const override { return ArrayIndex; }
 private:
@@ -130,7 +130,7 @@ private:
 struct ExceptionParser: public SubExpressionParser
 {
     void onEntry() override {}
-    size_t parse(const std::string& fullExpression, size_t fromPos, size_t endPos) override;
+    void parse(const std::string& fullExpression, size_t& fromPos, size_t endPos) override;
     std::shared_ptr<Expression> onExit() override { return nullptr; }
 
     type getCode() const override { return Exception; }

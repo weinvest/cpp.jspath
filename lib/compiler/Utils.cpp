@@ -1,3 +1,4 @@
+#include <stdexcept>
 #include "compiler/Utils.h"
 
 namespace jspath
@@ -52,6 +53,63 @@ size_t skip2Any(const std::string& input, size_t pos, const std::string& eodChar
     }
 
     return endPos;
+}
+
+bool matchRange(std::stack<char>& unmatched, const std::string& input, size_t& fromPos, size_t endPos)
+{
+    char c = input[fromPos];
+    switch (c)
+    {
+    case '(':
+    case '[':
+    case '{':
+        unmatched.push(c);
+        break;
+    case ')':
+        if(unmatched.empty() || '(' != unmatched.top())
+        {
+            throw std::logic_error("')' unmatched");
+        }
+        else
+        {
+            unmatched.pop();
+        }
+        break;
+    case ']':
+        if(unmatched.empty() || '[' != unmatched.top())
+        {
+            throw std::logic_error("']' unmatched");
+        }
+        else
+        {
+            unmatched.pop();
+        }
+        break;
+    case '}':
+        if(unmatched.empty() || '{' != unmatched.top())
+        {
+            throw std::logic_error("'}' unmatched");
+        }
+        else
+        {
+            unmatched.pop();
+        }
+        break;
+    case '"':
+        {
+            auto toPos = skipString(input, fromPos + 1, endPos);
+            if(toPos >= endPos)
+            {
+                throw std::logic_error("'\"' not found");
+            }
+            fromPos = toPos;
+        }
+        break;
+
+    default:
+        return false;
+    };
+    return true;
 }
 }
 

@@ -18,13 +18,13 @@ void SubExpressionParser::onEntry()
 {}
 
 //========================SpaceParser=============================
-size_t SpaceParser::parse(const std::string& fullExpression, size_t fromPos, size_t endPos)
+void SpaceParser::parse(const std::string& fullExpression, size_t& fromPos, size_t endPos)
 {
     while(fromPos < endPos && std::isspace(fullExpression[fromPos]))
     {
         ++fromPos;
     }
-    return fromPos;
+    fromPos;
 }
 
 //=======================RegexLocationParser================================
@@ -33,12 +33,12 @@ void RegexLocationParser::onEntry()
     mRegexText.clear();
 }
 
-size_t RegexLocationParser::parse(const std::string& fullExpression, size_t fromPos, size_t endPos)
+void RegexLocationParser::parse(const std::string& fullExpression, size_t& fromPos, size_t endPos)
 {
     ++fromPos;
     auto toPos = skip2(fullExpression, fromPos, '/', endPos);
     mRegexText = fullExpression.substr(fromPos, toPos - fromPos);
-    return toPos + 1;
+    fromPos = toPos + 1;
 }
 
 std::shared_ptr<Expression> RegexLocationParser::onExit()
@@ -51,13 +51,13 @@ std::shared_ptr<Expression> RegexLocationParser::onExit()
 void QuoteLocationParser::onEntry()
 {}
 
-size_t QuoteLocationParser::parse(const std::string& fullExpression, size_t fromPos, size_t endPos)
+void QuoteLocationParser::parse(const std::string& fullExpression, size_t& fromPos, size_t endPos)
 {
     ++fromPos;
     auto toPos = skip2(fullExpression, fromPos, '"', endPos);
     mLocation = fullExpression.substr(fromPos, toPos - fromPos);
     mIsWildcard = std::string::npos != mLocation.find('*');
-    return toPos + 1;
+    fromPos = toPos + 1;
 }
 
 std::shared_ptr<Expression> QuoteLocationParser::onExit()
@@ -78,13 +78,13 @@ void GenericLocationParser::onEntry()
     mIsWildcard = false;
 }
 
-size_t GenericLocationParser::parse(const std::string& fullExpression, size_t fromPos, size_t endPos)
+void GenericLocationParser::parse(const std::string& fullExpression, size_t& fromPos, size_t endPos)
 {
     assert(0 != fromPos);
     size_t toPos = skip2Any(fullExpression, fromPos, ".{[(", endPos);
     mLocation = fullExpression.substr(fromPos, toPos - fromPos);
     mIsWildcard = std::string::npos != mLocation.find('*');
-    return toPos;
+    fromPos = toPos;
 }
 
 std::shared_ptr<Expression> GenericLocationParser::onExit()
@@ -110,14 +110,14 @@ std::shared_ptr<Expression> TwoDotLocationParser::onExit()
 void PositionalParser::onEntry()
 {}
 
-size_t PositionalParser::parse(const std::string& fullExpression, size_t fromPos, size_t endPos)
+void PositionalParser::parse(const std::string& fullExpression, size_t& fromPos, size_t endPos)
 {
     assert(0 != fromPos);
     ++fromPos;
     size_t toPos = fromPos;
     toPos = skip2(fullExpression, fromPos, ']', endPos);
     mIndex = fullExpression.substr(fromPos, toPos - fromPos);
-    return toPos + 1;
+    fromPos = toPos + 1;
 }
 
 std::shared_ptr<Expression> PositionalParser::onExit()
@@ -137,7 +137,7 @@ void MultiLocationParser::onEntry()
     mSubExpressionIndices.clear();
 }
 
-size_t MultiLocationParser::parse(const std::string& fullExpression, size_t fromPos, size_t endPos)
+void MultiLocationParser::parse(const std::string& fullExpression, size_t& fromPos, size_t endPos)
 {
     mFullExpression = &fullExpression;
     mSubExpressionIndices.push_back(fromPos);
@@ -145,70 +145,22 @@ size_t MultiLocationParser::parse(const std::string& fullExpression, size_t from
 
 
     bool finish = false;
-    std::stack<char> unmatch;
+    std::stack<char> unmatched;
+    unmatched.push('(');
     for(; fromPos < endPos && !finish; ++fromPos)
     {
         char c = fullExpression.at(fromPos);
-        switch (c)
+        if(!matchRange(unmatched, fullExpression, fromPos, endPos) && '|' == c)
         {
-        case '(':
-        case '[':
-        case '{':
-            unmatch.push(c);
-            break;
-        case ')':
-            if(unmatch.empty())
-            {
-                finish = true;
-            }
-            else if('(' != unmatch.top())
-            {
-                throw std::logic_error("')' unmatch");
-            }
-            else
-            {
-                unmatch.pop();
-            }
-            break;
-        case ']':
-            if(unmatch.empty() || '[' != unmatch.top())
-            {
-                throw std::logic_error("']' unmatch");
-            }
-            else
-            {
-                unmatch.pop();
-            }
-            break;
-        case '}':
-            if(unmatch.empty() || '{' != unmatch.top())
-            {
-                throw std::logic_error("'}' unmatch");
-            }
-            else
-            {
-                unmatch.pop();
-            }
-            break;
-        case '"':
-        {
-            auto toPos = skipString(fullExpression, fromPos + 1, endPos);
-            if(toPos >= endPos)
-            {
-                throw std::logic_error("'\"' not found");
-            }
-            fromPos = toPos;
-        }
-            break;
-        case '|':
-            if(unmatch.empty())
+            if(1 == unmatched.size())
             {
                 mSubExpressionIndices.push_back(fromPos);
             }
-            break;
-        default:
-            break;
-        };
+        }
+        else if(unmatched.empty())
+        {
+            finish = true;
+        }
     }
 
     if(!finish)
@@ -217,7 +169,6 @@ size_t MultiLocationParser::parse(const std::string& fullExpression, size_t from
     }
 
     mSubExpressionIndices.push_back(fromPos - 1);
-    return fromPos;
 }
 
 std::shared_ptr<Expression> MultiLocationParser::onExit()
@@ -239,7 +190,7 @@ std::shared_ptr<Expression> MultiLocationParser::onExit()
 
 
 //=============================ExceptionParser===========================
-size_t ExceptionParser::parse(const std::string& fullExpression, size_t fromPos, size_t endPos)
+void ExceptionParser::parse(const std::string& fullExpression, size_t& fromPos, size_t endPos)
 {
     throw std::logic_error("syntax error ");
 }
@@ -350,7 +301,7 @@ std::shared_ptr<Expression> Compiler::compile(const std::string& strExpression, 
             break;
         }
 
-        pos = mCurrentState->parse(strExpression, pos, endPos);
+        mCurrentState->parse(strExpression, pos, endPos);
         Event event = EOFEvent;
         if(pos < endPos)
         {
