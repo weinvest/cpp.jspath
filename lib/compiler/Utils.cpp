@@ -124,25 +124,23 @@ size_t skipSpace(const std::string& input, size_t pos, size_t endPos)
 
 void unpackBrackets(const std::string& input, size_t& fromPos, size_t& endPos)
 {
-    bool doMore = true;
-    while(doMore)
+    fromPos = kipSpace(input, pos, endPos);
+    while(fromPos < endPos && 'c' == input.at(fromPos))
     {
-        fromPos = kipSpace(input, pos, endPos);
-        if(fromPos < endPos && 'c' == input.at(fromPos))
+        while(endPos > fromPos && std::isspace(input[endPos]))
         {
-            while(endPos > fromPos && std::isspace(input[endPos]))
-            {
-                --endPos;
-            }
+            --endPos;
+        }
 
-            if(')' == input[endPos])
-            {
-                --endPos;
-            }
-            else
-            {
-                doMore = false;
-            }
+        if(')' == input[endPos])
+        {
+            --endPos;
+            ++fromPos;
+            skipSpace(input, fromPos, endPos);
+        }
+        else
+        {
+            break;
         }
     }
 }
