@@ -20,11 +20,7 @@ void SubExpressionParser::onEntry()
 //========================SpaceParser=============================
 void SpaceParser::parse(const std::string& fullExpression, size_t& fromPos, size_t endPos)
 {
-    while(fromPos < endPos && std::isspace(fullExpression[fromPos]))
-    {
-        ++fromPos;
-    }
-    fromPos;
+    fromPos = skipSpace(fullExpression, fromPos, endPos);
 }
 
 //=======================RegexLocationParser================================
@@ -291,10 +287,7 @@ std::shared_ptr<Expression> Compiler::compile(const std::string& strExpression, 
 
     while(pos < endPos)
     {
-        while(pos < endPos && std::isspace(strExpression[pos]))
-        {
-            ++pos;
-        }
+        pos = skipSpace(strExpression, pos, endPos);
 
         if(pos >= endPos)
         {

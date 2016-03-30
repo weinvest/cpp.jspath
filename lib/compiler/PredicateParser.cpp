@@ -220,6 +220,7 @@ void PredicateParser::parse(const std::string& fullExpression, size_t& fromPos, 
         char c = fullExpression.at(fromPos);
         if(!matchRange(unmatched, fullExpression, fromPos, endPos) && 1 == unmatched.size())
         {
+
             switch(c)
             {
             case '=':
@@ -270,13 +271,23 @@ void PredicateParser::parse(const std::string& fullExpression, size_t& fromPos, 
         }
     }//foreach char
 
-    mResult = nullptr;
+    mResult = createSyntaxTree(fullExpression, 0, mOperators.size());
 }
 
+std::shared_ptr<Expression> PredicateParser::createSyntaxTree(const std::string& fullExpression, size_t idxOpFrom, size_ idxOpTo)
+{
+    if(idxOpFrom == idxOpTo)
+    {
+
+    }
+    else
+    {
+        
+    }
+}
 
 std::shared_ptr<Expression> PredicateParser::onExit()
 {
     return mResult;
 }
 }
-

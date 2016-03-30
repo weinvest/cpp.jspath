@@ -111,5 +111,39 @@ bool matchRange(std::stack<char>& unmatched, const std::string& input, size_t& f
     };
     return true;
 }
+
+size_t skipSpace(const std::string& input, size_t pos, size_t endPos)
+{
+    while(pos < endPos && std::isspace(input[pos]))
+    {
+        ++pos;
+    }
+
+    return pos;
 }
 
+void unpackBrackets(const std::string& input, size_t& fromPos, size_t& endPos)
+{
+    bool doMore = true;
+    while(doMore)
+    {
+        fromPos = kipSpace(input, pos, endPos);
+        if(fromPos < endPos && 'c' == input.at(fromPos))
+        {
+            while(endPos > fromPos && std::isspace(input[endPos]))
+            {
+                --endPos;
+            }
+
+            if(')' == input[endPos])
+            {
+                --endPos;
+            }
+            else
+            {
+                doMore = false;
+            }
+        }
+    }
+}
+}

@@ -85,6 +85,7 @@ private:
     void parseOr(const std::string& fullExpression, size_t& fromPos);
     void parseSub(const std::string& fullExpression, size_t& fromPos);
 
+    std::shared_ptr<Expression> createSyntaxTree(const std::string& fullExpression, size_t idxOpFrom, size_ idxOpTo);
 
     std::vector<OpInfo> mOperators;
     std::shared_ptr<Expression> mResult;
