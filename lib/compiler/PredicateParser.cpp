@@ -1,6 +1,11 @@
 #include "compiler/PredicateParser.h"
 #include "Context.h"
 #include "compiler/Utils.h"
+#include "predicate/LogicOperator.h"
+#include "predicate/ArthemeticOperator.h"
+#include "predicate/StringOperator.h"
+#include "predicate/Operand.h"
+#include "predicate/Comparator.h"
 namespace jspath
 {
 bool operator< (const OpInfo& lhs, const OpInfo& rhs)
@@ -274,7 +279,7 @@ void PredicateParser::parse(const std::string& fullExpression, size_t& fromPos, 
     mResult = createSyntaxTree(fullExpression, 0, mOperators.size());
 }
 
-std::shared_ptr<Expression> PredicateParser::createSyntaxTree(const std::string& fullExpression, size_t idxOpFrom, size_ idxOpTo)
+std::shared_ptr<Expression> PredicateParser::createSyntaxTree(const std::string& fullExpression, size_t idxOpFrom, size_t idxOpTo)
 {
     if(idxOpFrom == idxOpTo)
     {
@@ -282,7 +287,93 @@ std::shared_ptr<Expression> PredicateParser::createSyntaxTree(const std::string&
     }
     else
     {
-        
+        auto idxLowerest = idxOpFrom;
+        for(auto idxCur = idxLowerest + 1; idxCur < idxOpTo; ++idxCur)
+        {
+            if(mOperators[idxLowerest] < mOperators[idxCur])
+            {
+                idxLowerest = idxCur;
+            }
+        }
+
+        if(mOperators[idxLowerest].isUnary())
+        {
+
+        }
+        else
+        {
+            auto pLeft = createSyntaxTree(fullExpression, idxOpFrom, idxLowerest -1);
+            auto pRight = createSyntaxTree(fullExpression, idxLowerest + 1, idxOpTo);
+            auto pExpression =  createBinary(mOperators[idxLowerest], pLeft, pRight);
+            return pExpression;
+        }
+    }
+}
+
+std::shared_ptr<Operand> PredicateParser::createArthemeticOp(const OpInfo& opInfo)
+{
+    switch (opInfo.op)
+    {
+    case OpInfo::Add: return std::make_shared<Add>();
+    case OpInfo::Sub: return std::make_shared<Sub>();
+    case OpInfo::Mul: return std::make_shared<Multiply>();
+    case OpInfo::Div: return std::make_shared<Divide>();
+    case OpInfo::Mod: return std::make_shared<Module>();
+    case OpInfo::Minus: return std::make_shared<Add>();
+    default:
+        return nullptr;
+    }
+}
+
+std::shared_ptr<Predicate> PredicateParser::createCompOp(const OpInfo& opInfo)
+{
+    switch (opInfo.op)
+    {
+    case OpInfo::Equal: return std::make_shared<Equal>();
+    case OpInfo::StrictlyEqual: std::make_shared<StrictlyEqual>();
+    case OpInfo::NonEqual: return std::make_shared<NonEqual>();
+    case OpInfo::StrictlyNonEqual: return std::make_shared<StrictlyNonEqual>();
+    case OpInfo::GreatThan: return std::make_shared<GreatThan>();
+    case OpInfo::GreatEqual: return std::make_shared<GreatEqual>();
+    case OpInfo::LessThan: return std::make_shared<LessThan>();
+    case OpInfo::LessEqual: return std::make_shared<LessEqual>();
+
+    //=========================================string comparison operators=================================
+    case OpInfo::StartsWith: return std::make_shared<StartsWith>();
+    case OpInfo::iStartsWith: return std::make_shared<InsensitiveStartsWith>();
+    case OpInfo::EndsWith: return std::make_shared<EndsWith>();
+    case OpInfo::iEndsWith: return std::make_shared<InsensitiveEndsWith>();
+    case OpInfo::Contains: return std::make_shared<Contains>();
+    case OpInfo::iContains: return std::make_shared<InsensitiveContains>();
+    case OpInfo::Match: return std::make_shared<Match>();
+    case OpInfo::iMatch: return std::make_shared<InsensitiveMatch>();
+    case OpInfo::NotMatch: return std::make_shared<NonMatch>();
+    case OpInfo::iNotMatch: return std::make_shared<InsensitiveNonMatch>();
+    default:
+        return nullptr;
+    }
+}
+
+std::shared_ptr<Predicate> PredicateParser::createLogicOp(const opInfo& opInfo)
+{
+    switch (opInfo.op)
+    {
+    case OpInfo::And: return std::make_shared<Add>();
+    case OpInfo::Or: return std::make_shared<Or>();
+    case OpInfo::Not: return std::make_shared<Not>();
+    default:
+        return nullptr;
+    }
+}
+
+std::shared_ptr<Predicate> PredicateParser::createUnary(const OpInfo& opInfo, const std::shared_ptr<Predicate>& pChild)
+{
+    switch (opInfo.op)
+    {
+    case OpInfo::Not:
+        return std::make_shared<Not>(pChild);
+    default:
+        return nullptr;
     }
 }
 

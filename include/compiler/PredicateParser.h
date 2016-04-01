@@ -60,9 +60,12 @@ struct OpInfo
     const size_t from,to; //position in fullExpression[from,to)
     const size_t index; //index in mOperators which declared in PredicateParser
 
+    bool isUnary() const { return op == Not; }
     friend bool operator< (const OpInfo& lhs, const OpInfo& rhs);
 };
 
+class Predicate;
+class Operand;
 struct PredicateParser: public SubExpressionParser
 {
 public:
@@ -85,7 +88,10 @@ private:
     void parseOr(const std::string& fullExpression, size_t& fromPos);
     void parseSub(const std::string& fullExpression, size_t& fromPos);
 
-    std::shared_ptr<Expression> createSyntaxTree(const std::string& fullExpression, size_t idxOpFrom, size_ idxOpTo);
+    std::shared_ptr<Operand> createArthemeticOp(const OpInfo& opInfo);
+    std::shared_ptr<Predicate> createCompOp(const OpInfo& opInfo);
+    std::shared_ptr<Predicate> createLogicOp(const opInfo& opInfo);
+    std::shared_ptr<Predicate> createUnary(const OpInfo& opInfo, const std::shared_ptr<Predicate>& pChild);
 
     std::vector<OpInfo> mOperators;
     std::shared_ptr<Expression> mResult;

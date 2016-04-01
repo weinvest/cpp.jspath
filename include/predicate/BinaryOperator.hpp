@@ -7,15 +7,13 @@ namespace jspath
     class BinaryOperator:public Base
     {
     public:
-        BinaryOperator(std::shared_ptr<OP> op1, std::shared_ptr<OP> op2)
-            :mOperand1(op1)
-            ,mOperand2(op2)
-        {}
+        BinaryOperator(){}
 
+        void setLeft(const std::shared_ptr<OP>& pLeft) { mOperand1 = pLeft; }
+        void setRight(const std::shared_ptr<OP>& pRight) { mOperand2 = pRight; }
     protected:
         std::shared_ptr<OP> mOperand1;
         std::shared_ptr<OP> mOperand2;
     };
 }
 #endif
-

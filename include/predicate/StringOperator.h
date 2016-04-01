@@ -62,6 +62,33 @@ public:
     using StringOperator::StringOperator;
     bool eval(const Context& cxt, const json& input) override;
 };
+
+class Match: public StringOperator
+{
+public:
+    using StringOperator::StringOperator;
+    bool eval(const Context& cxt, const json& input) override;
+};
+
+class InsensitiveMatch: public StringOperator
+{
+public:
+    using StringOperator::StringOperator;
+    bool eval(const Context& cxt, const json& input) override;
+};
+
+class NonMatch: public StringOperator
+{
+public:
+    using StringOperator::StringOperator;
+    bool eval(const Context& cxt, const json& input) override;
+};
+
+class InsensitiveNonMatch: public StringOperator
+{
+public:
+    using StringOperator::StringOperator;
+    bool eval(const Context& cxt, const json& input) override;
+};
 }
 #endif
-

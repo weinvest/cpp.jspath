@@ -55,7 +55,7 @@ bool InsensitiveEndsWith::eval(const Context& cxt, const json& input)
     return boost::iends_with(str1, str2);
 }
 
-//===============================contains===========================================
+//===============================Match===========================================
 bool Contains::eval(const Context& cxt, const json& input)
 {
     const auto& str1 = mOperand1->getStringValue(cxt, input);
@@ -71,5 +71,41 @@ bool InsensitiveContains::eval(const Context& cxt, const json& input)
     const auto& str2 = mOperand2->getStringValue(cxt, input);
 
     return boost::algorithm::icontains(str1, str2);
+}
+
+//===============================Match===========================================
+bool Match::eval(const Context& cxt, const json& input)
+{
+    const auto& str1 = mOperand1->getStringValue(cxt, input);
+    const auto& str2 = mOperand2->getStringValue(cxt, input);
+
+    return boost::algorithm::Match(str1, str2);
+}
+
+//===============================insensitive Match===========================================
+bool InsensitiveMatch::eval(const Context& cxt, const json& input)
+{
+    const auto& str1 = mOperand1->getStringValue(cxt, input);
+    const auto& str2 = mOperand2->getStringValue(cxt, input);
+
+    return boost::algorithm::iMatch(str1, str2);
+}
+
+//===============================Match===========================================
+bool NonMatch::eval(const Context& cxt, const json& input)
+{
+    const auto& str1 = mOperand1->getStringValue(cxt, input);
+    const auto& str2 = mOperand2->getStringValue(cxt, input);
+
+    return boost::algorithm::Match(str1, str2);
+}
+
+//===============================insensitive Match===========================================
+bool InsensitiveNonMatch::eval(const Context& cxt, const json& input)
+{
+    const auto& str1 = mOperand1->getStringValue(cxt, input);
+    const auto& str2 = mOperand2->getStringValue(cxt, input);
+
+    return boost::algorithm::iMatch(str1, str2);
 }
 }
