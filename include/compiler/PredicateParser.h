@@ -90,7 +90,7 @@ private:
 
     std::shared_ptr<Operand> createArthemeticOp(const OpInfo& opInfo);
     std::shared_ptr<Predicate> createCompOp(const OpInfo& opInfo);
-    std::shared_ptr<Predicate> createLogicOp(const opInfo& opInfo);
+    std::shared_ptr<Predicate> createLogicOp(const OpInfo& opInfo);
     std::shared_ptr<Predicate> createUnary(const OpInfo& opInfo, const std::shared_ptr<Predicate>& pChild);
 
     std::vector<OpInfo> mOperators;

@@ -2,22 +2,23 @@
 #define _JSPATH_OPERAND_H
 #include "json.hpp"
 #include "Predicate.h"
+#include "Enum.h"
 namespace jspath
 {
 using nlohmann::json;
 class Operand: public Predicate
 {
 public:
+    #define OPERAND_TYPES  ((Bool,0))((Integer,1))((Real,2))((String,3))\
+                           ((Array,4))((Location,5))((Composite,6))((Unknown,7))
+
     enum type
     {
-	Bool,
-	Integer,
-        Real,
-        String,
-        Array,
-        Location,
-        Other
+        JSENUM_VALUE(OPERAND_TYPES)
     };
+
+    static const std::string& toString(type t);
+    static bool parse(const std::string& value, type& v);
 
     Operand(type t);
     virtual ~Operand();
@@ -29,7 +30,7 @@ public:
     virtual const std::string& getStringValue(const Context& cxt, const json& input) = 0;
 
     virtual type getType(const Context& /*cxt*/, const json& /*input*/) const { return mType; }
-    virtual bool IsDynamic() const { return false; }
+    bool IsDynamic() const { return mType < Location; }
 
     bool eval(const Context& cxt, const json& input) override;
 private:
@@ -68,7 +69,7 @@ private:
 class RealOperand: public Operand
 {
 public:
-    RealOperand(const std::string& v); 
+    RealOperand(const std::string& v);
 
     bool getBoolValue(const Context& cxt, const json& input) override;
     int getIntValue(const Context& cxt, const json& input) override;
@@ -110,7 +111,6 @@ class LocationOperand: public Operand
 {
 public:
     LocationOperand(std::shared_ptr<LocationPath> v);
-    bool IsDynamic() const override { return true; }
 
     bool getBoolValue(const Context& cxt, const json& input) override;
     int getIntValue(const Context& cxt, const json& input) override;
@@ -124,4 +124,3 @@ private:
 
 }
 #endif
-

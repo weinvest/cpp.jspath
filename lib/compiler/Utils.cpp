@@ -1,4 +1,5 @@
 #include <stdexcept>
+#include <boost/xpressive/xpressive.hpp>
 #include "compiler/Utils.h"
 
 namespace jspath
@@ -142,6 +143,26 @@ void unpackBrackets(const std::string& input, size_t& fromPos, size_t& endPos)
         {
             break;
         }
+    }
+}
+
+bool isMatch(const std::string& str, const std::string& pattern, bool caseInsensitive)
+{
+    using namespace boost::xpressive;
+    sregex regex;
+    if(caseInsensitive)
+    {
+        regex = icase(pattern);
+    }
+    else
+    {
+        regex = sregex::compile(str2);
+    }
+
+    smatch what;
+    if(regex_match(str1, what, pattern))
+    {
+        return true;
     }
 }
 }

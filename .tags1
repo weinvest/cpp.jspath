@@ -1,0 +1,13 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	0	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+jspath	/home/shgli/src/cpp.jspath/lib/predicate/ArthemeticOperator.cpp	/^namespace jspath$/;"	namespace	line:4	file:
+Add	/home/shgli/src/cpp.jspath/lib/predicate/ArthemeticOperator.cpp	/^    Add::Add()$/;"	function	line:6	class:jspath::Add	signature:()
+getType	/home/shgli/src/cpp.jspath/lib/predicate/ArthemeticOperator.cpp	/^    Operand::type Add::getType(const Context& cxt, const json& input)$/;"	function	line:11	class:jspath::Add	signature:(const Context& cxt, const json& input)
+getBoolValue	/home/shgli/src/cpp.jspath/lib/predicate/ArthemeticOperator.cpp	/^    bool Add::getBoolValue(const Context& cxt, const json& input)$/;"	function	line:36	class:jspath::Add	signature:(const Context& cxt, const json& input)
+getIntValue	/home/shgli/src/cpp.jspath/lib/predicate/ArthemeticOperator.cpp	/^    int Add::getIntValue(const Context& cxt, const json& input)$/;"	function	line:41	class:jspath::Add	signature:(const Context& cxt, const json& input)
+getRealValue	/home/shgli/src/cpp.jspath/lib/predicate/ArthemeticOperator.cpp	/^    double Add::getRealValue(const Context& cxt, const json& input)$/;"	function	line:53	class:jspath::Add	signature:(const Context& cxt, const json& input)
+getStringValue	/home/shgli/src/cpp.jspath/lib/predicate/ArthemeticOperator.cpp	/^    const std::string& Add::getStringValue(const Context& cxt, const json& input)$/;"	function	line:65	class:jspath::Add	signature:(const Context& cxt, const json& input)

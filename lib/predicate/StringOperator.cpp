@@ -1,5 +1,6 @@
 #include <cstdlib>
 #include <boost/algorithm/string/predicate.hpp>
+#include "compiler/Utils.h"
 #include "predicate/StringOperator.h"
 namespace jspath
 {
@@ -79,7 +80,7 @@ bool Match::eval(const Context& cxt, const json& input)
     const auto& str1 = mOperand1->getStringValue(cxt, input);
     const auto& str2 = mOperand2->getStringValue(cxt, input);
 
-    return boost::algorithm::Match(str1, str2);
+    return isMatch(str1, str2);
 }
 
 //===============================insensitive Match===========================================
@@ -88,7 +89,7 @@ bool InsensitiveMatch::eval(const Context& cxt, const json& input)
     const auto& str1 = mOperand1->getStringValue(cxt, input);
     const auto& str2 = mOperand2->getStringValue(cxt, input);
 
-    return boost::algorithm::iMatch(str1, str2);
+    return isMatch(str1, str2, true);
 }
 
 //===============================Match===========================================
@@ -97,7 +98,7 @@ bool NonMatch::eval(const Context& cxt, const json& input)
     const auto& str1 = mOperand1->getStringValue(cxt, input);
     const auto& str2 = mOperand2->getStringValue(cxt, input);
 
-    return boost::algorithm::Match(str1, str2);
+    return !isMatch(str1, str2);
 }
 
 //===============================insensitive Match===========================================
@@ -106,6 +107,6 @@ bool InsensitiveNonMatch::eval(const Context& cxt, const json& input)
     const auto& str1 = mOperand1->getStringValue(cxt, input);
     const auto& str2 = mOperand2->getStringValue(cxt, input);
 
-    return boost::algorithm::iMatch(str1, str2);
+    return !isMatch(str1, str2, true);
 }
 }

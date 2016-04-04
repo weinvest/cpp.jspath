@@ -7,6 +7,7 @@ namespace jspath
     class BinaryOperator:public Base
     {
     public:
+        using Base::Base;
         BinaryOperator(){}
 
         void setLeft(const std::shared_ptr<OP>& pLeft) { mOperand1 = pLeft; }
