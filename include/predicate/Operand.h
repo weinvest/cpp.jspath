@@ -10,7 +10,7 @@ class Operand: public Predicate
 {
 public:
     #define OPERAND_TYPES  ((Bool,0))((Integer,1))((Real,2))((String,3))\
-                           ((Array,4))((Location,5))((Composite,6))((Unknown,7))
+                           ((Json,4))((Location,5))((Composite,6))((Unknown,7))
 
     enum type
     {
@@ -19,6 +19,8 @@ public:
 
     static const std::string& toString(type t);
     static bool parse(const std::string& value, type& v);
+
+    Operand():Operand(Composite){}
 
     Operand(type t);
     virtual ~Operand();
@@ -40,44 +42,45 @@ private:
 class BoolOperand: public Operand
 {
 public:
-    BoolOperand(const std::string& v);
+    BoolOperand(bool v);
 
+    bool canConvert2(type t, const Context& cxt, const json& input) override;
     bool getBoolValue(const Context& cxt, const json& input) override;
     int getIntValue(const Context& cxt, const json& input) override;
     double getRealValue(const Context& cxt, const json& input) override;
     const std::string& getStringValue(const Context& cxt, const json& input) override;
+
 private:
-    std::string mRepresentation;
     bool mBoolValue;
 };
 
 class IntOperand: public Operand
 {
 public:
-    IntOperand(const std::string& v);
+    IntOperand(int v);
 
+    bool canConvert2(type t, const Context& cxt, const json& input) override;
     bool getBoolValue(const Context& cxt, const json& input) override;
     int getIntValue(const Context& cxt, const json& input) override;
     double getRealValue(const Context& cxt, const json& input) override;
     const std::string& getStringValue(const Context& cxt, const json& input) override;
 
 private:
-    std::string mRepresentation;
     int mIntValue;
 };
 
 class RealOperand: public Operand
 {
 public:
-    RealOperand(const std::string& v);
+    RealOperand(double v);
 
+    bool canConvert2(type t, const Context& cxt, const json& input) override;
     bool getBoolValue(const Context& cxt, const json& input) override;
     int getIntValue(const Context& cxt, const json& input) override;
     double getRealValue(const Context& cxt, const json& input) override;
     const std::string& getStringValue(const Context& cxt, const json& input) override;
 
 private:
-    std::string mRepresentation;
     double mRealValue;
 };
 
@@ -86,6 +89,7 @@ class StringOperand: public Operand
 public:
     StringOperand(const std::string& v);
 
+    bool canConvert2(type t, const Context& cxt, const json& input) override;
     bool getBoolValue(const Context& cxt, const json& input) override;
     int getIntValue(const Context& cxt, const json& input) override;
     double getRealValue(const Context& cxt, const json& input) override;
@@ -95,15 +99,19 @@ private:
     std::string mValue;
 };
 
-class ArrayOperand: public Operand
+class JsonOperand: public Operand
 {
 public:
-    ArrayOperand(const std::string& v);
+    JsonOperand(const json& v);
 
+    bool canConvert2(type t, const Context& cxt, const json& input) override;
     bool getBoolValue(const Context& cxt, const json& input) override;
     int getIntValue(const Context& cxt, const json& input) override;
     double getRealValue(const Context& cxt, const json& input) override;
     const std::string& getStringValue(const Context& cxt, const json& input) override;
+
+private:
+    json mValue;
 };
 
 class LocationPath;
@@ -112,13 +120,18 @@ class LocationOperand: public Operand
 public:
     LocationOperand(std::shared_ptr<LocationPath> v);
 
+    bool canConvert2(type t, const Context& cxt, const json& input) override;
     bool getBoolValue(const Context& cxt, const json& input) override;
     int getIntValue(const Context& cxt, const json& input) override;
     double getRealValue(const Context& cxt, const json& input) override;
     const std::string& getStringValue(const Context& cxt, const json& input) override;
-
+    type getType(const Context& /*cxt*/, const json& /*input*/) const override;
 private:
+    void makeSure(const Context& cxt, const json& input) const;
+
     std::shared_ptr<LocationPath> mLocation;
+    mutable std::shared_ptr<Operand> mResult; //TODO thread safe
+    mutable const json* mCurrentInput; //TODO: thread safe
 };
 
 

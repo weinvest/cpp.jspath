@@ -3,7 +3,7 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/algorithm/string.hpp>
 #include "positional/IndexRange.h"
-
+#include "compiler/Utils.h"
 namespace jspath
 {
 IndexRange::IndexRange(const std::string& index)
@@ -49,23 +49,7 @@ int IndexRange::parseIndex(const std::string& str, size_t& from, int blankValue)
         return blankValue;
     }
 
-    int value = 0, sign = 1;
-    if('-' == str.at(from))
-    {
-        sign = -1;
-        ++from;
-    }
-    else if('+' == str.at(from))
-    {
-        ++from;
-    }
-
-    for(; from < str.length() && std::isdigit(str.at(from)); ++from)
-    {
-        value *= 10;
-        value += (str.at(from) - '0');
-    }
-    value *= sign;
+    int value = convert2Int(str, from, str.length());
 
 
     for(; from < str.length() && std::isspace(str.at(from)); ++from)

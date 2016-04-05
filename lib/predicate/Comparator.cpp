@@ -30,7 +30,7 @@ int Compare(std::shared_ptr<Operand> op1, std::shared_ptr<Operand> op2, const Co
             const auto& str2 = op2->getStringValue(cxt, input);
             return strcmp(str1.c_str(), str2.c_str());
         }
-    case Operand::Array:
+    case Operand::Json:
 	{
 
 	}
@@ -60,7 +60,7 @@ bool Equal::eval(const Context &cxt, const json &input)
 	}
 	t = t2;
     }
-    
+
     return 0 == Compare(mOperand1, mOperand2, cxt, input, t);
 }
 
@@ -71,7 +71,7 @@ bool StrictlyEqual::eval(const Context &cxt, const json &input)
     {
         return false;
     }
-    
+
     return 0 == Compare(mOperand1, mOperand2, cxt, input, mOperand1->getType(cxt, input));
 }
 
@@ -96,7 +96,7 @@ bool NonEqual::eval(const Context &cxt, const json &input)
 	}
 	t = t2;
     }
-    
+
     return 0 != Compare(mOperand1, mOperand2, cxt, input, t);
 }
 
@@ -117,7 +117,7 @@ bool GreatThan::eval(const Context &cxt, const json &input)
     {
         return false;
     }
-    
+
     return Compare(mOperand1, mOperand2, cxt, input, mOperand1->getType(cxt, input)) > 0;
 }
 
@@ -128,7 +128,7 @@ bool GreatEqual::eval(const Context &cxt, const json &input)
     {
         return false;
     }
-    
+
     return Compare(mOperand1, mOperand2, cxt, input, mOperand1->getType(cxt, input)) >= 0;
 }
 
@@ -139,7 +139,7 @@ bool LessThan::eval(const Context &cxt, const json &input)
     {
         return false;
     }
-    
+
     return Compare(mOperand1, mOperand2, cxt, input, mOperand1->getType(cxt, input)) < 0;
 }
 
@@ -150,7 +150,7 @@ bool LessEqual::eval(const Context &cxt, const json &input)
     {
         return false;
     }
-    
+
     return Compare(mOperand1, mOperand2, cxt, input, mOperand1->getType(cxt, input)) <= 0;
 }
 }

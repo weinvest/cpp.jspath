@@ -1027,14 +1027,6 @@ eval	/home/shgli/src/cpp.jspath/lib/predicate/StringOperator.cpp	/^bool Match::e
 eval	/home/shgli/src/cpp.jspath/lib/predicate/StringOperator.cpp	/^bool InsensitiveMatch::eval(const Context& cxt, const json& input)$/;"	function	line:87	class:jspath::InsensitiveMatch	signature:(const Context& cxt, const json& input)
 eval	/home/shgli/src/cpp.jspath/lib/predicate/StringOperator.cpp	/^bool NonMatch::eval(const Context& cxt, const json& input)$/;"	function	line:96	class:jspath::NonMatch	signature:(const Context& cxt, const json& input)
 eval	/home/shgli/src/cpp.jspath/lib/predicate/StringOperator.cpp	/^bool InsensitiveNonMatch::eval(const Context& cxt, const json& input)$/;"	function	line:105	class:jspath::InsensitiveNonMatch	signature:(const Context& cxt, const json& input)
-jspath	/home/shgli/src/cpp.jspath/lib/compiler/Utils.cpp	/^namespace jspath$/;"	namespace	line:5	file:
-skipString	/home/shgli/src/cpp.jspath/lib/compiler/Utils.cpp	/^size_t skipString(const std::string& input, size_t pos, size_t endPos)$/;"	function	line:8	namespace:jspath	signature:(const std::string& input, size_t pos, size_t endPos)
-skip2	/home/shgli/src/cpp.jspath/lib/compiler/Utils.cpp	/^size_t skip2(const std::string& input, size_t pos, char c, size_t endPos)$/;"	function	line:13	namespace:jspath	signature:(const std::string& input, size_t pos, char c, size_t endPos)
-skip2Any	/home/shgli/src/cpp.jspath/lib/compiler/Utils.cpp	/^size_t skip2Any(const std::string& input, size_t pos, const std::string& eodChars, size_t endPos)$/;"	function	line:36	namespace:jspath	signature:(const std::string& input, size_t pos, const std::string& eodChars, size_t endPos)
-matchRange	/home/shgli/src/cpp.jspath/lib/compiler/Utils.cpp	/^bool matchRange(std::stack<char>& unmatched, const std::string& input, size_t& fromPos, size_t endPos)$/;"	function	line:59	namespace:jspath	signature:(std::stack<char>& unmatched, const std::string& input, size_t& fromPos, size_t endPos)
-skipSpace	/home/shgli/src/cpp.jspath/lib/compiler/Utils.cpp	/^size_t skipSpace(const std::string& input, size_t pos, size_t endPos)$/;"	function	line:116	namespace:jspath	signature:(const std::string& input, size_t pos, size_t endPos)
-unpackBrackets	/home/shgli/src/cpp.jspath/lib/compiler/Utils.cpp	/^void unpackBrackets(const std::string& input, size_t& fromPos, size_t& endPos)$/;"	function	line:126	namespace:jspath	signature:(const std::string& input, size_t& fromPos, size_t& endPos)
-isMatch	/home/shgli/src/cpp.jspath/lib/compiler/Utils.cpp	/^bool isMatch(const std::string& str, const std::string& pattern, bool caseInsensitive)$/;"	function	line:149	namespace:jspath	signature:(const std::string& str, const std::string& pattern, bool caseInsensitive)
 _JSPATH_COMPILER_UTILS_H	/home/shgli/src/cpp.jspath/include/compiler/Utils.h	/^#define _JSPATH_COMPILER_UTILS_H$/;"	macro	line:2
 jspath	/home/shgli/src/cpp.jspath/include/compiler/Utils.h	/^namespace jspath$/;"	namespace	line:5
 _JSPATH_PREDICATE_PARSER_H	/home/shgli/src/cpp.jspath/include/compiler/PredicateParser.h	/^#define _JSPATH_PREDICATE_PARSER_H$/;"	macro	line:2
@@ -1087,94 +1079,6 @@ override	/home/shgli/src/cpp.jspath/include/compiler/PredicateParser.h	/^    voi
 override	/home/shgli/src/cpp.jspath/include/compiler/PredicateParser.h	/^    std::shared_ptr<Expression> onExit() override;$/;"	member	line:74	struct:jspath::PredicateParser
 mOperators	/home/shgli/src/cpp.jspath/include/compiler/PredicateParser.h	/^    std::vector<OpInfo> mOperators;$/;"	member	line:96	struct:jspath::PredicateParser
 mResult	/home/shgli/src/cpp.jspath/include/compiler/PredicateParser.h	/^    std::shared_ptr<Expression> mResult;$/;"	member	line:97	struct:jspath::PredicateParser
-jspath	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^namespace jspath$/;"	namespace	line:5	file:
-Operand	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    Operand::Operand(type t)$/;"	function	line:8	class:jspath::Operand	signature:(type t)
-~Operand	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    Operand::~Operand()$/;"	function	line:12	class:jspath::Operand	signature:()
-eval	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    bool Operand::eval(const Context& cxt, const json& input)$/;"	function	line:15	class:jspath::Operand	signature:(const Context& cxt, const json& input)
-BoolOperand	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    BoolOperand::BoolOperand(const std::string& v)$/;"	function	line:21	class:jspath::BoolOperand	signature:(const std::string& v)
-getBoolValue	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    bool BoolOperand::getBoolValue(const Context& cxt, const json& input)$/;"	function	line:63	class:jspath::BoolOperand	signature:(const Context& cxt, const json& input)
-getIntValue	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    int BoolOperand::getIntValue(const Context& \/*cxt*\/, const json& \/*input*\/)$/;"	function	line:68	class:jspath::BoolOperand	signature:(const Context& , const json& )
-getRealValue	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    double BoolOperand::getRealValue(const Context& \/*cxt*\/, const json& \/*input*\/)$/;"	function	line:73	class:jspath::BoolOperand	signature:(const Context& , const json& )
-getStringValue	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    const std::string& BoolOperand::getStringValue(const Context& \/*cxt*\/, const json& \/*input*\/)$/;"	function	line:78	class:jspath::BoolOperand	signature:(const Context& , const json& )
-IntOperand	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    IntOperand::IntOperand(const std::string& v)$/;"	function	line:84	class:jspath::IntOperand	signature:(const std::string& v)
-getBoolValue	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    bool IntOperand::getBoolValue(const Context& cxt, const json& input)$/;"	function	line:90	class:jspath::IntOperand	signature:(const Context& cxt, const json& input)
-getIntValue	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    int IntOperand::getIntValue(const Context& \/*cxt*\/, const json& \/*input*\/)$/;"	function	line:95	class:jspath::IntOperand	signature:(const Context& , const json& )
-getRealValue	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    double IntOperand::getRealValue(const Context& \/*cxt*\/, const json& \/*input*\/)$/;"	function	line:100	class:jspath::IntOperand	signature:(const Context& , const json& )
-getStringValue	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    const std::string& IntOperand::getStringValue(const Context& \/*cxt*\/, const json& \/*input*\/)$/;"	function	line:105	class:jspath::IntOperand	signature:(const Context& , const json& )
-RealOperand	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    RealOperand::RealOperand(const std::string& v)$/;"	function	line:111	class:jspath::RealOperand	signature:(const std::string& v)
-getBoolValue	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    bool RealOperand::getBoolValue(const Context& cxt, const json& input)$/;"	function	line:117	class:jspath::RealOperand	signature:(const Context& cxt, const json& input)
-getIntValue	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    int RealOperand::getIntValue(const Context& \/*cxt*\/, const json& \/*input*\/)$/;"	function	line:122	class:jspath::RealOperand	signature:(const Context& , const json& )
-getRealValue	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    double RealOperand::getRealValue(const Context& \/*cxt*\/, const json& \/*input*\/)$/;"	function	line:127	class:jspath::RealOperand	signature:(const Context& , const json& )
-getStringValue	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    const std::string& RealOperand::getStringValue(const Context& \/*cxt*\/, const json& \/*input*\/)$/;"	function	line:132	class:jspath::RealOperand	signature:(const Context& , const json& )
-StringOperand	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    StringOperand::StringOperand(const std::string& v)$/;"	function	line:138	class:jspath::StringOperand	signature:(const std::string& v)
-getBoolValue	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    bool StringOperand::getBoolValue(const Context& cxt, const json& input)$/;"	function	line:143	class:jspath::StringOperand	signature:(const Context& cxt, const json& input)
-getIntValue	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    int StringOperand::getIntValue(const Context& cxt, const json& input)$/;"	function	line:148	class:jspath::StringOperand	signature:(const Context& cxt, const json& input)
-getRealValue	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    double StringOperand::getRealValue(const Context& cxt, const json& input)$/;"	function	line:153	class:jspath::StringOperand	signature:(const Context& cxt, const json& input)
-getStringValue	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    const std::string& StringOperand::getStringValue(const Context& cxt, const json& input)$/;"	function	line:158	class:jspath::StringOperand	signature:(const Context& cxt, const json& input)
-ArrayOperand	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    ArrayOperand::ArrayOperand(const std::string& v)$/;"	function	line:164	class:jspath::ArrayOperand	signature:(const std::string& v)
-getBoolValue	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    bool ArrayOperand::getBoolValue(const Context& cxt, const json& input)$/;"	function	line:168	class:jspath::ArrayOperand	signature:(const Context& cxt, const json& input)
-getIntValue	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    int ArrayOperand::getIntValue(const Context& cxt, const json& input)$/;"	function	line:173	class:jspath::ArrayOperand	signature:(const Context& cxt, const json& input)
-getRealValue	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    double ArrayOperand::getRealValue(const Context& cxt, const json& input)$/;"	function	line:178	class:jspath::ArrayOperand	signature:(const Context& cxt, const json& input)
-getStringValue	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    const std::string& ArrayOperand::getStringValue(const Context& cxt, const json& input)$/;"	function	line:183	class:jspath::ArrayOperand	signature:(const Context& cxt, const json& input)
-LocationOperand	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    LocationOperand::LocationOperand(const std::shared_ptr<LocationPath> p)$/;"	function	line:191	class:jspath::LocationOperand	signature:(const std::shared_ptr<LocationPath> p)
-getBoolValue	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    bool LocationOperand::getBoolValue(const Context& cxt, const json& input)$/;"	function	line:196	class:jspath::LocationOperand	signature:(const Context& cxt, const json& input)
-getIntValue	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    int LocationOperand::getIntValue(const Context& cxt, const json& input)$/;"	function	line:201	class:jspath::LocationOperand	signature:(const Context& cxt, const json& input)
-getRealValue	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    double LocationOperand::getRealValue(const Context& cxt, const json& input)$/;"	function	line:206	class:jspath::LocationOperand	signature:(const Context& cxt, const json& input)
-getStringValue	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    const std::string& LocationOperand::getStringValue(const Context& cxt, const json& input)$/;"	function	line:211	class:jspath::LocationOperand	signature:(const Context& cxt, const json& input)
-_JSPATH_OPERAND_H	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^#define _JSPATH_OPERAND_H$/;"	macro	line:2
-jspath	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^namespace jspath$/;"	namespace	line:5
-Operand	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^class Operand: public Predicate$/;"	class	line:8	namespace:jspath
-type	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    enum type$/;"	enum	line:11	class:jspath::Operand
-Bool	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^        Bool,$/;"	enumerator	line:13	enum:jspath::Operand::type
-Integer	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^        Integer,$/;"	enumerator	line:14	enum:jspath::Operand::type
-Real	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^        Real,$/;"	enumerator	line:15	enum:jspath::Operand::type
-String	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^        String,$/;"	enumerator	line:16	enum:jspath::Operand::type
-Array	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^        Array,$/;"	enumerator	line:17	enum:jspath::Operand::type
-Location	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^        Location,$/;"	enumerator	line:18	enum:jspath::Operand::type
-Composite	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^        Composite$/;"	enumerator	line:19	enum:jspath::Operand::type
-canConvert2	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    virtual bool canConvert2(type t, const Context& cxt, const json& input) { return false; }$/;"	function	line:25	class:jspath::Operand	signature:(type t, const Context& cxt, const json& input)
-getType	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    virtual type getType(const Context& \/*cxt*\/, const json& \/*input*\/) const { return mType; }$/;"	function	line:31	class:jspath::Operand	signature:(const Context& , const json& ) const
-IsDynamic	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    bool IsDynamic() const { return mType < Location; }$/;"	function	line:32	class:jspath::Operand	signature:() const
-override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    bool eval(const Context& cxt, const json& input) override;$/;"	member	line:34	class:jspath::Operand
-mType	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    type mType;$/;"	member	line:36	class:jspath::Operand
-BoolOperand	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^class BoolOperand: public Operand$/;"	class	line:39	namespace:jspath
-override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    bool getBoolValue(const Context& cxt, const json& input) override;$/;"	member	line:44	class:jspath::BoolOperand
-override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    int getIntValue(const Context& cxt, const json& input) override;$/;"	member	line:45	class:jspath::BoolOperand
-override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    double getRealValue(const Context& cxt, const json& input) override;$/;"	member	line:46	class:jspath::BoolOperand
-override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    const std::string& getStringValue(const Context& cxt, const json& input) override;$/;"	member	line:47	class:jspath::BoolOperand
-mRepresentation	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    std::string mRepresentation;$/;"	member	line:49	class:jspath::BoolOperand
-mBoolValue	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    bool mBoolValue;$/;"	member	line:50	class:jspath::BoolOperand
-IntOperand	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^class IntOperand: public Operand$/;"	class	line:53	namespace:jspath
-override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    bool getBoolValue(const Context& cxt, const json& input) override;$/;"	member	line:58	class:jspath::IntOperand
-override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    int getIntValue(const Context& cxt, const json& input) override;$/;"	member	line:59	class:jspath::IntOperand
-override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    double getRealValue(const Context& cxt, const json& input) override;$/;"	member	line:60	class:jspath::IntOperand
-override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    const std::string& getStringValue(const Context& cxt, const json& input) override;$/;"	member	line:61	class:jspath::IntOperand
-mRepresentation	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    std::string mRepresentation;$/;"	member	line:64	class:jspath::IntOperand
-mIntValue	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    int mIntValue;$/;"	member	line:65	class:jspath::IntOperand
-RealOperand	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^class RealOperand: public Operand$/;"	class	line:68	namespace:jspath
-override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    bool getBoolValue(const Context& cxt, const json& input) override;$/;"	member	line:73	class:jspath::RealOperand
-override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    int getIntValue(const Context& cxt, const json& input) override;$/;"	member	line:74	class:jspath::RealOperand
-override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    double getRealValue(const Context& cxt, const json& input) override;$/;"	member	line:75	class:jspath::RealOperand
-override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    const std::string& getStringValue(const Context& cxt, const json& input) override;$/;"	member	line:76	class:jspath::RealOperand
-mRepresentation	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    std::string mRepresentation;$/;"	member	line:79	class:jspath::RealOperand
-mRealValue	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    double mRealValue;$/;"	member	line:80	class:jspath::RealOperand
-StringOperand	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^class StringOperand: public Operand$/;"	class	line:83	namespace:jspath
-override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    bool getBoolValue(const Context& cxt, const json& input) override;$/;"	member	line:88	class:jspath::StringOperand
-override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    int getIntValue(const Context& cxt, const json& input) override;$/;"	member	line:89	class:jspath::StringOperand
-override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    double getRealValue(const Context& cxt, const json& input) override;$/;"	member	line:90	class:jspath::StringOperand
-override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    const std::string& getStringValue(const Context& cxt, const json& input) override;$/;"	member	line:91	class:jspath::StringOperand
-mValue	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    std::string mValue;$/;"	member	line:94	class:jspath::StringOperand
-ArrayOperand	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^class ArrayOperand: public Operand$/;"	class	line:97	namespace:jspath
-override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    bool getBoolValue(const Context& cxt, const json& input) override;$/;"	member	line:102	class:jspath::ArrayOperand
-override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    int getIntValue(const Context& cxt, const json& input) override;$/;"	member	line:103	class:jspath::ArrayOperand
-override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    double getRealValue(const Context& cxt, const json& input) override;$/;"	member	line:104	class:jspath::ArrayOperand
-override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    const std::string& getStringValue(const Context& cxt, const json& input) override;$/;"	member	line:105	class:jspath::ArrayOperand
-LocationOperand	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^class LocationOperand: public Operand$/;"	class	line:109	namespace:jspath
-override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    bool getBoolValue(const Context& cxt, const json& input) override;$/;"	member	line:114	class:jspath::LocationOperand
-override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    int getIntValue(const Context& cxt, const json& input) override;$/;"	member	line:115	class:jspath::LocationOperand
-override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    double getRealValue(const Context& cxt, const json& input) override;$/;"	member	line:116	class:jspath::LocationOperand
-override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    const std::string& getStringValue(const Context& cxt, const json& input) override;$/;"	member	line:117	class:jspath::LocationOperand
-mLocation	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    std::shared_ptr<LocationPath> mLocation;$/;"	member	line:120	class:jspath::LocationOperand
 JSPATH_BINARY_OPERATOR_H	/home/shgli/src/cpp.jspath/include/predicate/BinaryOperator.hpp	/^#define JSPATH_BINARY_OPERATOR_H$/;"	macro	line:2
 jspath	/home/shgli/src/cpp.jspath/include/predicate/BinaryOperator.hpp	/^namespace jspath$/;"	namespace	line:4
 BinaryOperator	/home/shgli/src/cpp.jspath/include/predicate/BinaryOperator.hpp	/^    class BinaryOperator:public Base$/;"	class	line:7	namespace:jspath
@@ -1183,39 +1087,151 @@ setLeft	/home/shgli/src/cpp.jspath/include/predicate/BinaryOperator.hpp	/^      
 setRight	/home/shgli/src/cpp.jspath/include/predicate/BinaryOperator.hpp	/^        void setRight(const std::shared_ptr<OP>& pRight) { mOperand2 = pRight; }$/;"	function	line:14	class:jspath::BinaryOperator	signature:(const std::shared_ptr<OP>& pRight)
 mOperand1	/home/shgli/src/cpp.jspath/include/predicate/BinaryOperator.hpp	/^        std::shared_ptr<OP> mOperand1;$/;"	member	line:16	class:jspath::BinaryOperator
 mOperand2	/home/shgli/src/cpp.jspath/include/predicate/BinaryOperator.hpp	/^        std::shared_ptr<OP> mOperand2;$/;"	member	line:17	class:jspath::BinaryOperator
+jspath	/home/shgli/src/cpp.jspath/lib/compiler/Utils.cpp	/^namespace jspath$/;"	namespace	line:5	file:
+skipString	/home/shgli/src/cpp.jspath/lib/compiler/Utils.cpp	/^size_t skipString(const std::string& input, size_t pos, size_t endPos)$/;"	function	line:8	namespace:jspath	signature:(const std::string& input, size_t pos, size_t endPos)
+skip2	/home/shgli/src/cpp.jspath/lib/compiler/Utils.cpp	/^size_t skip2(const std::string& input, size_t pos, char c, size_t endPos)$/;"	function	line:13	namespace:jspath	signature:(const std::string& input, size_t pos, char c, size_t endPos)
+skip2Any	/home/shgli/src/cpp.jspath/lib/compiler/Utils.cpp	/^size_t skip2Any(const std::string& input, size_t pos, const std::string& eodChars, size_t endPos)$/;"	function	line:36	namespace:jspath	signature:(const std::string& input, size_t pos, const std::string& eodChars, size_t endPos)
+matchRange	/home/shgli/src/cpp.jspath/lib/compiler/Utils.cpp	/^bool matchRange(std::stack<char>& unmatched, const std::string& input, size_t& fromPos, size_t endPos)$/;"	function	line:59	namespace:jspath	signature:(std::stack<char>& unmatched, const std::string& input, size_t& fromPos, size_t endPos)
+skipSpace	/home/shgli/src/cpp.jspath/lib/compiler/Utils.cpp	/^size_t skipSpace(const std::string& input, size_t pos, size_t endPos)$/;"	function	line:116	namespace:jspath	signature:(const std::string& input, size_t pos, size_t endPos)
+unpackBrackets	/home/shgli/src/cpp.jspath/lib/compiler/Utils.cpp	/^void unpackBrackets(const std::string& input, size_t& fromPos, size_t& endPos)$/;"	function	line:126	namespace:jspath	signature:(const std::string& input, size_t& fromPos, size_t& endPos)
+isMatch	/home/shgli/src/cpp.jspath/lib/compiler/Utils.cpp	/^bool isMatch(const std::string& str, const std::string& pattern, bool caseInsensitive)$/;"	function	line:149	namespace:jspath	signature:(const std::string& str, const std::string& pattern, bool caseInsensitive)
 JSPATH_ARTHEMETIC_OPERATOR_H	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^#define JSPATH_ARTHEMETIC_OPERATOR_H$/;"	macro	line:2
-jspath	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^namespace jspath$/;"	namespace	line:5
-ArthemeticOperator	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^typedef BinaryOperator<Operand, Operand> ArthemeticOperator;$/;"	typedef	line:7	namespace:jspath
-Add	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^class Add: public ArthemeticOperator$/;"	class	line:8	namespace:jspath
-override	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^    Operand::type getType(const Context& \/*cxt*\/, const json& \/*input*\/) const override;$/;"	member	line:13	class:jspath::Add
-override	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^    bool getBoolValue(const Context& cxt, const json& input) override;$/;"	member	line:14	class:jspath::Add
-override	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^    int getIntValue(const Context& cxt, const json& input) override;$/;"	member	line:15	class:jspath::Add
-override	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^    double getRealValue(const Context& cxt, const json& input) override;$/;"	member	line:16	class:jspath::Add
-override	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^    const std::string& getStringValue(const Context& cxt, const json& input) override;$/;"	member	line:17	class:jspath::Add
-Sub	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^class Sub: public ArthemeticOperator$/;"	class	line:20	namespace:jspath
-override	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^    bool getBoolValue(const Context& cxt, const json& input) override;$/;"	member	line:25	class:jspath::Sub
-override	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^    int getIntValue(const Context& cxt, const json& input) override;$/;"	member	line:26	class:jspath::Sub
-override	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^    double getRealValue(const Context& cxt, const json& input) override;$/;"	member	line:27	class:jspath::Sub
-override	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^    const std::string& getStringValue(const Context& cxt, const json& input) override;$/;"	member	line:28	class:jspath::Sub
-Multiply	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^class Multiply: public ArthemeticOperator$/;"	class	line:31	namespace:jspath
-override	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^    bool getBoolValue(const Context& cxt, const json& input) override;$/;"	member	line:36	class:jspath::Multiply
-override	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^    int getIntValue(const Context& cxt, const json& input) override;$/;"	member	line:37	class:jspath::Multiply
-override	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^    double getRealValue(const Context& cxt, const json& input) override;$/;"	member	line:38	class:jspath::Multiply
-override	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^    const std::string& getStringValue(const Context& cxt, const json& input) override;$/;"	member	line:39	class:jspath::Multiply
-Divide	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^class Divide: public ArthemeticOperator$/;"	class	line:42	namespace:jspath
-override	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^    bool getBoolValue(const Context& cxt, const json& input) override;$/;"	member	line:47	class:jspath::Divide
-override	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^    int getIntValue(const Context& cxt, const json& input) override;$/;"	member	line:48	class:jspath::Divide
-override	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^    double getRealValue(const Context& cxt, const json& input) override;$/;"	member	line:49	class:jspath::Divide
-override	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^    const std::string& getStringValue(const Context& cxt, const json& input) override;$/;"	member	line:50	class:jspath::Divide
-Module	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^class Module: public ArthemeticOperator$/;"	class	line:53	namespace:jspath
-override	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^    bool getBoolValue(const Context& cxt, const json& input) override;$/;"	member	line:58	class:jspath::Module
-override	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^    int getIntValue(const Context& cxt, const json& input) override;$/;"	member	line:59	class:jspath::Module
-override	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^    double getRealValue(const Context& cxt, const json& input) override;$/;"	member	line:60	class:jspath::Module
-override	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^    const std::string& getStringValue(const Context& cxt, const json& input) override;$/;"	member	line:61	class:jspath::Module
+jspath	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^namespace jspath$/;"	namespace	line:6
+ArthemeticOperator	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^class ArthemeticOperator: public BinaryOperator<Operand, Operand>$/;"	class	line:8	namespace:jspath
+Operator	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^    enum Operator$/;"	enum	line:11	class:jspath::ArthemeticOperator
+OP_Add	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^        OP_Add,$/;"	enumerator	line:13	enum:jspath::ArthemeticOperator::Operator
+OP_Sub	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^        OP_Sub,$/;"	enumerator	line:14	enum:jspath::ArthemeticOperator::Operator
+OP_Mul	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^        OP_Mul,$/;"	enumerator	line:15	enum:jspath::ArthemeticOperator::Operator
+OP_Div	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^        OP_Div$/;"	enumerator	line:16	enum:jspath::ArthemeticOperator::Operator
+Base	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^    typedef BinaryOperator<Operand, Operand> Base;$/;"	typedef	line:19	class:jspath::ArthemeticOperator
+override	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^    Operand::type getType(const Context& \/*cxt*\/, const json& \/*input*\/) const override;$/;"	member	line:22	class:jspath::ArthemeticOperator
+override	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^    int getIntValue(const Context& cxt, const json& input) override;$/;"	member	line:23	class:jspath::ArthemeticOperator
+override	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^    double getRealValue(const Context& cxt, const json& input) override;$/;"	member	line:24	class:jspath::ArthemeticOperator
+apply	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^    T apply(T lhs, T rhs)$/;"	function	line:28	class:jspath::ArthemeticOperator	signature:(T lhs, T rhs)
+mOperator	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^    Operator mOperator;$/;"	member	line:39	class:jspath::ArthemeticOperator
+Add	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^class Add: public ArthemeticOperator$/;"	class	line:42	namespace:jspath
+override	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^    bool getBoolValue(const Context& cxt, const json& input) override;$/;"	member	line:47	class:jspath::Add
+override	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^    const std::string& getStringValue(const Context& cxt, const json& input) override;$/;"	member	line:48	class:jspath::Add
+Sub	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^class Sub: public ArthemeticOperator$/;"	class	line:51	namespace:jspath
+override	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^    bool getBoolValue(const Context& cxt, const json& input) override;$/;"	member	line:57	class:jspath::Sub
+override	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^    const std::string& getStringValue(const Context& cxt, const json& input) override;$/;"	member	line:58	class:jspath::Sub
+Multiply	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^class Multiply: public ArthemeticOperator$/;"	class	line:61	namespace:jspath
+override	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^    bool getBoolValue(const Context& cxt, const json& input) override;$/;"	member	line:67	class:jspath::Multiply
+override	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^    const std::string& getStringValue(const Context& cxt, const json& input) override;$/;"	member	line:68	class:jspath::Multiply
+Divide	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^class Divide: public ArthemeticOperator$/;"	class	line:71	namespace:jspath
+override	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^    bool getBoolValue(const Context& cxt, const json& input) override;$/;"	member	line:77	class:jspath::Divide
+override	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^    const std::string& getStringValue(const Context& cxt, const json& input) override;$/;"	member	line:78	class:jspath::Divide
+Module	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^class Module: public BinaryOperator<Operand, Operand>$/;"	class	line:81	namespace:jspath
+override	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^    Operand::type getType(const Context& cxt, const json& input) const override;$/;"	member	line:84	class:jspath::Module
+override	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^    bool getBoolValue(const Context& cxt, const json& input) override;$/;"	member	line:85	class:jspath::Module
+override	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^    int getIntValue(const Context& cxt, const json& input) override;$/;"	member	line:86	class:jspath::Module
+override	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^    double getRealValue(const Context& cxt, const json& input) override;$/;"	member	line:87	class:jspath::Module
+override	/home/shgli/src/cpp.jspath/include/predicate/ArthemeticOperator.h	/^    const std::string& getStringValue(const Context& cxt, const json& input) override;$/;"	member	line:88	class:jspath::Module
 jspath	/home/shgli/src/cpp.jspath/lib/predicate/ArthemeticOperator.cpp	/^namespace jspath$/;"	namespace	line:4	file:
-Add	/home/shgli/src/cpp.jspath/lib/predicate/ArthemeticOperator.cpp	/^    Add::Add()$/;"	function	line:6	class:jspath::Add	signature:()
-getType	/home/shgli/src/cpp.jspath/lib/predicate/ArthemeticOperator.cpp	/^    Operand::type Add::getType(const Context& cxt, const json& input)$/;"	function	line:11	class:jspath::Add	signature:(const Context& cxt, const json& input)
-getBoolValue	/home/shgli/src/cpp.jspath/lib/predicate/ArthemeticOperator.cpp	/^    bool Add::getBoolValue(const Context& cxt, const json& input)$/;"	function	line:36	class:jspath::Add	signature:(const Context& cxt, const json& input)
-getIntValue	/home/shgli/src/cpp.jspath/lib/predicate/ArthemeticOperator.cpp	/^    int Add::getIntValue(const Context& cxt, const json& input)$/;"	function	line:41	class:jspath::Add	signature:(const Context& cxt, const json& input)
-getRealValue	/home/shgli/src/cpp.jspath/lib/predicate/ArthemeticOperator.cpp	/^    double Add::getRealValue(const Context& cxt, const json& input)$/;"	function	line:53	class:jspath::Add	signature:(const Context& cxt, const json& input)
-getStringValue	/home/shgli/src/cpp.jspath/lib/predicate/ArthemeticOperator.cpp	/^    const std::string& Add::getStringValue(const Context& cxt, const json& input)$/;"	function	line:65	class:jspath::Add	signature:(const Context& cxt, const json& input)
+ArthemeticOperator	/home/shgli/src/cpp.jspath/lib/predicate/ArthemeticOperator.cpp	/^    ArthemeticOperator::ArthemeticOperator(Operator op)$/;"	function	line:7	class:jspath::ArthemeticOperator	signature:(Operator op)
+getType	/home/shgli/src/cpp.jspath/lib/predicate/ArthemeticOperator.cpp	/^    Operand::type ArthemeticOperator::getType(const Context& cxt, const json& input) const$/;"	function	line:12	class:jspath::ArthemeticOperator	signature:(const Context& cxt, const json& input) const
+getIntValue	/home/shgli/src/cpp.jspath/lib/predicate/ArthemeticOperator.cpp	/^    int ArthemeticOperator::getIntValue(const Context& cxt, const json& input)$/;"	function	line:37	class:jspath::ArthemeticOperator	signature:(const Context& cxt, const json& input)
+getRealValue	/home/shgli/src/cpp.jspath/lib/predicate/ArthemeticOperator.cpp	/^    double ArthemeticOperator::getRealValue(const Context& cxt, const json& input)$/;"	function	line:49	class:jspath::ArthemeticOperator	signature:(const Context& cxt, const json& input)
+Add	/home/shgli/src/cpp.jspath/lib/predicate/ArthemeticOperator.cpp	/^    Add::Add()$/;"	function	line:62	class:jspath::Add	signature:()
+getBoolValue	/home/shgli/src/cpp.jspath/lib/predicate/ArthemeticOperator.cpp	/^    bool Add::getBoolValue(const Context& cxt, const json& input)$/;"	function	line:67	class:jspath::Add	signature:(const Context& cxt, const json& input)
+getStringValue	/home/shgli/src/cpp.jspath/lib/predicate/ArthemeticOperator.cpp	/^    const std::string& Add::getStringValue(const Context& cxt, const json& input)$/;"	function	line:86	class:jspath::Add	signature:(const Context& cxt, const json& input)
+Sub	/home/shgli/src/cpp.jspath/lib/predicate/ArthemeticOperator.cpp	/^    Sub::Sub()$/;"	function	line:101	class:jspath::Sub	signature:()
+getBoolValue	/home/shgli/src/cpp.jspath/lib/predicate/ArthemeticOperator.cpp	/^    bool Sub::getBoolValue(const Context& cxt, const json& input)$/;"	function	line:106	class:jspath::Sub	signature:(const Context& cxt, const json& input)
+getStringValue	/home/shgli/src/cpp.jspath/lib/predicate/ArthemeticOperator.cpp	/^    const std::string& Sub::getStringValue(const Context& cxt, const json& input)$/;"	function	line:122	class:jspath::Sub	signature:(const Context& cxt, const json& input)
+Multiply	/home/shgli/src/cpp.jspath/lib/predicate/ArthemeticOperator.cpp	/^    Multiply::Multiply()$/;"	function	line:128	class:jspath::Multiply	signature:()
+getBoolValue	/home/shgli/src/cpp.jspath/lib/predicate/ArthemeticOperator.cpp	/^    bool Multiply::getBoolValue(const Context& cxt, const json& input)$/;"	function	line:133	class:jspath::Multiply	signature:(const Context& cxt, const json& input)
+getStringValue	/home/shgli/src/cpp.jspath/lib/predicate/ArthemeticOperator.cpp	/^    const std::string& Multiply::getStringValue(const Context& cxt, const json& input)$/;"	function	line:149	class:jspath::Multiply	signature:(const Context& cxt, const json& input)
+Divide	/home/shgli/src/cpp.jspath/lib/predicate/ArthemeticOperator.cpp	/^    Divide::Divide()$/;"	function	line:155	class:jspath::Divide	signature:()
+getBoolValue	/home/shgli/src/cpp.jspath/lib/predicate/ArthemeticOperator.cpp	/^    bool Divide::getBoolValue(const Context& cxt, const json& input)$/;"	function	line:160	class:jspath::Divide	signature:(const Context& cxt, const json& input)
+getStringValue	/home/shgli/src/cpp.jspath/lib/predicate/ArthemeticOperator.cpp	/^    const std::string& Divide::getStringValue(const Context& cxt, const json& input)$/;"	function	line:176	class:jspath::Divide	signature:(const Context& cxt, const json& input)
+getType	/home/shgli/src/cpp.jspath/lib/predicate/ArthemeticOperator.cpp	/^    Operand::type Module::getType(const Context& cxt, const json& input) const$/;"	function	line:182	class:jspath::Module	signature:(const Context& cxt, const json& input) const
+getBoolValue	/home/shgli/src/cpp.jspath/lib/predicate/ArthemeticOperator.cpp	/^    bool Module::getBoolValue(const Context& cxt, const json& input)$/;"	function	line:193	class:jspath::Module	signature:(const Context& cxt, const json& input)
+getIntValue	/home/shgli/src/cpp.jspath/lib/predicate/ArthemeticOperator.cpp	/^    int Module::getIntValue(const Context& cxt, const json& input)$/;"	function	line:198	class:jspath::Module	signature:(const Context& cxt, const json& input)
+getRealValue	/home/shgli/src/cpp.jspath/lib/predicate/ArthemeticOperator.cpp	/^    double Module::getRealValue(const Context& cxt, const json& input)$/;"	function	line:211	class:jspath::Module	signature:(const Context& cxt, const json& input)
+getStringValue	/home/shgli/src/cpp.jspath/lib/predicate/ArthemeticOperator.cpp	/^    const std::string& Module::getStringValue(const Context& cxt, const json& input)$/;"	function	line:216	class:jspath::Module	signature:(const Context& cxt, const json& input)
+_JSPATH_OPERAND_H	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^#define _JSPATH_OPERAND_H$/;"	macro	line:2
+jspath	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^namespace jspath$/;"	namespace	line:6
+Operand	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^class Operand: public Predicate$/;"	class	line:9	namespace:jspath
+OPERAND_TYPES	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    #define OPERAND_TYPES /;"	macro	line:12
+type	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    enum type$/;"	enum	line:15	class:jspath::Operand
+JSENUM_VALUE	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^        JSENUM_VALUE(OPERAND_TYPES)$/;"	enumerator	line:17	enum:jspath::Operand::type
+Operand	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    Operand():Operand(Composite){}$/;"	function	line:23	class:jspath::Operand	signature:()
+canConvert2	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    virtual bool canConvert2(type t, const Context& cxt, const json& input) { return false; }$/;"	function	line:28	class:jspath::Operand	signature:(type t, const Context& cxt, const json& input)
+getType	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    virtual type getType(const Context& \/*cxt*\/, const json& \/*input*\/) const { return mType; }$/;"	function	line:34	class:jspath::Operand	signature:(const Context& , const json& ) const
+IsDynamic	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    bool IsDynamic() const { return mType < Location; }$/;"	function	line:35	class:jspath::Operand	signature:() const
+override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    bool eval(const Context& cxt, const json& input) override;$/;"	member	line:37	class:jspath::Operand
+mType	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    type mType;$/;"	member	line:39	class:jspath::Operand
+BoolOperand	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^class BoolOperand: public Operand$/;"	class	line:42	namespace:jspath
+override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    bool canConvert2(type t, const Context& cxt, const json& input) override;$/;"	member	line:47	class:jspath::BoolOperand
+override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    bool getBoolValue(const Context& cxt, const json& input) override;$/;"	member	line:48	class:jspath::BoolOperand
+override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    int getIntValue(const Context& cxt, const json& input) override;$/;"	member	line:49	class:jspath::BoolOperand
+override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    double getRealValue(const Context& cxt, const json& input) override;$/;"	member	line:50	class:jspath::BoolOperand
+override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    const std::string& getStringValue(const Context& cxt, const json& input) override;$/;"	member	line:51	class:jspath::BoolOperand
+mRepresentation	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    std::string mRepresentation;$/;"	member	line:53	class:jspath::BoolOperand
+mBoolValue	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    bool mBoolValue;$/;"	member	line:54	class:jspath::BoolOperand
+IntOperand	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^class IntOperand: public Operand$/;"	class	line:57	namespace:jspath
+override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    bool getBoolValue(const Context& cxt, const json& input) override;$/;"	member	line:62	class:jspath::IntOperand
+override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    int getIntValue(const Context& cxt, const json& input) override;$/;"	member	line:63	class:jspath::IntOperand
+override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    double getRealValue(const Context& cxt, const json& input) override;$/;"	member	line:64	class:jspath::IntOperand
+override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    const std::string& getStringValue(const Context& cxt, const json& input) override;$/;"	member	line:65	class:jspath::IntOperand
+mRepresentation	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    std::string mRepresentation;$/;"	member	line:68	class:jspath::IntOperand
+mIntValue	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    int mIntValue;$/;"	member	line:69	class:jspath::IntOperand
+RealOperand	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^class RealOperand: public Operand$/;"	class	line:72	namespace:jspath
+override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    bool getBoolValue(const Context& cxt, const json& input) override;$/;"	member	line:77	class:jspath::RealOperand
+override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    int getIntValue(const Context& cxt, const json& input) override;$/;"	member	line:78	class:jspath::RealOperand
+override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    double getRealValue(const Context& cxt, const json& input) override;$/;"	member	line:79	class:jspath::RealOperand
+override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    const std::string& getStringValue(const Context& cxt, const json& input) override;$/;"	member	line:80	class:jspath::RealOperand
+mRepresentation	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    std::string mRepresentation;$/;"	member	line:83	class:jspath::RealOperand
+mRealValue	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    double mRealValue;$/;"	member	line:84	class:jspath::RealOperand
+StringOperand	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^class StringOperand: public Operand$/;"	class	line:87	namespace:jspath
+override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    bool getBoolValue(const Context& cxt, const json& input) override;$/;"	member	line:92	class:jspath::StringOperand
+override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    int getIntValue(const Context& cxt, const json& input) override;$/;"	member	line:93	class:jspath::StringOperand
+override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    double getRealValue(const Context& cxt, const json& input) override;$/;"	member	line:94	class:jspath::StringOperand
+override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    const std::string& getStringValue(const Context& cxt, const json& input) override;$/;"	member	line:95	class:jspath::StringOperand
+mValue	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    std::string mValue;$/;"	member	line:98	class:jspath::StringOperand
+ArrayOperand	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^class ArrayOperand: public Operand$/;"	class	line:101	namespace:jspath
+override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    bool getBoolValue(const Context& cxt, const json& input) override;$/;"	member	line:106	class:jspath::ArrayOperand
+override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    int getIntValue(const Context& cxt, const json& input) override;$/;"	member	line:107	class:jspath::ArrayOperand
+override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    double getRealValue(const Context& cxt, const json& input) override;$/;"	member	line:108	class:jspath::ArrayOperand
+override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    const std::string& getStringValue(const Context& cxt, const json& input) override;$/;"	member	line:109	class:jspath::ArrayOperand
+LocationOperand	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^class LocationOperand: public Operand$/;"	class	line:113	namespace:jspath
+override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    bool getBoolValue(const Context& cxt, const json& input) override;$/;"	member	line:118	class:jspath::LocationOperand
+override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    int getIntValue(const Context& cxt, const json& input) override;$/;"	member	line:119	class:jspath::LocationOperand
+override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    double getRealValue(const Context& cxt, const json& input) override;$/;"	member	line:120	class:jspath::LocationOperand
+override	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    const std::string& getStringValue(const Context& cxt, const json& input) override;$/;"	member	line:121	class:jspath::LocationOperand
+mLocation	/home/shgli/src/cpp.jspath/include/predicate/Operand.h	/^    std::shared_ptr<LocationPath> mLocation;$/;"	member	line:124	class:jspath::LocationOperand
+jspath	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^namespace jspath$/;"	namespace	line:5	file:
+Operand	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    Operand::Operand(type t)$/;"	function	line:11	class:jspath::Operand	signature:(type t)
+~Operand	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    Operand::~Operand()$/;"	function	line:15	class:jspath::Operand	signature:()
+eval	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    bool Operand::eval(const Context& cxt, const json& input)$/;"	function	line:18	class:jspath::Operand	signature:(const Context& cxt, const json& input)
+BoolOperand	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    BoolOperand::BoolOperand(const std::string& v)$/;"	function	line:24	class:jspath::BoolOperand	signature:(const std::string& v)
+canConvert2	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    bool BoolOperand::canConvert2(type t, const Context& cxt, const json& input)$/;"	function	line:66	class:jspath::BoolOperand	signature:(type t, const Context& cxt, const json& input)
+getBoolValue	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    bool BoolOperand::getBoolValue(const Context& cxt, const json& input)$/;"	function	line:71	class:jspath::BoolOperand	signature:(const Context& cxt, const json& input)
+getIntValue	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    int BoolOperand::getIntValue(const Context& \/*cxt*\/, const json& \/*input*\/)$/;"	function	line:76	class:jspath::BoolOperand	signature:(const Context& , const json& )
+getRealValue	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    double BoolOperand::getRealValue(const Context& \/*cxt*\/, const json& \/*input*\/)$/;"	function	line:81	class:jspath::BoolOperand	signature:(const Context& , const json& )
+getStringValue	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    const std::string& BoolOperand::getStringValue(const Context& \/*cxt*\/, const json& \/*input*\/)$/;"	function	line:86	class:jspath::BoolOperand	signature:(const Context& , const json& )
+IntOperand	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    IntOperand::IntOperand(const std::string& v)$/;"	function	line:92	class:jspath::IntOperand	signature:(const std::string& v)
+getBoolValue	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    bool IntOperand::getBoolValue(const Context& cxt, const json& input)$/;"	function	line:98	class:jspath::IntOperand	signature:(const Context& cxt, const json& input)
+getIntValue	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    int IntOperand::getIntValue(const Context& \/*cxt*\/, const json& \/*input*\/)$/;"	function	line:103	class:jspath::IntOperand	signature:(const Context& , const json& )
+getRealValue	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    double IntOperand::getRealValue(const Context& \/*cxt*\/, const json& \/*input*\/)$/;"	function	line:108	class:jspath::IntOperand	signature:(const Context& , const json& )
+getStringValue	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    const std::string& IntOperand::getStringValue(const Context& \/*cxt*\/, const json& \/*input*\/)$/;"	function	line:113	class:jspath::IntOperand	signature:(const Context& , const json& )
+RealOperand	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    RealOperand::RealOperand(const std::string& v)$/;"	function	line:119	class:jspath::RealOperand	signature:(const std::string& v)
+getBoolValue	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    bool RealOperand::getBoolValue(const Context& cxt, const json& input)$/;"	function	line:125	class:jspath::RealOperand	signature:(const Context& cxt, const json& input)
+getIntValue	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    int RealOperand::getIntValue(const Context& \/*cxt*\/, const json& \/*input*\/)$/;"	function	line:130	class:jspath::RealOperand	signature:(const Context& , const json& )
+getRealValue	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    double RealOperand::getRealValue(const Context& \/*cxt*\/, const json& \/*input*\/)$/;"	function	line:135	class:jspath::RealOperand	signature:(const Context& , const json& )
+getStringValue	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    const std::string& RealOperand::getStringValue(const Context& \/*cxt*\/, const json& \/*input*\/)$/;"	function	line:140	class:jspath::RealOperand	signature:(const Context& , const json& )
+StringOperand	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    StringOperand::StringOperand(const std::string& v)$/;"	function	line:146	class:jspath::StringOperand	signature:(const std::string& v)
+getBoolValue	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    bool StringOperand::getBoolValue(const Context& cxt, const json& input)$/;"	function	line:151	class:jspath::StringOperand	signature:(const Context& cxt, const json& input)
+getIntValue	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    int StringOperand::getIntValue(const Context& cxt, const json& input)$/;"	function	line:156	class:jspath::StringOperand	signature:(const Context& cxt, const json& input)
+getRealValue	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    double StringOperand::getRealValue(const Context& cxt, const json& input)$/;"	function	line:161	class:jspath::StringOperand	signature:(const Context& cxt, const json& input)
+getStringValue	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    const std::string& StringOperand::getStringValue(const Context& cxt, const json& input)$/;"	function	line:166	class:jspath::StringOperand	signature:(const Context& cxt, const json& input)
+ArrayOperand	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    ArrayOperand::ArrayOperand(const std::string& v)$/;"	function	line:172	class:jspath::ArrayOperand	signature:(const std::string& v)
+getBoolValue	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    bool ArrayOperand::getBoolValue(const Context& cxt, const json& input)$/;"	function	line:176	class:jspath::ArrayOperand	signature:(const Context& cxt, const json& input)
+getIntValue	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    int ArrayOperand::getIntValue(const Context& cxt, const json& input)$/;"	function	line:181	class:jspath::ArrayOperand	signature:(const Context& cxt, const json& input)
+getRealValue	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    double ArrayOperand::getRealValue(const Context& cxt, const json& input)$/;"	function	line:186	class:jspath::ArrayOperand	signature:(const Context& cxt, const json& input)
+getStringValue	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    const std::string& ArrayOperand::getStringValue(const Context& cxt, const json& input)$/;"	function	line:191	class:jspath::ArrayOperand	signature:(const Context& cxt, const json& input)
+LocationOperand	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    LocationOperand::LocationOperand(const std::shared_ptr<LocationPath> p)$/;"	function	line:199	class:jspath::LocationOperand	signature:(const std::shared_ptr<LocationPath> p)
+getBoolValue	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    bool LocationOperand::getBoolValue(const Context& cxt, const json& input)$/;"	function	line:204	class:jspath::LocationOperand	signature:(const Context& cxt, const json& input)
+getIntValue	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    int LocationOperand::getIntValue(const Context& cxt, const json& input)$/;"	function	line:209	class:jspath::LocationOperand	signature:(const Context& cxt, const json& input)
+getRealValue	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    double LocationOperand::getRealValue(const Context& cxt, const json& input)$/;"	function	line:214	class:jspath::LocationOperand	signature:(const Context& cxt, const json& input)
+getStringValue	/home/shgli/src/cpp.jspath/lib/predicate/Operand.cpp	/^    const std::string& LocationOperand::getStringValue(const Context& cxt, const json& input)$/;"	function	line:219	class:jspath::LocationOperand	signature:(const Context& cxt, const json& input)

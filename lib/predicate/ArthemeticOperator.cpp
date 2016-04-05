@@ -15,7 +15,7 @@ namespace jspath
         auto t2 = mOperand2->getType(cxt, input);
         if(t1 == t2)
         {
-            if(Operand::Array == t1)
+            if(Operand::Json == t1)
             {
                 return Operand::Unknown;
             }
@@ -85,16 +85,15 @@ namespace jspath
 
     const std::string& Add::getStringValue(const Context& cxt, const json& input)
     {
-        static std::string result;
         auto t = getType(cxt, input);
         if(Operand::String != t)
         {
             throw std::logic_error("Add.getStringValue only availabe for Operand::String");
         }
 
-        result = mOperand1->getStringValue(cxt, input);
-        result += mOperand1->getStringValue(cxt, input);
-        return result;
+        mTemp = mOperand1->getStringValue(cxt, input);
+        mTemp += mOperand1->getStringValue(cxt, input);
+        return mTemp;
     }
 
     //===================================Sub====================================
@@ -109,36 +108,24 @@ namespace jspath
         switch (t)
         {
         case Operand::Bool:
-            return mOperand1->getBoolValue(cxt, input) || mOperand2->getBoolValue(cxt, input);
+            return 0 != (mOperand1->getBoolValue(cxt, input) - mOperand2->getBoolValue(cxt, input));
         case Operand::Integer:
-            return 0 != (mOperand1->getIntValue(cxt, input) + mOperand2->getIntValue(cxt, input));
+            return 0 != (mOperand1->getIntValue(cxt, input) - mOperand2->getIntValue(cxt, input));
         case Operand::Real:
-            return std::abs(mOperand1->getIntValue(cxt, input) + mOperand2->getIntValue(cxt, input)) > 1e-8;
-        case Operand::String:
-            return mOperand1->getStringValue(cxt, input).length() > 0
-                || mOperand2->getStringValue(cxt, input).length() > 0;
+            return std::abs(mOperand1->getIntValue(cxt, input) - mOperand2->getIntValue(cxt, input)) > 1e-8;
         default:
-            throw std::logic_error("Sub.getBoolValue only available for Operand::Bool/Int/Real/String");
+            throw std::logic_error("Sub.getBoolValue only available for Operand::Bool/Int/Real");
         }
     }
 
     const std::string& Sub::getStringValue(const Context& cxt, const json& input)
     {
-        static std::string result;
-        auto t = getType(cxt, input);
-        if(Operand::String != t)
-        {
-            throw std::logic_error("Sub.getStringValue only availabe for Operand::String");
-        }
-
-        result = mOperand1->getStringValue(cxt, input);
-        result += mOperand1->getStringValue(cxt, input);
-        return result;
+        throw std::logic_error("Sub.getStringValue not supported");
     }
 
     //===================================Multiply====================================
     Multiply::Multiply()
-        :ArthemeticOperator(ArthemeticOperator::OP_Multiply)
+        :ArthemeticOperator(ArthemeticOperator::OP_Mul)
     {
     }
 
@@ -148,36 +135,24 @@ namespace jspath
         switch (t)
         {
         case Operand::Bool:
-            return mOperand1->getBoolValue(cxt, input) || mOperand2->getBoolValue(cxt, input);
+            return mOperand1->getBoolValue(cxt, input) && mOperand2->getBoolValue(cxt, input);
         case Operand::Integer:
-            return 0 != (mOperand1->getIntValue(cxt, input) + mOperand2->getIntValue(cxt, input));
+            return 0 != (mOperand1->getIntValue(cxt, input) * mOperand2->getIntValue(cxt, input));
         case Operand::Real:
-            return std::abs(mOperand1->getIntValue(cxt, input) + mOperand2->getIntValue(cxt, input)) > 1e-8;
-        case Operand::String:
-            return mOperand1->getStringValue(cxt, input).length() > 0
-                || mOperand2->getStringValue(cxt, input).length() > 0;
+            return std::abs(mOperand1->getIntValue(cxt, input) * mOperand2->getIntValue(cxt, input)) > 1e-8;
         default:
-            throw std::logic_error("Multiply.getBoolValue only available for Operand::Bool/Int/Real/String");
+            throw std::logic_error("Multiply.getBoolValue only available for Operand::Bool/Int/Real");
         }
     }
 
     const std::string& Multiply::getStringValue(const Context& cxt, const json& input)
     {
-        static std::string result;
-        auto t = getType(cxt, input);
-        if(Operand::String != t)
-        {
-            throw std::logic_error("Multiply.getStringValue only availabe for Operand::String");
-        }
-
-        result = mOperand1->getStringValue(cxt, input);
-        result += mOperand1->getStringValue(cxt, input);
-        return result;
+        throw std::logic_error("Multiply.getStringValue not supported");
     }
 
     //===================================Divide====================================
     Divide::Divide()
-        :ArthemeticOperator(ArthemeticOperator::OP_Divide)
+        :ArthemeticOperator(ArthemeticOperator::OP_Div)
     {
     }
 
@@ -187,30 +162,58 @@ namespace jspath
         switch (t)
         {
         case Operand::Bool:
-            return mOperand1->getBoolValue(cxt, input) || mOperand2->getBoolValue(cxt, input);
+            return mOperand1->getBoolValue(cxt, input);
         case Operand::Integer:
-            return 0 != (mOperand1->getIntValue(cxt, input) + mOperand2->getIntValue(cxt, input));
+            return 0 != mOperand1->getIntValue(cxt, input);
         case Operand::Real:
-            return std::abs(mOperand1->getIntValue(cxt, input) + mOperand2->getIntValue(cxt, input)) > 1e-8;
-        case Operand::String:
-            return mOperand1->getStringValue(cxt, input).length() > 0
-                || mOperand2->getStringValue(cxt, input).length() > 0;
+            return std::abs(mOperand1->getIntValue(cxt, input)) > 1e-8;
         default:
-            throw std::logic_error("Divide.getBoolValue only available for Operand::Bool/Int/Real/String");
+            throw std::logic_error("Divide.getBoolValue only available for Operand::Bool/Int/Real");
         }
     }
 
     const std::string& Divide::getStringValue(const Context& cxt, const json& input)
     {
-        static std::string result;
-        auto t = getType(cxt, input);
-        if(Operand::String != t)
-        {
-            throw std::logic_error("Divide.getStringValue only availabe for Operand::String");
-        }
+        throw std::logic_error("Divide.getStringValue not supported");
+    }
 
-        result = mOperand1->getStringValue(cxt, input);
-        result += mOperand1->getStringValue(cxt, input);
-        return result;
+    //===================================Module====================================
+    Operand::type Module::getType(const Context& cxt, const json& input) const
+    {
+        auto t1 = mOperand1->getType(cxt, input);
+        auto t2 = mOperand2->getType(cxt, input);
+        if(t1 == t2 && (Operand::Integer == t1))
+        {
+            return t1;
+        }
+        return Operand::Unknown;
+    }
+
+    bool Module::getBoolValue(const Context& cxt, const json& input)
+    {
+        return 0 != getIntValue(cxt, input);
+    }
+
+    int Module::getIntValue(const Context& cxt, const json& input)
+    {
+        auto t = getType(cxt, input);
+        if (Operand::Integer == t)
+        {
+            return (mOperand1->getIntValue(cxt, input) % mOperand2->getIntValue(cxt, input));
+        }
+        else
+        {
+            throw std::logic_error("Module::getIntValue( only available for Operand::Int");
+        }
+    }
+
+    double Module::getRealValue(const Context& cxt, const json& input)
+    {
+        return getIntValue(cxt, input);
+    }
+
+    const std::string& Module::getStringValue(const Context& cxt, const json& input)
+    {
+        throw std::logic_error("Module.getStringValue not supported");
     }
 }
