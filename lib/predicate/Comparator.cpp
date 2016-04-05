@@ -25,14 +25,56 @@ int Compare(std::shared_ptr<Operand> op1, std::shared_ptr<Operand> op2, const Co
 	    return std::abs(v1 - v2) < 1e-8;
 	}
     case Operand::String:
-        {
-            const auto& str1 = op1->getStringValue(cxt, input);
-            const auto& str2 = op2->getStringValue(cxt, input);
-            return strcmp(str1.c_str(), str2.c_str());
-        }
+    {
+        const auto& str1 = op1->getStringValue(cxt, input);
+        const auto& str2 = op2->getStringValue(cxt, input);
+        return strcmp(str1.c_str(), str2.c_str());
+    }
     case Operand::Json:
 	{
+        const auto* v1 = &op1->getJsonValue(cxt, input);
+        const auto* v2 = &op2->getJsonValue(cxt, input);
 
+        if(v1->is_structured() && v2->is_primitive())
+        {
+            const auto* tmp = v2;
+            v2 = v1;
+            v1 = tmp;
+        }
+
+        if(v1->is_primitive())
+        {
+            if(v2->is_primitive())
+            {
+                return *v1 == *v2;
+            }
+
+            if(v2->is_structured())
+            {
+                for(const auto& child : *v2)
+                {
+                    if(*v1 == child)
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+        else
+        {
+            for(const auto& child1 : *v1)
+            {
+                for(const auto& child2 : *v2)
+                {
+                    if(child1 == child2)
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
 	}
     }
 
@@ -48,17 +90,17 @@ bool Equal::eval(const Context &cxt, const json &input)
     if(t1 < t2)
     {
         if(!mOperand2->canConvert2(t1, cxt, input))
-	{
-	    return false;
-	}
+        {
+            return false;
+        }
     }
     else if(t1 > t2)
     {
-	if(!mOperand1->canConvert2(t2, cxt, input))
-	{
-	    return false;
-	}
-	t = t2;
+        if(!mOperand1->canConvert2(t2, cxt, input))
+        {
+            return false;
+        }
+        t = t2;
     }
 
     return 0 == Compare(mOperand1, mOperand2, cxt, input, t);

@@ -22,6 +22,11 @@ namespace jspath
         return getBoolValue(cxt, input);
     }
 
+    const json& Operand::getJsonValue(const Context& cxt, const json& input)
+    {
+        throw std::logic_error("no json value availabe");
+    }
+
     //=======================BoolOperand===========================
     BoolOperand::BoolOperand(bool v)
     :Operand(Operand::Real)
@@ -191,7 +196,10 @@ namespace jspath
         throw std::logic_error("JsonOperand::getStringValue not supported");
     }
 
-
+    const json& JsonOperand::getJsonValue(const Context& cxt, const json& input)
+    {
+        return mValue;
+    }
     //=======================LocationOperand===========================
     LocationOperand::LocationOperand(const std::shared_ptr<LocationPath> p)
     :Operand(Operand::Location)
@@ -277,5 +285,9 @@ namespace jspath
         return mResult->getStringValue(cxt, input);
     }
 
-
+    const json& LocationOperand::getJsonValue(const Context& cxt, const json& input)
+    {
+        makeSure(cxt, input);
+        return mResult->getJsonValue(cxt, input);
+    }
 }

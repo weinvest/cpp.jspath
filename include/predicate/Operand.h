@@ -30,6 +30,7 @@ public:
     virtual int getIntValue(const Context& cxt, const json& input) = 0;
     virtual double getRealValue(const Context& cxt, const json& input) = 0;
     virtual const std::string& getStringValue(const Context& cxt, const json& input) = 0;
+    virtual const json& getJsonValue(const Context& cxt, const json& input);
 
     virtual type getType(const Context& /*cxt*/, const json& /*input*/) const { return mType; }
     bool IsDynamic() const { return mType < Location; }
@@ -109,7 +110,7 @@ public:
     int getIntValue(const Context& cxt, const json& input) override;
     double getRealValue(const Context& cxt, const json& input) override;
     const std::string& getStringValue(const Context& cxt, const json& input) override;
-
+    const json& getJsonValue(const Context& cxt, const json& input) override;
 private:
     json mValue;
 };
@@ -126,6 +127,7 @@ public:
     double getRealValue(const Context& cxt, const json& input) override;
     const std::string& getStringValue(const Context& cxt, const json& input) override;
     type getType(const Context& /*cxt*/, const json& /*input*/) const override;
+    const json& getJsonValue(const Context& cxt, const json& input) override;
 private:
     void makeSure(const Context& cxt, const json& input) const;
 

@@ -214,6 +214,6 @@ namespace jspath
 
     const std::string& Module::getStringValue(const Context& cxt, const json& input)
     {
-        throw std::logic_error("Module.getStringValue not supported");
+        throw std::logic_error("Module::getStringValue not supported");
     }
 }
