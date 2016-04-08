@@ -21,6 +21,10 @@ bool operator< (const OpInfo& lhs, const OpInfo& rhs)
     }
 }
 
+PredicateParser::PredicateParser(bool rootParser)
+    :mRootParser(rootParser)
+{}
+
 void PredicateParser::onEntry()
 {}
 
@@ -219,9 +223,14 @@ void PredicateParser::parseSub(const std::string& fullExpression, size_t& fromPo
 
 void PredicateParser::parse(const std::string& fullExpression, size_t& fromPos, size_t endPos)
 {
+    auto oldFrom = fromPos;
     assert(0 != fromPos);
     std::stack<char> unmatched;
-    unmatched.push('{');
+    if(mRootParser)
+    {
+        unmatched.push('{');
+    }
+
     for(; fromPos < endPos; ++fromPos)
     {
         char c = fullExpression.at(fromPos);
@@ -281,15 +290,26 @@ void PredicateParser::parse(const std::string& fullExpression, size_t& fromPos, 
         }
     }//foreach char
 
-    auto pPredicate = createPredicate(fullExpression, 0, mOperators.size());
-    mResult = std::make_shared<Filter>(pPredicate);
+    if(mOperators.empty())
+    {
+        auto pOperand = createPrimitive(fullExpression, oldFrom, endPos);
+        mResult = pOperand;
+    }
+    else
+    {
+        auto pPredicate = createPredicate(fullExpression, 0, mOperators.size(), oldFrom, endPos);
+        mResult = pPredicate;
+    }
 }
 
-std::shared_ptr<Predicate> PredicateParser::createPredicate(const std::string& fullExpression, size_t idxOpFrom, size_t idxOpTo)
+std::shared_ptr<Predicate> PredicateParser::createPredicate(const std::string& fullExpression, size_t idxOpFrom, size_t idxOpTo, size_t from, size_t to)
 {
-    if(idxOpFrom == idxOpTo)
+    if(idxOpFrom  > idxOpTo)
     {
-
+        unpackBrackets(fullExpression, from, to);
+        PredicateParser childParaser(false);
+        childParaser.parse(fullExpression, from, to);
+        return childParaser.getResult();
     }
     else
     {
@@ -310,17 +330,20 @@ std::shared_ptr<Predicate> PredicateParser::createPredicate(const std::string& f
                 throw std::logic_error("! must be the last operator");
             }
 
-            auto pChild = createPredicate(fullExpression, idxLowerest + 1, idxOpTo);
+            auto pChild = createPredicate(fullExpression, idxLowerest + 1, idxOpTo, opInfo.to + 1, to);
             auto pNot = createUnary(opInfo, pChild);
             return pNot;
         }
         else
         {
+            auto leftFrom = from;
+            auto rightTo = to;
+
             auto pArthemetic = createArthemeticOp(opInfo);
             if(nullptr != pArthemetic)
             {
-                auto pLeft = createOperand(fullExpression, idxOpFrom, idxLowerest -1);
-                auto pRight = createOperand(fullExpression, idxLowerest + 1, idxOpTo);
+                auto pLeft = createOperand(fullExpression, idxOpFrom, idxLowerest -1, leftFrom, opInfo.from - 1);
+                auto pRight = createOperand(fullExpression, idxLowerest + 1, idxOpTo, opInfo.to + 1, rightTo);
 
                 pArthemetic->setLeft(pLeft);
                 pArthemetic->setRight(pRight);
@@ -331,8 +354,8 @@ std::shared_ptr<Predicate> PredicateParser::createPredicate(const std::string& f
             auto pCompare = createCompOp(opInfo);
             if(nullptr != pCompare)
             {
-                auto pLeft = createOperand(fullExpression, idxOpFrom, idxLowerest -1);
-                auto pRight = createOperand(fullExpression, idxLowerest + 1, idxOpTo);
+                auto pLeft = createOperand(fullExpression, idxOpFrom, idxLowerest -1, leftFrom, opInfo.from - 1);
+                auto pRight = createOperand(fullExpression, idxLowerest + 1, idxOpTo, opInfo.to + 1, rightTo);
 
                 pCompare->setLeft(pLeft);
                 pCompare->setRight(pRight);
@@ -343,8 +366,8 @@ std::shared_ptr<Predicate> PredicateParser::createPredicate(const std::string& f
             auto pLogic = createLogicOp(opInfo);
             if(nullptr != pLogic)
             {
-                auto pLeft = createPredicate(fullExpression, idxOpFrom, idxLowerest -1);
-                auto pRight = createPredicate(fullExpression, idxLowerest + 1, idxOpTo);
+                auto pLeft = createPredicate(fullExpression, idxOpFrom, idxLowerest -1, leftFrom, opInfo.from - 1);
+                auto pRight = createPredicate(fullExpression, idxLowerest + 1, idxOpTo, opInfo.to + 1, rightTo);
 
                 pLogic->setLeft(pLeft);
                 pLogic->setRight(pRight);
@@ -357,9 +380,18 @@ std::shared_ptr<Predicate> PredicateParser::createPredicate(const std::string& f
     }
 }
 
-std::shared_ptr<Operand> PredicateParser::createOperand(const std::string& fullExpression, size_t idxOpFrom, size_t idxOpTo)
+std::shared_ptr<Operand> PredicateParser::createOperand(const std::string& fullExpression, size_t idxOpFrom, size_t idxOpTo, size_t from, size_t to)
 {
-     return nullptr;
+    auto pPredicate = createPredicate(fullExpression, idxOpFrom, idxOpTo, from, to);
+    auto pOperand = std::dynamic_pointer_cast<Operand>(pPredicate);
+    if(nullptr != pOperand)
+    {
+        return pOperand;
+    }
+    else
+    {
+        return std::make_shared<PredicateOperand>(pPredicate);
+    }
 }
 
 std::shared_ptr<BinaryOperator<Operand, Operand>> PredicateParser::createArthemeticOp(const OpInfo& opInfo)
@@ -503,13 +535,13 @@ std::shared_ptr<Operand> PredicateParser::createPrimitive(const std::string& ful
         }
         else
         {
-            throw std::logic_error(fullExpression.substr(from, to - from) + " can't be interpreted as a operand");
+            throw std::logic_error(fullExpression.substr(from, to - from) + " can't be interpreted as an operand");
         }
     }
 }
 
 std::shared_ptr<Expression> PredicateParser::onExit()
 {
-    return mResult;
+    return std::make_shared<Filter>(mResult);
 }
 }

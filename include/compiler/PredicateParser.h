@@ -69,6 +69,8 @@ class Operand;
 struct PredicateParser: public SubExpressionParser
 {
 public:
+    PredicateParser(bool rootParser = true);
+
     void onEntry() override;
     void parse(const std::string& fullExpression, size_t& fromPos, size_t endPos) override;
     std::shared_ptr<Expression> onExit() override;
@@ -76,8 +78,9 @@ public:
     type getCode() const override { return PredicateExp; }
 
 private:
-    std::shared_ptr<Predicate> createPredicate(const std::string& fullExpression, size_t idxOpFrom, size_t idxOpTo);
-    std::shared_ptr<Operand> createOperand(const std::string& fullExpression, size_t idxOpFrom, size_t idxOpTo);
+    std::shared_ptr<Predicate> getResult() { return mResult; }
+    std::shared_ptr<Predicate> createPredicate(const std::string& fullExpression, size_t idxOpFrom, size_t idxOpTo, size_t from, size_t to);
+    std::shared_ptr<Operand> createOperand(const std::string& fullExpression, size_t idxOpFrom, size_t idxOpTo, size_t from, size_t to);
     std::shared_ptr<Operand> createPrimitive(const std::string& fullExpression, size_t from, size_t to);
 
     void parseEqual(const std::string& fullExpression, size_t& fromPos);
@@ -97,8 +100,9 @@ private:
     std::shared_ptr<BinaryOperator<Predicate, Predicate>> createLogicOp(const OpInfo& opInfo);
     std::shared_ptr<Predicate> createUnary(const OpInfo& opInfo, const std::shared_ptr<Predicate>& pChild);
 
+    bool mRootParser;
     std::vector<OpInfo> mOperators;
-    std::shared_ptr<Expression> mResult;
+    std::shared_ptr<Predicate> mResult;
 };
 }
 #endif
