@@ -10,7 +10,8 @@ class Operand: public Predicate
 {
 public:
     #define OPERAND_TYPES  ((Bool,0))((Integer,1))((Real,2))((String,3))\
-                           ((Json,4))((Location,5))((Composite,6))((Unknown,7))
+                           ((Json,4))((Regex,5))((Location,6))((Composite,7))\
+                           ((Unknown,8))
 
     enum type
     {
@@ -115,11 +116,11 @@ private:
     json mValue;
 };
 
-class LocationPath;
+class Expression;
 class LocationOperand: public Operand
 {
 public:
-    LocationOperand(std::shared_ptr<LocationPath> v);
+    LocationOperand(const std::shared_ptr<Expression>& v);
 
     bool canConvert2(type t, const Context& cxt, const json& input) override;
     bool getBoolValue(const Context& cxt, const json& input) override;
@@ -131,11 +132,37 @@ public:
 private:
     void makeSure(const Context& cxt, const json& input) const;
 
-    std::shared_ptr<LocationPath> mLocation;
+    std::shared_ptr<Expression> mLocation;
     mutable std::shared_ptr<Operand> mResult; //TODO thread safe
     mutable const json* mCurrentInput; //TODO: thread safe
 };
 
+class PredicateOperand: public Operand
+{
+public:
+    PredicateOperand(std::shared_ptr<Predicate> pChild);
 
+    bool canConvert2(type t, const Context& cxt, const json& input) override;
+    bool getBoolValue(const Context& cxt, const json& input) override;
+    int getIntValue(const Context& cxt, const json& input) override;
+    double getRealValue(const Context& cxt, const json& input) override;
+    const std::string& getStringValue(const Context& cxt, const json& input) override;
+
+private:
+    std::shared_ptr<Predicate> mChild;
+};
+
+class RegexOperand: public Operand
+{
+public:
+    RegexOperand(const std::string& regex);
+    bool getBoolValue(const Context& cxt, const json& input) override;
+    int getIntValue(const Context& cxt, const json& input) override;
+    double getRealValue(const Context& cxt, const json& input) override;
+    const std::string& getStringValue(const Context& cxt, const json& input) override;
+
+private:
+    std::string mRegex;
+};
 }
 #endif

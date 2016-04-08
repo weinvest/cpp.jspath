@@ -1,7 +1,7 @@
 #ifndef _JSPATH_PREDICATE_PARSER_H
 #define _JSPATH_PREDICATE_PARSER_H
 #include "compiler/JSPathCompiler.h"
-
+#include "predicate/BinaryOperator.hpp"
 namespace jspath
 {
 
@@ -76,6 +76,10 @@ public:
     type getCode() const override { return PredicateExp; }
 
 private:
+    std::shared_ptr<Predicate> createPredicate(const std::string& fullExpression, size_t idxOpFrom, size_t idxOpTo);
+    std::shared_ptr<Operand> createOperand(const std::string& fullExpression, size_t idxOpFrom, size_t idxOpTo);
+    std::shared_ptr<Operand> createPrimitive(const std::string& fullExpression, size_t from, size_t to);
+
     void parseEqual(const std::string& fullExpression, size_t& fromPos);
     void parseGreat(const std::string& fullExpression, size_t& fromPos);
     void parseLess(const std::string& fullExpression, size_t& fromPos);
@@ -88,9 +92,9 @@ private:
     void parseOr(const std::string& fullExpression, size_t& fromPos);
     void parseSub(const std::string& fullExpression, size_t& fromPos);
 
-    std::shared_ptr<Operand> createArthemeticOp(const OpInfo& opInfo);
-    std::shared_ptr<Predicate> createCompOp(const OpInfo& opInfo);
-    std::shared_ptr<Predicate> createLogicOp(const OpInfo& opInfo);
+    std::shared_ptr<BinaryOperator<Operand, Operand>> createArthemeticOp(const OpInfo& opInfo);
+    std::shared_ptr<BinaryOperator<Operand, Predicate>> createCompOp(const OpInfo& opInfo);
+    std::shared_ptr<BinaryOperator<Predicate, Predicate>> createLogicOp(const OpInfo& opInfo);
     std::shared_ptr<Predicate> createUnary(const OpInfo& opInfo, const std::shared_ptr<Predicate>& pChild);
 
     std::vector<OpInfo> mOperators;

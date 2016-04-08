@@ -2,7 +2,7 @@
 #include <boost/algorithm/string.hpp>
 #include "predicate/Operand.h"
 #include "compiler/Utils.h"
-#include "LocationPath.h"
+#include "Expression.h"
 #include "Context.h"
 namespace jspath
 {
@@ -29,7 +29,7 @@ namespace jspath
 
     //=======================BoolOperand===========================
     BoolOperand::BoolOperand(bool v)
-    :Operand(Operand::Real)
+    :Operand(Operand::Bool)
     ,mBoolValue(v)
     {
     }
@@ -201,7 +201,7 @@ namespace jspath
         return mValue;
     }
     //=======================LocationOperand===========================
-    LocationOperand::LocationOperand(const std::shared_ptr<LocationPath> p)
+    LocationOperand::LocationOperand(const std::shared_ptr<Expression>& p)
     :Operand(Operand::Location)
     ,mLocation(p)
     ,mCurrentInput(nullptr)
@@ -290,4 +290,64 @@ namespace jspath
         makeSure(cxt, input);
         return mResult->getJsonValue(cxt, input);
     }
+
+    //=======================PredicateOperand===========================
+    PredicateOperand::PredicateOperand(std::shared_ptr<Predicate> pChild)
+    :Operand(Operand::Real)
+    ,mChild(pChild)
+    {
+    }
+
+    bool PredicateOperand::canConvert2(type t, const Context& cxt, const json& input)
+    {
+         return Operand::Integer == t || Operand::Real == t;
+    }
+
+    bool PredicateOperand::getBoolValue(const Context& cxt, const json& input)
+    {
+        return mChild->eval(cxt, input);
+    }
+
+    int PredicateOperand::getIntValue(const Context& cxt, const json& input)
+    {
+        return getBoolValue(cxt, input);
+    }
+
+    double PredicateOperand::getRealValue(const Context& cxt, const json& input)
+    {
+        return getBoolValue(cxt, input);
+    }
+
+    const std::string& PredicateOperand::getStringValue(const Context& /*cxt*/, const json& /*input*/)
+    {
+        throw std::logic_error("PredicateOperand::getStringValue not supported");
+    }
+
+    //=======================RegexOperand===========================
+    RegexOperand::RegexOperand(const std::string& regex)
+    :Operand(Operand::Regex)
+    ,mRegex(regex)
+    {
+    }
+
+    bool RegexOperand::getBoolValue(const Context& cxt, const json& input)
+    {
+        throw std::logic_error("RegexOperand::getBoolValue not supported");
+    }
+
+    int RegexOperand::getIntValue(const Context& cxt, const json& input)
+    {
+        throw std::logic_error("RegexOperand::getIntValue not supported");
+    }
+
+    double RegexOperand::getRealValue(const Context& cxt, const json& input)
+    {
+        throw std::logic_error("RegexOperand::getRealValue not supported");
+    }
+
+    const std::string& RegexOperand::getStringValue(const Context& cxt, const json& input)
+    {
+        return mRegex;
+    }
+
 }

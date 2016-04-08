@@ -17,6 +17,7 @@ public:
     void setSuccessor(std::shared_ptr<Expression> pSuccessor);
     std::shared_ptr<Expression> getSuccessor() { return mSuccessor; }
     bool isAbsolute() const { return mIsAbsolute; }
+    void setAbsolute(bool isAbsolute = true) { mIsAbsolute = isAbsolute; }
 protected:
     virtual void doApply(Context& cxt) = 0;
 
@@ -25,4 +26,3 @@ protected:
 };
 }
 #endif
-

@@ -285,15 +285,14 @@ std::shared_ptr<Expression> Compiler::compile(const std::string& strExpression, 
         endPos = strExpression.length();
     }
 
+    pos = skipSpace(strExpression, pos, endPos);
+    if('^' == strExpression.at(pos))
+    {
+        pLastExpression->setAbsolute(true);
+    }
+
     while(pos < endPos)
     {
-        pos = skipSpace(strExpression, pos, endPos);
-
-        if(pos >= endPos)
-        {
-            break;
-        }
-
         mCurrentState->parse(strExpression, pos, endPos);
         Event event = EOFEvent;
         if(pos < endPos)
@@ -314,6 +313,7 @@ std::shared_ptr<Expression> Compiler::compile(const std::string& strExpression, 
                 pLastExpression = pExpression;
             }
         }
+        pos = skipSpace(strExpression, pos, endPos);
     }
 
     return pRetExpression;

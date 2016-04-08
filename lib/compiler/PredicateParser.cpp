@@ -1,5 +1,6 @@
 #include "compiler/PredicateParser.h"
 #include "Context.h"
+#include "Filter.h"
 #include "compiler/Utils.h"
 #include "predicate/LogicOperator.h"
 #include "predicate/ArthemeticOperator.h"
@@ -127,7 +128,8 @@ void PredicateParser::parseEndsWith(const std::string& fullExpression, size_t& f
     }
     else
     {
-        throw std::logic_error("syntax error");
+        //a variable
+        //throw std::logic_error("syntax error");
     }
 }
 
@@ -265,7 +267,10 @@ void PredicateParser::parse(const std::string& fullExpression, size_t& fromPos, 
                 mOperators.emplace_back(OpInfo{OpInfo::Sub, fromPos, fromPos + 1, mOperators.size()});
                 break;
             case '/':
-                mOperators.emplace_back(OpInfo{OpInfo::Div, fromPos, fromPos + 1, mOperators.size()});
+                if(mOperators.empty() || (mOperators.back().op < OpInfo::Match) && (mOperators.back().op > OpInfo::iNotMatch))
+                {
+                    mOperators.emplace_back(OpInfo{OpInfo::Div, fromPos, fromPos + 1, mOperators.size()});
+                }
                 break;
             case '%':
                 mOperators.emplace_back(OpInfo{OpInfo::Mod, fromPos, fromPos + 1, mOperators.size()});
@@ -276,10 +281,11 @@ void PredicateParser::parse(const std::string& fullExpression, size_t& fromPos, 
         }
     }//foreach char
 
-    mResult = createSyntaxTree(fullExpression, 0, mOperators.size());
+    auto pPredicate = createPredicate(fullExpression, 0, mOperators.size());
+    mResult = std::make_shared<Filter>(pPredicate);
 }
 
-std::shared_ptr<Expression> PredicateParser::createSyntaxTree(const std::string& fullExpression, size_t idxOpFrom, size_t idxOpTo)
+std::shared_ptr<Predicate> PredicateParser::createPredicate(const std::string& fullExpression, size_t idxOpFrom, size_t idxOpTo)
 {
     if(idxOpFrom == idxOpTo)
     {
@@ -296,21 +302,67 @@ std::shared_ptr<Expression> PredicateParser::createSyntaxTree(const std::string&
             }
         }
 
+        auto& opInfo = mOperators[idxLowerest];
         if(mOperators[idxLowerest].isUnary())
         {
+            if(idxLowerest != (idxOpTo - 1))
+            {
+                throw std::logic_error("! must be the last operator");
+            }
 
+            auto pChild = createPredicate(fullExpression, idxLowerest + 1, idxOpTo);
+            auto pNot = createUnary(opInfo, pChild);
+            return pNot;
         }
         else
         {
-            auto pLeft = createSyntaxTree(fullExpression, idxOpFrom, idxLowerest -1);
-            auto pRight = createSyntaxTree(fullExpression, idxLowerest + 1, idxOpTo);
-            auto pExpression =  createBinary(mOperators[idxLowerest], pLeft, pRight);
-            return pExpression;
+            auto pArthemetic = createArthemeticOp(opInfo);
+            if(nullptr != pArthemetic)
+            {
+                auto pLeft = createOperand(fullExpression, idxOpFrom, idxLowerest -1);
+                auto pRight = createOperand(fullExpression, idxLowerest + 1, idxOpTo);
+
+                pArthemetic->setLeft(pLeft);
+                pArthemetic->setRight(pRight);
+
+                return pArthemetic;
+            }
+
+            auto pCompare = createCompOp(opInfo);
+            if(nullptr != pCompare)
+            {
+                auto pLeft = createOperand(fullExpression, idxOpFrom, idxLowerest -1);
+                auto pRight = createOperand(fullExpression, idxLowerest + 1, idxOpTo);
+
+                pCompare->setLeft(pLeft);
+                pCompare->setRight(pRight);
+
+                return pCompare;
+            }
+
+            auto pLogic = createLogicOp(opInfo);
+            if(nullptr != pLogic)
+            {
+                auto pLeft = createPredicate(fullExpression, idxOpFrom, idxLowerest -1);
+                auto pRight = createPredicate(fullExpression, idxLowerest + 1, idxOpTo);
+
+                pLogic->setLeft(pLeft);
+                pLogic->setRight(pRight);
+
+                return pLogic;
+            }
+
+            throw std::logic_error("unknow operator");
         }
     }
 }
 
-std::shared_ptr<Operand> PredicateParser::createArthemeticOp(const OpInfo& opInfo)
+std::shared_ptr<Operand> PredicateParser::createOperand(const std::string& fullExpression, size_t idxOpFrom, size_t idxOpTo)
+{
+     return nullptr;
+}
+
+std::shared_ptr<BinaryOperator<Operand, Operand>> PredicateParser::createArthemeticOp(const OpInfo& opInfo)
 {
     switch (opInfo.op)
     {
@@ -325,7 +377,7 @@ std::shared_ptr<Operand> PredicateParser::createArthemeticOp(const OpInfo& opInf
     }
 }
 
-std::shared_ptr<Predicate> PredicateParser::createCompOp(const OpInfo& opInfo)
+std::shared_ptr<BinaryOperator<Operand, Predicate>> PredicateParser::createCompOp(const OpInfo& opInfo)
 {
     switch (opInfo.op)
     {
@@ -354,13 +406,12 @@ std::shared_ptr<Predicate> PredicateParser::createCompOp(const OpInfo& opInfo)
     }
 }
 
-std::shared_ptr<Predicate> PredicateParser::createLogicOp(const opInfo& opInfo)
+std::shared_ptr<BinaryOperator<Predicate, Predicate>> PredicateParser::createLogicOp(const OpInfo& opInfo)
 {
     switch (opInfo.op)
     {
-    case OpInfo::And: return std::make_shared<Add>();
+    case OpInfo::And: return std::make_shared<And>();
     case OpInfo::Or: return std::make_shared<Or>();
-    case OpInfo::Not: return std::make_shared<Not>();
     default:
         return nullptr;
     }
@@ -374,6 +425,80 @@ std::shared_ptr<Predicate> PredicateParser::createUnary(const OpInfo& opInfo, co
         return std::make_shared<Not>(pChild);
     default:
         return nullptr;
+    }
+}
+
+std::shared_ptr<Operand> PredicateParser::createPrimitive(const std::string& fullExpression, size_t from, size_t to)
+{
+    from = skipSpace(fullExpression, from, to);
+    if(from >= to)
+    {
+        return nullptr;
+    }
+
+    char c = fullExpression.at(from);
+    switch(c)
+    {
+    case '"':
+    {
+        auto last = skipString(fullExpression, from, to);
+        auto str = fullExpression.substr(from, last - from);
+        if(last == to && (to != skipSpace(fullExpression, last, to)))
+        {
+            throw std::logic_error(str + " not a string");
+        }
+
+        return std::make_shared<StringOperand>(str);
+    }
+    case '^':
+    case '.':
+    {
+        Compiler subCompiler;
+        auto subExpression = subCompiler.compile(fullExpression, from, to);
+        return std::make_shared<LocationOperand>(subExpression);
+    }
+    case '{':
+    {
+        auto last = skip2(fullExpression, from, '}', to);
+        auto str = fullExpression.substr(from, last - from);
+        if(last == to && (to != skipSpace(fullExpression, last, to)))
+        {
+            throw std::logic_error(str + " not a json");
+        }
+
+        json value(str);
+        return std::make_shared<JsonOperand>(value);
+    }
+    case '/':
+    {
+        auto toPos = skip2(fullExpression, from, '/', to);
+        auto regex = fullExpression.substr(from, to - from);
+        return std::make_shared<RegexOperand>(regex);
+    }
+    case '$':
+    {
+         return nullptr;
+    }
+    default:
+        if(isBool(fullExpression, from, to))
+        {
+            bool v = convert2Bool(fullExpression, from, to);
+            return std::make_shared<BoolOperand>(v);
+        }
+        else if(isInt(fullExpression, from, to))
+        {
+            int v = convert2Int(fullExpression, from, to);
+            return std::make_shared<IntOperand>(v);
+        }
+        else if(isReal(fullExpression, from, to))
+        {
+            double v = convert2Real(fullExpression, from, to);
+            return std::make_shared<RealOperand>(v);
+        }
+        else
+        {
+            throw std::logic_error(fullExpression.substr(from, to - from) + " can't be interpreted as a operand");
+        }
     }
 }
 
