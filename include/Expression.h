@@ -12,14 +12,14 @@ public:
     Expression(bool isAbsolute = false);
 
     virtual ~Expression() {}
-    virtual void apply(Context& cxt);
+    virtual void apply(Context& cxt, const json& variables);
 
     void setSuccessor(std::shared_ptr<Expression> pSuccessor);
     std::shared_ptr<Expression> getSuccessor() { return mSuccessor; }
     bool isAbsolute() const { return mIsAbsolute; }
     void setAbsolute(bool isAbsolute = true) { mIsAbsolute = isAbsolute; }
 protected:
-    virtual void doApply(Context& cxt) = 0;
+    virtual void doApply(Context& cxt, const json& variables) = 0;
 
     std::shared_ptr<Expression> mSuccessor;
     bool mIsAbsolute;

@@ -8,12 +8,12 @@ TwoDotLocationPath::TwoDotLocationPath()
 
 }
 
-void TwoDotLocationPath::doApply(Context &cxt)
+void TwoDotLocationPath::doApply(Context &cxt, const json& variables)
 {
-    doApply(cxt, *cxt.getInput());
+    doApply(cxt, variables, *cxt.getInput());
 }
 
-void TwoDotLocationPath::doApply(Context &cxt, const json& input)
+void TwoDotLocationPath::doApply(Context &cxt, const json& variables, const json& input)
 {
     if(!input.is_array())
     {
@@ -24,7 +24,7 @@ void TwoDotLocationPath::doApply(Context &cxt, const json& input)
     {
         for(auto& child : input)
         {
-            doApply(cxt, child);
+            doApply(cxt, variables, child);
         }
     }
 }

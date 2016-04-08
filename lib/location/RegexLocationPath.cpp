@@ -8,7 +8,7 @@ RegexLocationPath::RegexLocationPath(const std::string& regex)
     mPattern = sregex::compile(regex);
 }
 
-void RegexLocationPath::doApply(Context& cxt)
+void RegexLocationPath::doApply(Context& cxt, const json& variables)
 {
     using namespace boost::xpressive;
     cxt.getOutput() = std::make_shared<json>(json::array());

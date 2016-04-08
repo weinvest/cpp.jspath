@@ -10,10 +10,10 @@ class MultiLocationPath: public LocationPath
 public:
     MultiLocationPath();
     void addChild(std::shared_ptr<Expression> pChild);
-    void apply(Context& cxt) override;
+    void apply(Context& cxt, const json& variables) override;
 
 protected:
-    void doApply(Context &cxt);
+    void doApply(Context& cxt, const json& variables);
 
     std::vector<std::shared_ptr<Expression>> mChildren;
 };

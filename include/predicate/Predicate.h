@@ -11,7 +11,7 @@ public:
     Predicate();
     virtual ~Predicate();
 
-    virtual bool eval(const Context& cxt, const json& input) = 0;
+    virtual bool eval(const Context& cxt, const json& variables) = 0;
 };
 }
 #endif

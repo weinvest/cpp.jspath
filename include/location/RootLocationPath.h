@@ -9,7 +9,7 @@ public:
     RootLocationPath();
 
 protected:
-    void doApply(Context& cxt) override;
+    void doApply(Context& cxt, const json& variables) override;
 };
 }
 #endif

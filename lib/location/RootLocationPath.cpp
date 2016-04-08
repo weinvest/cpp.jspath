@@ -6,7 +6,7 @@ RootLocationPath::RootLocationPath()
     :LocationPath("")
 {}
 
-void RootLocationPath::doApply(Context& cxt)
+void RootLocationPath::doApply(Context& cxt, const json& variables)
 {
     *cxt.getOutput() = *cxt.getInput();
 }

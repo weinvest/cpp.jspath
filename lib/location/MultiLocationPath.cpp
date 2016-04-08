@@ -14,14 +14,14 @@ void MultiLocationPath::addChild(std::shared_ptr<Expression> pChild)
     }
 }
 
-void MultiLocationPath::apply(Context& cxt)
+void MultiLocationPath::apply(Context& cxt, const json& variables)
 {
     cxt.getOutput() = std::make_shared<json>(json::array());
     for(auto pChild : mChildren)
     {
         auto input = pChild->isAbsolute() ? cxt.getRootInput() : cxt.getInput();
         Context tmpCxt(input, cxt.getRootInput());
-        pChild->apply(tmpCxt);
+        pChild->apply(tmpCxt, variables);
         if(tmpCxt.getOutput()->is_null())
         {}
         else if(tmpCxt.getOutput()->is_array())
@@ -34,10 +34,10 @@ void MultiLocationPath::apply(Context& cxt)
         }
     }
 
-    LocationPath::apply(cxt);
+    LocationPath::apply(cxt, variables);
 }
 
-void MultiLocationPath::doApply(Context &/*cxt*/)
+void MultiLocationPath::doApply(Context &/*cxt*/, const json& /*variable*/)
 {
 }
 }

@@ -7,7 +7,7 @@ DotLocationPath::DotLocationPath(const std::string& path)
     :LocationPath(boost::trim_copy(path))
 {}
 
-void DotLocationPath::doApply(Context& cxt)
+void DotLocationPath::doApply(Context& cxt, const json& variables)
 {
 	auto& input = cxt.getInput();
     if(input->is_primitive())

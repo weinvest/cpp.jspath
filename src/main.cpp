@@ -47,9 +47,15 @@ int main(int argc, char** argv)
 
         jsStream >> inputJson;
 
+        json variables;
+        if(0 != vm.count("substs"))
+        {
+            variable = json(vm["substs"].as<std::string>());
+        }
+
         auto queryExpr = vm["query"].as<std::string>();
         auto query = jspath::compile(queryExpr);
-        auto result = jspath::apply(inputJson, query);
+        auto result = jspath::apply(inputJson, query, variables);
 
         std::cout << result.dump(4) << std::endl;
         return 0;

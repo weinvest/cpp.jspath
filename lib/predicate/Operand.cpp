@@ -17,12 +17,12 @@ namespace jspath
     Operand::~Operand()
     {}
 
-    bool Operand::eval(const Context& cxt, const json& input)
+    bool Operand::eval(const Context& cxt, const json& variables)
     {
-        return getBoolValue(cxt, input);
+        return getBoolValue(cxt, variables);
     }
 
-    const json& Operand::getJsonValue(const Context& cxt, const json& input)
+    const json& Operand::getJsonValue(const Context& cxt, const json& variables)
     {
         throw std::logic_error("no json value availabe");
     }
@@ -34,27 +34,27 @@ namespace jspath
     {
     }
 
-    bool BoolOperand::canConvert2(type t, const Context& cxt, const json& input)
+    bool BoolOperand::canConvert2(type t, const Context& cxt, const json& variables)
     {
          return Operand::Integer == t || Operand::Real == t;
     }
 
-    bool BoolOperand::getBoolValue(const Context& cxt, const json& input)
+    bool BoolOperand::getBoolValue(const Context& cxt, const json& variables)
     {
         return mBoolValue;
     }
 
-    int BoolOperand::getIntValue(const Context& /*cxt*/, const json& /*input*/)
+    int BoolOperand::getIntValue(const Context& /*cxt*/, const json& /*variables*/)
     {
         return mBoolValue;
     }
 
-    double BoolOperand::getRealValue(const Context& /*cxt*/, const json& /*input*/)
+    double BoolOperand::getRealValue(const Context& /*cxt*/, const json& /*variables*/)
     {
         return mBoolValue;
     }
 
-    const std::string& BoolOperand::getStringValue(const Context& /*cxt*/, const json& /*input*/)
+    const std::string& BoolOperand::getStringValue(const Context& /*cxt*/, const json& /*variables*/)
     {
         throw std::logic_error("BoolOperand::getStringValue not supported");
     }
@@ -65,27 +65,27 @@ namespace jspath
     ,mIntValue(v)
     {}
 
-    bool IntOperand::canConvert2(type t, const Context& cxt, const json& input)
+    bool IntOperand::canConvert2(type t, const Context& cxt, const json& variables)
     {
         return Operand::Bool == t || Operand::Real == t;
     }
 
-    bool IntOperand::getBoolValue(const Context& cxt, const json& input)
+    bool IntOperand::getBoolValue(const Context& cxt, const json& variables)
     {
         return 0 != mIntValue;
     }
 
-    int IntOperand::getIntValue(const Context& /*cxt*/, const json& /*input*/)
+    int IntOperand::getIntValue(const Context& /*cxt*/, const json& /*variables*/)
     {
         return mIntValue;
     }
 
-    double IntOperand::getRealValue(const Context& /*cxt*/, const json& /*input*/)
+    double IntOperand::getRealValue(const Context& /*cxt*/, const json& /*variables*/)
     {
         return mIntValue;
     }
 
-    const std::string& IntOperand::getStringValue(const Context& /*cxt*/, const json& /*input*/)
+    const std::string& IntOperand::getStringValue(const Context& /*cxt*/, const json& /*variables*/)
     {
         throw std::logic_error("IntOperand::getStringValue not supported");
     }
@@ -96,27 +96,27 @@ namespace jspath
     ,mRealValue(v)
     {}
 
-    bool RealOperand::canConvert2(type t, const Context& cxt, const json& input)
+    bool RealOperand::canConvert2(type t, const Context& cxt, const json& variables)
     {
         return Operand::Bool == t || Operand::Integer == t;
     }
 
-    bool RealOperand::getBoolValue(const Context& cxt, const json& input)
+    bool RealOperand::getBoolValue(const Context& cxt, const json& variables)
     {
         return std::abs(mRealValue) < 1e-8;
     }
 
-    int RealOperand::getIntValue(const Context& /*cxt*/, const json& /*input*/)
+    int RealOperand::getIntValue(const Context& /*cxt*/, const json& /*variables*/)
     {
         return mRealValue;
     }
 
-    double RealOperand::getRealValue(const Context& /*cxt*/, const json& /*input*/)
+    double RealOperand::getRealValue(const Context& /*cxt*/, const json& /*variables*/)
     {
         return mRealValue;
     }
 
-    const std::string& RealOperand::getStringValue(const Context& /*cxt*/, const json& /*input*/)
+    const std::string& RealOperand::getStringValue(const Context& /*cxt*/, const json& /*variables*/)
     {
         throw std::logic_error("RealOperand::getStringValue not supported");
     }
@@ -127,7 +127,7 @@ namespace jspath
     ,mValue(v)
     {}
 
-    bool StringOperand::canConvert2(type t, const Context& cxt, const json& input)
+    bool StringOperand::canConvert2(type t, const Context& cxt, const json& variables)
     {
         if(Operand::Bool == t)
         {
@@ -145,28 +145,28 @@ namespace jspath
         return false;
     }
 
-    bool StringOperand::getBoolValue(const Context& cxt, const json& input)
+    bool StringOperand::getBoolValue(const Context& cxt, const json& variables)
     {
         return convert2Bool(mValue, 0, mValue.length());
     }
 
-    int StringOperand::getIntValue(const Context& cxt, const json& input)
+    int StringOperand::getIntValue(const Context& cxt, const json& variables)
     {
         return convert2Bool(mValue, 0, mValue.length());
     }
 
-    double StringOperand::getRealValue(const Context& cxt, const json& input)
+    double StringOperand::getRealValue(const Context& cxt, const json& variables)
     {
         return convert2Real(mValue, 0, mValue.length());
     }
 
-    const std::string& StringOperand::getStringValue(const Context& cxt, const json& input)
+    const std::string& StringOperand::getStringValue(const Context& cxt, const json& variables)
     {
         return mValue;
     }
 
     //=======================JsonOperand===========================
-    bool JsonOperand::canConvert2(type t, const Context& cxt, const json& input)
+    bool JsonOperand::canConvert2(type t, const Context& cxt, const json& variables)
     {
         return false;
     }
@@ -176,27 +176,27 @@ namespace jspath
         ,mValue(v)
     {}
 
-    bool JsonOperand::getBoolValue(const Context& cxt, const json& input)
+    bool JsonOperand::getBoolValue(const Context& cxt, const json& variables)
     {
         throw std::logic_error("JsonOperand::getBoolValue not supported");
     }
 
-    int JsonOperand::getIntValue(const Context& cxt, const json& input)
+    int JsonOperand::getIntValue(const Context& cxt, const json& variables)
     {
         throw std::logic_error("JsonOperand::getIntValue not supported");
     }
 
-    double JsonOperand::getRealValue(const Context& cxt, const json& input)
+    double JsonOperand::getRealValue(const Context& cxt, const json& variables)
     {
         throw std::logic_error("JsonOperand::getRealValue not supported");
     }
 
-    const std::string& JsonOperand::getStringValue(const Context& cxt, const json& input)
+    const std::string& JsonOperand::getStringValue(const Context& cxt, const json& variables)
     {
         throw std::logic_error("JsonOperand::getStringValue not supported");
     }
 
-    const json& JsonOperand::getJsonValue(const Context& cxt, const json& input)
+    const json& JsonOperand::getJsonValue(const Context& cxt, const json& variables)
     {
         return mValue;
     }
@@ -207,15 +207,15 @@ namespace jspath
     ,mCurrentInput(nullptr)
     {}
 
-    void LocationOperand::makeSure(const Context& cxt, const json& input) const
+    void LocationOperand::makeSure(const Context& cxt, const json& variables) const
     {
-        if(input != mCurrentInput)
+        if((&variables) != mCurrentInput)
         {
-            mCurrentInput = &input;
+            mCurrentInput = &variables;
 
-            auto input = mLocation->isAbsolute() ? cxt.getRootInput() : cxt.getInput();
-            Context tmpCxt(input, cxt.getRootInput());
-            mLocation->apply(tmpCxt);
+            auto tmpInput = mLocation->isAbsolute() ? cxt.getRootInput() : cxt.getInput();
+            Context tmpCxt(tmpInput, cxt.getRootInput());
+            mLocation->apply(tmpCxt, variables);
             auto result = tmpCxt.getOutput();
 
             if(result->is_boolean())
@@ -245,50 +245,50 @@ namespace jspath
         }
     }
 
-    Operand::type LocationOperand::getType(const Context& cxt, const json& input) const
+    Operand::type LocationOperand::getType(const Context& cxt, const json& variables) const
     {
-        makeSure(cxt, input);
+        makeSure(cxt, variables);
         if(nullptr == mResult)
         {
             return Operand::Unknown;
         }
-        return mResult->getType(cxt, input);
+        return mResult->getType(cxt, variables);
     }
 
-    bool LocationOperand::canConvert2(type t, const Context& cxt, const json& input)
+    bool LocationOperand::canConvert2(type t, const Context& cxt, const json& variables)
     {
-        makeSure(cxt, input);
-        return mResult->canConvert2(t, cxt, input);
+        makeSure(cxt, variables);
+        return mResult->canConvert2(t, cxt, variables);
     }
 
-    bool LocationOperand::getBoolValue(const Context& cxt, const json& input)
+    bool LocationOperand::getBoolValue(const Context& cxt, const json& variables)
     {
-        makeSure(cxt, input);
-        return mResult->getBoolValue(cxt, input);
+        makeSure(cxt, variables);
+        return mResult->getBoolValue(cxt, variables);
     }
 
-    int LocationOperand::getIntValue(const Context& cxt, const json& input)
+    int LocationOperand::getIntValue(const Context& cxt, const json& variables)
     {
-        makeSure(cxt, input);
-        return mResult->getIntValue(cxt, input);
+        makeSure(cxt, variables);
+        return mResult->getIntValue(cxt, variables);
     }
 
-    double LocationOperand::getRealValue(const Context& cxt, const json& input)
+    double LocationOperand::getRealValue(const Context& cxt, const json& variables)
     {
-        makeSure(cxt, input);
-        return mResult->getRealValue(cxt, input);
+        makeSure(cxt, variables);
+        return mResult->getRealValue(cxt, variables);
     }
 
-    const std::string& LocationOperand::getStringValue(const Context& cxt, const json& input)
+    const std::string& LocationOperand::getStringValue(const Context& cxt, const json& variables)
     {
-        makeSure(cxt, input);
-        return mResult->getStringValue(cxt, input);
+        makeSure(cxt, variables);
+        return mResult->getStringValue(cxt, variables);
     }
 
-    const json& LocationOperand::getJsonValue(const Context& cxt, const json& input)
+    const json& LocationOperand::getJsonValue(const Context& cxt, const json& variables)
     {
-        makeSure(cxt, input);
-        return mResult->getJsonValue(cxt, input);
+        makeSure(cxt, variables);
+        return mResult->getJsonValue(cxt, variables);
     }
 
     //=======================PredicateOperand===========================
@@ -298,27 +298,27 @@ namespace jspath
     {
     }
 
-    bool PredicateOperand::canConvert2(type t, const Context& cxt, const json& input)
+    bool PredicateOperand::canConvert2(type t, const Context& cxt, const json& variables)
     {
          return Operand::Integer == t || Operand::Real == t;
     }
 
-    bool PredicateOperand::getBoolValue(const Context& cxt, const json& input)
+    bool PredicateOperand::getBoolValue(const Context& cxt, const json& variables)
     {
-        return mChild->eval(cxt, input);
+        return mChild->eval(cxt, variables);
     }
 
-    int PredicateOperand::getIntValue(const Context& cxt, const json& input)
+    int PredicateOperand::getIntValue(const Context& cxt, const json& variables)
     {
-        return getBoolValue(cxt, input);
+        return getBoolValue(cxt, variables);
     }
 
-    double PredicateOperand::getRealValue(const Context& cxt, const json& input)
+    double PredicateOperand::getRealValue(const Context& cxt, const json& variables)
     {
-        return getBoolValue(cxt, input);
+        return getBoolValue(cxt, variables);
     }
 
-    const std::string& PredicateOperand::getStringValue(const Context& /*cxt*/, const json& /*input*/)
+    const std::string& PredicateOperand::getStringValue(const Context& /*cxt*/, const json& /*variables*/)
     {
         throw std::logic_error("PredicateOperand::getStringValue not supported");
     }
@@ -330,24 +330,111 @@ namespace jspath
     {
     }
 
-    bool RegexOperand::getBoolValue(const Context& cxt, const json& input)
+    bool RegexOperand::getBoolValue(const Context& cxt, const json& variables)
     {
         throw std::logic_error("RegexOperand::getBoolValue not supported");
     }
 
-    int RegexOperand::getIntValue(const Context& cxt, const json& input)
+    int RegexOperand::getIntValue(const Context& cxt, const json& variables)
     {
         throw std::logic_error("RegexOperand::getIntValue not supported");
     }
 
-    double RegexOperand::getRealValue(const Context& cxt, const json& input)
+    double RegexOperand::getRealValue(const Context& cxt, const json& variables)
     {
         throw std::logic_error("RegexOperand::getRealValue not supported");
     }
 
-    const std::string& RegexOperand::getStringValue(const Context& cxt, const json& input)
+    const std::string& RegexOperand::getStringValue(const Context& cxt, const json& variables)
     {
         return mRegex;
+    }
+
+    //=======================VariableOperand===========================
+    VariableOperand::VariableOperand(const std::string& variableName)
+    :Operand(Operand::Variable)
+    ,mVariableName(variableName)
+    ,mCurrentInput(nullptr)
+    {}
+
+    void VariableOperand::makeSure(const Context& cxt, const json& variables) const
+    {
+        if((&variables) != mCurrentInput)
+        {
+            mCurrentInput = &variables;
+
+            auto result = variables[mVariableName];
+            if(result.is_boolean())
+            {
+                mResult = std::make_shared<BoolOperand>(result.get<bool>());
+            }
+            else if(result.is_number_integer())
+            {
+                mResult = std::make_shared<IntOperand>(result.get<int>());
+            }
+            else if(result.is_number_float())
+            {
+                mResult = std::make_shared<RealOperand>(result.get<double>());
+            }
+            else if(result.is_string())
+            {
+                mResult = std::make_shared<StringOperand>(result.get<std::string>());
+            }
+            else if(!result.is_null())
+            {
+                mResult = std::make_shared<JsonOperand>(result);
+            }
+            else
+            {
+                mResult.reset();
+            }
+        }
+    }
+
+    Operand::type VariableOperand::getType(const Context& cxt, const json& variables) const
+    {
+        makeSure(cxt, variables);
+        if(nullptr == mResult)
+        {
+            return Operand::Unknown;
+        }
+        return mResult->getType(cxt, variables);
+    }
+
+    bool VariableOperand::canConvert2(type t, const Context& cxt, const json& variables)
+    {
+        makeSure(cxt, variables);
+        return mResult->canConvert2(t, cxt, variables);
+    }
+
+    bool VariableOperand::getBoolValue(const Context& cxt, const json& variables)
+    {
+        makeSure(cxt, variables);
+        return mResult->getBoolValue(cxt, variables);
+    }
+
+    int VariableOperand::getIntValue(const Context& cxt, const json& variables)
+    {
+        makeSure(cxt, variables);
+        return mResult->getIntValue(cxt, variables);
+    }
+
+    double VariableOperand::getRealValue(const Context& cxt, const json& variables)
+    {
+        makeSure(cxt, variables);
+        return mResult->getRealValue(cxt, variables);
+    }
+
+    const std::string& VariableOperand::getStringValue(const Context& cxt, const json& variables)
+    {
+        makeSure(cxt, variables);
+        return mResult->getStringValue(cxt, variables);
+    }
+
+    const json& VariableOperand::getJsonValue(const Context& cxt, const json& variables)
+    {
+        makeSure(cxt, variables);
+        return mResult->getJsonValue(cxt, variables);
     }
 
 }

@@ -10,9 +10,9 @@ class Positional: public Expression
 public:
     Positional(IndexRange range);
 
-    void apply(Context& cxt) override;
+    void apply(Context& cxt, const json& variables) override;
 private:
-    void doApply(Context& cxt) override;
+    void doApply(Context& cxt, const json& variables) override;
 
     IndexRange mRange;
 };

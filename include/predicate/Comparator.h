@@ -12,7 +12,7 @@ class Equal: public CompareBase
 public:
     using CompareBase::CompareBase;
 
-    bool eval(const Context& cxt, const json& input) override;
+    bool eval(const Context& cxt, const json& variables) override;
 };
 
 class StrictlyEqual: public CompareBase
@@ -20,7 +20,7 @@ class StrictlyEqual: public CompareBase
 public:
     using CompareBase::CompareBase;
 
-    bool eval(const Context& cxt, const json& input) override;
+    bool eval(const Context& cxt, const json& variables) override;
 };
 
 class NonEqual: public CompareBase
@@ -28,7 +28,7 @@ class NonEqual: public CompareBase
 public:
     using CompareBase::CompareBase;
 
-    bool eval(const Context& cxt, const json& input) override;
+    bool eval(const Context& cxt, const json& variables) override;
 };
 
 class StrictlyNonEqual: public CompareBase
@@ -36,35 +36,35 @@ class StrictlyNonEqual: public CompareBase
 public:
     using CompareBase::CompareBase;
 
-    bool eval(const Context& cxt, const json& input) override;
+    bool eval(const Context& cxt, const json& variables) override;
 };
 
 class GreatThan: public CompareBase
 {
 public:
     using CompareBase::CompareBase;
-    bool eval(const Context& cxt, const json& input) override;
+    bool eval(const Context& cxt, const json& variables) override;
 };
 
 class GreatEqual: public CompareBase
 {
 public:
     using CompareBase::CompareBase;
-    bool eval(const Context& cxt, const json& input) override;
+    bool eval(const Context& cxt, const json& variables) override;
 };
 
 class LessThan: public CompareBase
 {
 public:
     using CompareBase::CompareBase;
-    bool eval(const Context& cxt, const json& input) override;
+    bool eval(const Context& cxt, const json& variables) override;
 };
 
 class LessEqual: public CompareBase
 {
 public:
     using CompareBase::CompareBase;
-    bool eval(const Context& cxt, const json& input) override;
+    bool eval(const Context& cxt, const json& variables) override;
 };
 
 int Compare(std::shared_ptr<Operand> op1

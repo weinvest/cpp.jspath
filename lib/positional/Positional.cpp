@@ -7,7 +7,7 @@ Positional::Positional(IndexRange range)
     :mRange(range)
 {}
 
-void Positional::apply(Context& cxt)
+void Positional::apply(Context& cxt, const json& variables)
 {
     if(!cxt.getInput()->is_array())
     {
@@ -45,10 +45,10 @@ void Positional::apply(Context& cxt)
         return;
     }
 
-    return Expression::apply(cxt);
+    return Expression::apply(cxt, variables);
 }
 
-void Positional::doApply(Context& cxt)
+void Positional::doApply(Context& /*cxt*/, const json& /*variables*/)
 {
 }
 }

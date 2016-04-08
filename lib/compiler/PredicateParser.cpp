@@ -431,6 +431,11 @@ std::shared_ptr<Predicate> PredicateParser::createUnary(const OpInfo& opInfo, co
 std::shared_ptr<Operand> PredicateParser::createPrimitive(const std::string& fullExpression, size_t from, size_t to)
 {
     from = skipSpace(fullExpression, from, to);
+    while(to > from && std::isspace(fullExpression.at(to - 1)))
+    {
+        --to;
+    }
+
     if(from >= to)
     {
         return nullptr;
@@ -443,7 +448,7 @@ std::shared_ptr<Operand> PredicateParser::createPrimitive(const std::string& ful
     {
         auto last = skipString(fullExpression, from, to);
         auto str = fullExpression.substr(from, last - from);
-        if(last == to && (to != skipSpace(fullExpression, last, to)))
+        if(last == to)
         {
             throw std::logic_error(str + " not a string");
         }
@@ -461,7 +466,7 @@ std::shared_ptr<Operand> PredicateParser::createPrimitive(const std::string& ful
     {
         auto last = skip2(fullExpression, from, '}', to);
         auto str = fullExpression.substr(from, last - from);
-        if(last == to && (to != skipSpace(fullExpression, last, to)))
+        if(last == to)
         {
             throw std::logic_error(str + " not a json");
         }
@@ -477,7 +482,8 @@ std::shared_ptr<Operand> PredicateParser::createPrimitive(const std::string& ful
     }
     case '$':
     {
-         return nullptr;
+        auto variableName = fullExpression.substr(from, to);
+        return std::make_shared<VariableOperand>(variableName);
     }
     default:
         if(isBool(fullExpression, from, to))

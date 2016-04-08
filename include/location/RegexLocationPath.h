@@ -12,7 +12,7 @@ public:
     RegexLocationPath(const std::string& regex);
 
 protected:
-    void doApply(Context& cxt);
+    void doApply(Context& cxt, const json& variables);
     void add2(Context& cxt, json& ele);
     sregex mPattern;
 };

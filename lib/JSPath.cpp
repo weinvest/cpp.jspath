@@ -19,17 +19,17 @@ std::shared_ptr<Expression> compile(const std::string& applyExpr)
     }
 }
 
-json apply(const json& root, std::shared_ptr<Expression> pExpression)
+json apply(const json& root, std::shared_ptr<Expression> pExpression, const json& variables)
 {
     json outRoot;
-    apply(outRoot, root, pExpression);
+    apply(outRoot, root, pExpression, variables);
     return outRoot;
 }
 
-void apply(json& outRoot, const json& root, std::shared_ptr<Expression> pExpression)
+void apply(json& outRoot, const json& root, std::shared_ptr<Expression> pExpression, const json& variables)
 {
     Context cxt(root);
-    pExpression->apply(cxt);
+    pExpression->apply(cxt, variables);
     cxt.getOutput()->swap(outRoot);
 }
 }
