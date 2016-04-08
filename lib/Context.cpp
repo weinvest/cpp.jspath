@@ -2,11 +2,16 @@
 
 namespace jspath
 {
-Context::Context(const json& root)
+Context::Context(const json& root, StepInput rootInput)
     :mOutputContext(std::allocate_shared<json>(mAllocator))
 {
     mStepContexts.emplace_back(const_cast<json*>(&root), [](void*){});
-    mRootInputContext = getInput();
+
+    mRootInputContext = rootInput;
+    if(nullptr == mRootInputContext)
+    {
+        mRootInputContext = getInput();
+    }
 }
 
 Context::Context(StepInput input, StepInput rootInput)

@@ -12,7 +12,7 @@ public:
     typedef std::shared_ptr<json> StepInput;
     typedef std::shared_ptr<json> StepOutput;
 
-    Context(const json& root);
+    Context(const json& root, StepInput rootInput = nullptr);
 
     Context(StepInput input, StepInput rootInput = nullptr);
 
@@ -39,4 +39,3 @@ private:
 };
 }
 #endif
-

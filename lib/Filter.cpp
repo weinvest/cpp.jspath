@@ -9,9 +9,13 @@ Filter::Filter(std::shared_ptr<Predicate> predicate):
 
 void Filter::doApply(Context& cxt, const json& variables)
 {
-   if( mPredicate->eval(cxt, variables))
-   {
-       cxt.getOutput()->push_back(&variables);
-   }
+    for(auto& child : *cxt.getInput())
+    {
+        Context tmpCxt(child, cxt.getRootInput());
+        if( mPredicate->eval(tmpCxt, variables))
+        {
+            cxt.getOutput()->push_back(child);
+        }
+    }
 }
 }
