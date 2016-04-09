@@ -153,7 +153,7 @@ bool isMatch(const std::string& str, const std::string& pattern, bool caseInsens
     sregex regex;
     if(caseInsensitive)
     {
-        regex = icase(pattern);
+        regex = sregex::compile(pattern, icase);
     }
     else
     {

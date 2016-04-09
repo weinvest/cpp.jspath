@@ -282,9 +282,13 @@ void PredicateParser::parse(const std::string& fullExpression, size_t& fromPos, 
                 mOperators.emplace_back(OpInfo{OpInfo::Sub, fromPos, fromPos + 1, mOperators.size()});
                 break;
             case '/':
-                if(mOperators.empty() || (mOperators.back().op < OpInfo::Match) && (mOperators.back().op > OpInfo::iNotMatch))
+                if((oldFrom != fromPos) && (mOperators.empty() || (mOperators.back().op < OpInfo::Match) && (mOperators.back().op > OpInfo::iNotMatch)))
                 {
                     mOperators.emplace_back(OpInfo{OpInfo::Div, fromPos, fromPos + 1, mOperators.size()});
+                }
+                else
+                {
+                    fromPos = skip2(fullExpression, fromPos + 1, '/', endPos) + 1;
                 }
                 break;
             case '%':
@@ -516,7 +520,7 @@ std::shared_ptr<Operand> PredicateParser::createPrimitive(const std::string& ful
     case '/':
     {
         auto toPos = skip2(fullExpression, from + 1, '/', to);
-        auto regex = fullExpression.substr(from + 1, to - from - 1);
+        auto regex = fullExpression.substr(from + 1, toPos - from - 1);
         return std::make_shared<RegexOperand>(regex);
     }
     case '$':
