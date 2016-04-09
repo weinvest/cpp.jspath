@@ -138,7 +138,7 @@ void unpackBrackets(const std::string& input, size_t& fromPos, size_t& endPos)
         {
             --endPos;
             ++fromPos;
-            skipSpace(input, fromPos, endPos);
+            fromPos = skipSpace(input, fromPos, endPos);
         }
         else
         {
