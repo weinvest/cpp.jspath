@@ -60,7 +60,7 @@ namespace jspath
 
     //===================================Add====================================
     Add::Add()
-        :ArthemeticOperator(ArthemeticOperator::OP_Div)
+        :ArthemeticOperator(ArthemeticOperator::OP_Add)
     {
     }
 
