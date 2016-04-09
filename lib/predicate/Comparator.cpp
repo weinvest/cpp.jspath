@@ -87,29 +87,35 @@ int Compare(std::shared_ptr<Operand> op1, std::shared_ptr<Operand> op2, const Co
 
     return false;
 }
+//================================CompareBase=========================
+Operand::type CompareBase::compareAt(const Context& cxt, const json& variables)
+{
+    auto t1 = mOperand1->getType(cxt, variables);
+    auto t2 = mOperand2->getType(cxt, variables);
+    if(t1 == t2)
+    {
+        return t1;
+    }
+    else if(t1 < Operand::String && t2 < Operand::String)
+    {
+        return t1 > t2 ? t1 : t2;
+    }
+    else if(Operand::String == t1 && (t2 < Operand::String) && mOperand1->canConvert2(t2, cxt, variables))
+    {
+        return t2;
+    }
+    else if(Operand::String == t2 && (t1 < Operand::String) && mOperand2->canConvert2(t1, cxt, variables))
+    {
+        return t1;
+    }
+
+    return Operand::Unknown;
+}
 
 //=================================equal==============================
 bool Equal::eval(const Context &cxt, const json &variables)
 {
-    auto t1 = mOperand1->getType(cxt, variables);
-    auto t2 = mOperand2->getType(cxt, variables);
-    auto t = t1;
-    if(t1 < t2)
-    {
-        if(!mOperand2->canConvert2(t1, cxt, variables))
-        {
-            return false;
-        }
-    }
-    else if(t1 > t2)
-    {
-        if(!mOperand1->canConvert2(t2, cxt, variables))
-        {
-            return false;
-        }
-        t = t2;
-    }
-
+    auto t = compareAt(cxt, variables);
     return 0 == Compare(mOperand1, mOperand2, cxt, variables, t);
 }
 
@@ -127,25 +133,7 @@ bool StrictlyEqual::eval(const Context &cxt, const json &variables)
 //=================================non equal==============================
 bool NonEqual::eval(const Context &cxt, const json &variables)
 {
-    auto t1 = mOperand1->getType(cxt, variables);
-    auto t2 = mOperand2->getType(cxt, variables);
-    auto t = t1;
-    if(t1 < t2)
-    {
-        if(!mOperand2->canConvert2(t1, cxt, variables))
-	{
-	    return false;
-	}
-    }
-    else if(t1 > t2)
-    {
-	if(!mOperand1->canConvert2(t2, cxt, variables))
-	{
-	    return false;
-	}
-	t = t2;
-    }
-
+    auto t = compareAt(cxt, variables);
     return 0 != Compare(mOperand1, mOperand2, cxt, variables, t);
 }
 
@@ -154,7 +142,7 @@ bool StrictlyNonEqual::eval(const Context &cxt, const json &variables)
 {
     if(mOperand1->getType(cxt, variables) != mOperand2->getType(cxt, variables))
     {
-	return true;
+	    return true;
     }
     return 0 != Compare(mOperand1, mOperand2, cxt, variables, mOperand1->getType(cxt, variables));
 }
@@ -162,44 +150,48 @@ bool StrictlyNonEqual::eval(const Context &cxt, const json &variables)
 //=================================great than==============================
 bool GreatThan::eval(const Context &cxt, const json &variables)
 {
-    if(mOperand1->getType(cxt, variables) != mOperand2->getType(cxt, variables))
+    auto t = compareAt(cxt, variables);
+    if(Operand::Unknown == t)
     {
         return false;
     }
 
-    return Compare(mOperand1, mOperand2, cxt, variables, mOperand1->getType(cxt, variables)) > 0;
+    return Compare(mOperand1, mOperand2, cxt, variables, t) > 0;
 }
 
 //=================================great equal==============================
 bool GreatEqual::eval(const Context &cxt, const json &variables)
 {
-    if(mOperand1->getType(cxt, variables) != mOperand2->getType(cxt, variables))
+    auto t = compareAt(cxt, variables);
+    if(Operand::Unknown == t)
     {
         return false;
     }
 
-    return Compare(mOperand1, mOperand2, cxt, variables, mOperand1->getType(cxt, variables)) >= 0;
+    return Compare(mOperand1, mOperand2, cxt, variables, t) >= 0;
 }
 
 //=================================less than ==============================
 bool LessThan::eval(const Context &cxt, const json &variables)
 {
-    if(mOperand1->getType(cxt, variables) != mOperand2->getType(cxt, variables))
+    auto t = compareAt(cxt, variables);
+    if(Operand::Unknown == t)
     {
         return false;
     }
 
-    return Compare(mOperand1, mOperand2, cxt, variables, mOperand1->getType(cxt, variables)) < 0;
+    return Compare(mOperand1, mOperand2, cxt, variables, t) < 0;
 }
 
 //=================================less equal ==============================
 bool LessEqual::eval(const Context &cxt, const json &variables)
 {
-    if(mOperand1->getType(cxt, variables) != mOperand2->getType(cxt, variables))
+    auto t = compareAt(cxt, variables);
+    if(Operand::Unknown == t)
     {
         return false;
     }
 
-    return Compare(mOperand1, mOperand2, cxt, variables, mOperand1->getType(cxt, variables)) <= 0;
+    return Compare(mOperand1, mOperand2, cxt, variables, t) <= 0;
 }
 }

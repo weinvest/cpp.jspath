@@ -6,7 +6,12 @@
 namespace jspath
 {
 
-typedef BinaryOperator<Operand, Predicate> CompareBase;
+class CompareBase: public BinaryOperator<Operand, Predicate>
+{
+public:
+    Operand::type compareAt(const Context& cxt, const json& variables);
+};
+
 class Equal: public CompareBase
 {
 public:
@@ -74,4 +79,3 @@ int Compare(std::shared_ptr<Operand> op1
 	, Operand::type t);
 }
 #endif
-
