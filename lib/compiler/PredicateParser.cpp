@@ -231,6 +231,7 @@ void PredicateParser::parse(const std::string& fullExpression, size_t& fromPos, 
         ++fromPos;
     }
 
+    fromPos = skipSpace(fullExpression, fromPos, endPos);
     auto oldFrom = fromPos;
     size_t outerSize = unmatched.size();
 
@@ -294,7 +295,7 @@ void PredicateParser::parse(const std::string& fullExpression, size_t& fromPos, 
     }//foreach char
 
     auto newEnd = fromPos - (mRootParser ? 1 : 0);
-    if(mOperators.empty())
+    if(mOperators.empty() && '(' != fullExpression.at(oldFrom))
     {
         auto pOperand = createPrimitive(fullExpression, oldFrom, newEnd);
         mResult = pOperand;
