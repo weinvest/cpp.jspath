@@ -204,14 +204,14 @@ namespace jspath
     LocationOperand::LocationOperand(const std::shared_ptr<Expression>& p)
     :Operand(Operand::Location)
     ,mLocation(p)
-    ,mCurrentInput(nullptr)
+    ,mCurrentContext(0)
     {}
 
     void LocationOperand::makeSure(const Context& cxt, const json& variables) const
     {
-        if((&variables) != mCurrentInput)
+        if(cxt.getId() != mCurrentContext)
         {
-            mCurrentInput = &variables;
+            mCurrentContext = cxt.getId();
 
             auto tmpInput = mLocation->isAbsolute() ? cxt.getRootInput() : cxt.getInput();
             Context tmpCxt(tmpInput, cxt.getRootInput());
@@ -293,7 +293,7 @@ namespace jspath
 
     //=======================PredicateOperand===========================
     PredicateOperand::PredicateOperand(std::shared_ptr<Predicate> pChild)
-    :Operand(Operand::Real)
+    :Operand(Operand::Bool)
     ,mChild(pChild)
     {
     }
@@ -354,14 +354,14 @@ namespace jspath
     VariableOperand::VariableOperand(const std::string& variableName)
     :Operand(Operand::Variable)
     ,mVariableName(variableName)
-    ,mCurrentInput(nullptr)
+    ,mCurrentContext(0)
     {}
 
     void VariableOperand::makeSure(const Context& cxt, const json& variables) const
     {
-        if((&variables) != mCurrentInput)
+        if(cxt.getId() != mCurrentContext)
         {
-            mCurrentInput = &variables;
+            mCurrentContext = cxt.getId();
 
             auto result = variables[mVariableName];
             if(result.is_boolean())

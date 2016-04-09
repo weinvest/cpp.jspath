@@ -223,18 +223,21 @@ void PredicateParser::parseSub(const std::string& fullExpression, size_t& fromPo
 
 void PredicateParser::parse(const std::string& fullExpression, size_t& fromPos, size_t endPos)
 {
-    auto oldFrom = fromPos;
     assert(0 != fromPos);
     std::stack<char> unmatched;
     if(mRootParser)
     {
         unmatched.push('{');
+        ++fromPos;
     }
 
-    for(; fromPos < endPos; ++fromPos)
+    auto oldFrom = fromPos;
+    size_t outerSize = unmatched.size();
+
+    for(; fromPos < endPos && !(mRootParser && unmatched.empty()); ++fromPos)
     {
         char c = fullExpression.at(fromPos);
-        if(!matchRange(unmatched, fullExpression, fromPos, endPos) && 1 == unmatched.size())
+        if(!matchRange(unmatched, fullExpression, fromPos, endPos) && outerSize == unmatched.size())
         {
 
             switch(c)
@@ -287,24 +290,25 @@ void PredicateParser::parse(const std::string& fullExpression, size_t& fromPos, 
             default:
                 break;
             }
-        }
+        }//match range
     }//foreach char
 
+    auto newEnd = fromPos - (mRootParser ? 1 : 0);
     if(mOperators.empty())
     {
-        auto pOperand = createPrimitive(fullExpression, oldFrom, endPos);
+        auto pOperand = createPrimitive(fullExpression, oldFrom, newEnd);
         mResult = pOperand;
     }
     else
     {
-        auto pPredicate = createPredicate(fullExpression, 0, mOperators.size(), oldFrom, endPos);
+        auto pPredicate = createPredicate(fullExpression, 0, mOperators.size(), oldFrom, newEnd);
         mResult = pPredicate;
     }
 }
 
-std::shared_ptr<Predicate> PredicateParser::createPredicate(const std::string& fullExpression, size_t idxOpFrom, size_t idxOpTo, size_t from, size_t to)
+std::shared_ptr<Predicate> PredicateParser::createPredicate(const std::string& fullExpression, int idxOpFrom, int idxOpTo, size_t from, size_t to)
 {
-    if(idxOpFrom  > idxOpTo)
+    if(idxOpFrom  >= idxOpTo)
     {
         unpackBrackets(fullExpression, from, to);
         PredicateParser childParaser(false);
@@ -330,7 +334,7 @@ std::shared_ptr<Predicate> PredicateParser::createPredicate(const std::string& f
                 throw std::logic_error("! must be the last operator");
             }
 
-            auto pChild = createPredicate(fullExpression, idxLowerest + 1, idxOpTo, opInfo.to + 1, to);
+            auto pChild = createPredicate(fullExpression, idxLowerest + 1, idxOpTo, opInfo.to, to);
             auto pNot = createUnary(opInfo, pChild);
             return pNot;
         }
@@ -342,8 +346,8 @@ std::shared_ptr<Predicate> PredicateParser::createPredicate(const std::string& f
             auto pArthemetic = createArthemeticOp(opInfo);
             if(nullptr != pArthemetic)
             {
-                auto pLeft = createOperand(fullExpression, idxOpFrom, idxLowerest -1, leftFrom, opInfo.from - 1);
-                auto pRight = createOperand(fullExpression, idxLowerest + 1, idxOpTo, opInfo.to + 1, rightTo);
+                auto pLeft = createOperand(fullExpression, idxOpFrom, idxLowerest -1, leftFrom, opInfo.from);
+                auto pRight = createOperand(fullExpression, idxLowerest + 1, idxOpTo, opInfo.to, rightTo);
 
                 pArthemetic->setLeft(pLeft);
                 pArthemetic->setRight(pRight);
@@ -354,8 +358,8 @@ std::shared_ptr<Predicate> PredicateParser::createPredicate(const std::string& f
             auto pCompare = createCompOp(opInfo);
             if(nullptr != pCompare)
             {
-                auto pLeft = createOperand(fullExpression, idxOpFrom, idxLowerest -1, leftFrom, opInfo.from - 1);
-                auto pRight = createOperand(fullExpression, idxLowerest + 1, idxOpTo, opInfo.to + 1, rightTo);
+                auto pLeft = createOperand(fullExpression, idxOpFrom, idxLowerest -1, leftFrom, opInfo.from);
+                auto pRight = createOperand(fullExpression, idxLowerest + 1, idxOpTo, opInfo.to, rightTo);
 
                 pCompare->setLeft(pLeft);
                 pCompare->setRight(pRight);
@@ -366,8 +370,8 @@ std::shared_ptr<Predicate> PredicateParser::createPredicate(const std::string& f
             auto pLogic = createLogicOp(opInfo);
             if(nullptr != pLogic)
             {
-                auto pLeft = createPredicate(fullExpression, idxOpFrom, idxLowerest -1, leftFrom, opInfo.from - 1);
-                auto pRight = createPredicate(fullExpression, idxLowerest + 1, idxOpTo, opInfo.to + 1, rightTo);
+                auto pLeft = createPredicate(fullExpression, idxOpFrom, idxLowerest -1, leftFrom, opInfo.from);
+                auto pRight = createPredicate(fullExpression, idxLowerest + 1, idxOpTo, opInfo.to, rightTo);
 
                 pLogic->setLeft(pLeft);
                 pLogic->setRight(pRight);
@@ -380,7 +384,7 @@ std::shared_ptr<Predicate> PredicateParser::createPredicate(const std::string& f
     }
 }
 
-std::shared_ptr<Operand> PredicateParser::createOperand(const std::string& fullExpression, size_t idxOpFrom, size_t idxOpTo, size_t from, size_t to)
+std::shared_ptr<Operand> PredicateParser::createOperand(const std::string& fullExpression, int idxOpFrom, int idxOpTo, size_t from, size_t to)
 {
     auto pPredicate = createPredicate(fullExpression, idxOpFrom, idxOpTo, from, to);
     auto pOperand = std::dynamic_pointer_cast<Operand>(pPredicate);
@@ -478,8 +482,8 @@ std::shared_ptr<Operand> PredicateParser::createPrimitive(const std::string& ful
     {
     case '"':
     {
-        auto last = skipString(fullExpression, from, to);
-        auto str = fullExpression.substr(from, last - from);
+        auto last = skipString(fullExpression, from + 1, to);
+        auto str = fullExpression.substr(from + 1, last - from - 1);
         if(last == to)
         {
             throw std::logic_error(str + " not a string");
@@ -497,7 +501,7 @@ std::shared_ptr<Operand> PredicateParser::createPrimitive(const std::string& ful
     case '{':
     {
         auto last = skip2(fullExpression, from, '}', to);
-        auto str = fullExpression.substr(from, last - from);
+        auto str = fullExpression.substr(from, last - from + 1);
         if(last == to)
         {
             throw std::logic_error(str + " not a json");
@@ -508,13 +512,13 @@ std::shared_ptr<Operand> PredicateParser::createPrimitive(const std::string& ful
     }
     case '/':
     {
-        auto toPos = skip2(fullExpression, from, '/', to);
-        auto regex = fullExpression.substr(from, to - from);
+        auto toPos = skip2(fullExpression, from + 1, '/', to);
+        auto regex = fullExpression.substr(from + 1, to - from - 1);
         return std::make_shared<RegexOperand>(regex);
     }
     case '$':
     {
-        auto variableName = fullExpression.substr(from, to);
+        auto variableName = fullExpression.substr(from + 1, to - from - 1);
         return std::make_shared<VariableOperand>(variableName);
     }
     default:

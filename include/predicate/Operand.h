@@ -134,7 +134,7 @@ private:
 
     std::shared_ptr<Expression> mLocation;
     mutable std::shared_ptr<Operand> mResult; //TODO thread safe
-    mutable const json* mCurrentInput; //TODO: thread safe
+    mutable uint32_t mCurrentContext; //TODO: thread safe
 };
 
 class PredicateOperand: public Operand
@@ -182,7 +182,7 @@ private:
 
     std::string mVariableName;
     mutable std::shared_ptr<Operand> mResult; //TODO thread safe
-    mutable const json* mCurrentInput; //TODO: thread safe
+    mutable uint32_t mCurrentContext; //TODO: thread safe
 };
 }
 #endif

@@ -224,6 +224,7 @@ Compiler::Compiler()
     addTransaction(pAnyState,     DotEvent,          pDotState);
     addTransaction(pAnyState,     EOFEvent,          pInitState);
     addTransaction(pAnyState,     OpenBracket,       pPositionalState);
+    addTransaction(pAnyState,     OpenBrace,         pPredicateState);
     addTransaction(pAnyState,     ' ',               pSpaceState);
     addTransaction(pAnyState,     '\t',              pSpaceState);
     //addTransaction()

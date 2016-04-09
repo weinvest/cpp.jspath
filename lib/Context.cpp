@@ -1,9 +1,12 @@
+#include <atomic>
 #include "Context.h"
 
 namespace jspath
 {
+static std::atomic_uint NEXT_CONTEXT_ID(1);
 Context::Context(const json& root, StepInput rootInput)
-    :mOutputContext(std::allocate_shared<json>(mAllocator))
+    :mId(NEXT_CONTEXT_ID.fetch_add(1))
+    ,mOutputContext(std::allocate_shared<json>(mAllocator))
 {
     mStepContexts.emplace_back(const_cast<json*>(&root), [](void*){});
 
@@ -15,7 +18,8 @@ Context::Context(const json& root, StepInput rootInput)
 }
 
 Context::Context(StepInput input, StepInput rootInput)
-    :mOutputContext(std::allocate_shared<json>(mAllocator))
+    :mId(NEXT_CONTEXT_ID.fetch_add(1))
+    ,mOutputContext(std::allocate_shared<json>(mAllocator))
 {
     mStepContexts.push_back(input);
 

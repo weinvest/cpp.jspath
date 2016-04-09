@@ -79,8 +79,8 @@ public:
 
 private:
     std::shared_ptr<Predicate> getResult() { return mResult; }
-    std::shared_ptr<Predicate> createPredicate(const std::string& fullExpression, size_t idxOpFrom, size_t idxOpTo, size_t from, size_t to);
-    std::shared_ptr<Operand> createOperand(const std::string& fullExpression, size_t idxOpFrom, size_t idxOpTo, size_t from, size_t to);
+    std::shared_ptr<Predicate> createPredicate(const std::string& fullExpression, int idxOpFrom, int idxOpTo, size_t from, size_t to);
+    std::shared_ptr<Operand> createOperand(const std::string& fullExpression, int idxOpFrom, int idxOpTo, size_t from, size_t to);
     std::shared_ptr<Operand> createPrimitive(const std::string& fullExpression, size_t from, size_t to);
 
     void parseEqual(const std::string& fullExpression, size_t& fromPos);

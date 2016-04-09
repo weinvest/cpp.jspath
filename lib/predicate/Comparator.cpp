@@ -22,7 +22,14 @@ int Compare(std::shared_ptr<Operand> op1, std::shared_ptr<Operand> op2, const Co
 	{
 	    double v1 = op1->getRealValue(cxt, variables);
 	    double v2 = op2->getRealValue(cxt, variables);
-	    return std::abs(v1 - v2) < 1e-8;
+
+        double diff = v1 - v2;
+	    if(std::abs(diff) < 1e-8)
+        {
+            return 0;
+        }
+
+        return diff > 0 ? 1 : -1;
 	}
     case Operand::String:
     {
