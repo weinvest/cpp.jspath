@@ -184,7 +184,7 @@ void PredicateParser::parseMatch(const std::string& fullExpression, size_t& from
         }
         else
         {
-            mOperators.emplace_back(OpInfo{OpInfo::iNotMatch, fromPos, fromPos + 1, mOperators.size()});
+            mOperators.emplace_back(OpInfo{OpInfo::iNotMatch, fromPos, fromPos + 2, mOperators.size()});
             fromPos += 1;
         }
     }
