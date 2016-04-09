@@ -190,7 +190,7 @@ bool iequal(const std::string& str, size_t from, size_t to, const std::string& s
 }
 
 static const std::string trueLexical("true");
-static const std::string falseLexical("true");
+static const std::string falseLexical("false");
 bool isBool(const std::string& str, size_t from, size_t to)
 {
     if(to == (1 + from))
