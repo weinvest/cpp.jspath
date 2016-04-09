@@ -75,6 +75,7 @@ void PredicateParser::parseGreat(const std::string& fullExpression, size_t& from
     if('=' == fullExpression.at(fromPos + 1))
     {
         mOperators.emplace_back(OpInfo{OpInfo::GreatEqual, fromPos, fromPos + 2, mOperators.size()});
+        fromPos += 1;
     }
     else
     {
@@ -87,6 +88,7 @@ void PredicateParser::parseLess(const std::string& fullExpression, size_t& fromP
     if('=' == fullExpression.at(fromPos + 1))
     {
         mOperators.emplace_back(OpInfo{OpInfo::LessEqual, fromPos, fromPos + 2, mOperators.size()});
+        fromPos += 1;
     }
     else
     {
