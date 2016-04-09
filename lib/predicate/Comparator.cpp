@@ -116,6 +116,11 @@ Operand::type CompareBase::compareAt(const Context& cxt, const json& variables)
 bool Equal::eval(const Context &cxt, const json &variables)
 {
     auto t = compareAt(cxt, variables);
+    if(Operand::Unknown == t)
+    {
+        return false;
+    }
+    
     return 0 == Compare(mOperand1, mOperand2, cxt, variables, t);
 }
 
@@ -134,6 +139,11 @@ bool StrictlyEqual::eval(const Context &cxt, const json &variables)
 bool NonEqual::eval(const Context &cxt, const json &variables)
 {
     auto t = compareAt(cxt, variables);
+    if(Operand::Unknown == t)
+    {
+        return false;
+    }
+
     return 0 != Compare(mOperand1, mOperand2, cxt, variables, t);
 }
 
