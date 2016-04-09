@@ -291,6 +291,11 @@ namespace jspath
         return mResult->getJsonValue(cxt, variables);
     }
 
+    bool LocationOperand::eval(const Context& cxt, const json& variables)
+    {
+        makeSure(cxt, variables);
+        return nullptr != mResult;
+    }
     //=======================PredicateOperand===========================
     PredicateOperand::PredicateOperand(std::shared_ptr<Predicate> pChild)
     :Operand(Operand::Bool)

@@ -129,6 +129,8 @@ public:
     const std::string& getStringValue(const Context& cxt, const json& variables) override;
     type getType(const Context& /*cxt*/, const json& /*input*/) const override;
     const json& getJsonValue(const Context& cxt, const json& variables) override;
+
+    bool eval(const Context& cxt, const json& variables) override;
 private:
     void makeSure(const Context& cxt, const json& variables) const;
 
