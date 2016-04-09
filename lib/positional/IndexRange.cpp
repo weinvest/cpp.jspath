@@ -36,8 +36,7 @@ IndexRange::IndexRange(const std::string& index)
 
 int IndexRange::parseIndex(const std::string& str, size_t& from, int blankValue)
 {
-    for(; from < str.length() && std::isspace(str.at(from)); ++from)
-    {}
+    from = skipSpace(str, from, str.length());
 
     if(from >= str.length())
     {
@@ -49,12 +48,25 @@ int IndexRange::parseIndex(const std::string& str, size_t& from, int blankValue)
         return blankValue;
     }
 
-    int value = convert2Int(str, from, str.length());
+    int value = 0, sign = 1;
+    if('-' == str.at(from))
+    {
+        sign = -1;
+        ++from;
+    }
+    else if('+' == str.at(from))
+    {
+        ++from;
+    }
 
+    for(; from < str.length() && std::isdigit(str.at(from)); ++from)
+    {
+        value *= 10;
+        value += (str.at(from) - '0');
+    }
+    value *= sign;
 
-    for(; from < str.length() && std::isspace(str.at(from)); ++from)
-    {}
-
+    from = skipSpace(str, from, str.length());
     if(from < str.length())
     {
         if(':' != str.at(from))
@@ -98,9 +110,9 @@ int IndexRange::end(int size)
     {
         return size;
     }
-    else if(mTo <= -size)
+    else if(mTo < -size)
     {
-        return 0;
+        return -1;
     }
 
 	return (mTo + size) % size;
