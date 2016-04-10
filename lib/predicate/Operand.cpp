@@ -442,4 +442,44 @@ namespace jspath
         return mResult->getJsonValue(cxt, variables);
     }
 
+    //=======================MinusOperand===========================
+    MinusOperand::MinusOperand(const std::shared_ptr<Operand>& child)
+    :Operand(Operand::Composite)
+    ,mChild(child)
+    {}
+
+    Operand::type MinusOperand::getType(const Context& cxt, const json& variables) const
+    {
+        return mChild->getType(cxt, variables);
+    }
+
+    bool MinusOperand::canConvert2(type t, const Context& cxt, const json& variables)
+    {
+        return mChild->canConvert2(t, cxt, variables);
+    }
+
+    bool MinusOperand::getBoolValue(const Context& cxt, const json& variables)
+    {
+        return mChild->getBoolValue(cxt, variables);
+    }
+
+    int MinusOperand::getIntValue(const Context& cxt, const json& variables)
+    {
+        return -mChild->getIntValue(cxt, variables);
+    }
+
+    double MinusOperand::getRealValue(const Context& cxt, const json& variables)
+    {
+        return -mChild->getRealValue(cxt, variables);
+    }
+
+    const std::string& MinusOperand::getStringValue(const Context& cxt, const json& variables)
+    {
+        throw std::logic_error("MinusOperand::getStringValue not supported");
+    }
+
+    const json& MinusOperand::getJsonValue(const Context& cxt, const json& variables)
+    {
+        throw std::logic_error("MinusOperand::getJsonValue not supported");
+    }
 }

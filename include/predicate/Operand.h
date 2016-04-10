@@ -186,5 +186,21 @@ private:
     mutable std::shared_ptr<Operand> mResult; //TODO thread safe
     mutable uint32_t mCurrentContext; //TODO: thread safe
 };
+
+class MinusOperand: public Operand
+{
+public:
+    MinusOperand(const std::shared_ptr<Operand>& child);
+
+    bool canConvert2(type t, const Context& cxt, const json& variables) override;
+    bool getBoolValue(const Context& cxt, const json& variables) override;
+    int getIntValue(const Context& cxt, const json& variables) override;
+    double getRealValue(const Context& cxt, const json& variables) override;
+    const std::string& getStringValue(const Context& cxt, const json& variables) override;
+    type getType(const Context& /*cxt*/, const json& /*input*/) const override;
+    const json& getJsonValue(const Context& cxt, const json& variables) override;
+private:
+    std::shared_ptr<Operand> mChild;
+};
 }
 #endif

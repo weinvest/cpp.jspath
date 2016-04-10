@@ -279,8 +279,27 @@ void PredicateParser::parse(const std::string& fullExpression, size_t& fromPos, 
                 mOperators.emplace_back(OpInfo{OpInfo::Add, fromPos, fromPos + 1, mOperators.size()});
                 break;
             case '-':
-                mOperators.emplace_back(OpInfo{OpInfo::Sub, fromPos, fromPos + 1, mOperators.size()});
-                break;
+                {
+                    size_t lastOpEnd = mOperators.empty() ? oldFrom : mOperators.back().to;
+                    bool isMinus = true;
+                    for(size_t cur = fromPos - 1; cur >= lastOpEnd; --cur)
+                    {
+                        if(!std::isspace(fullExpression[cur]))
+                        {
+                            isMinus = false;
+                        }
+                    }
+
+                    if(isMinus)
+                    {
+                        mOperators.emplace_back(OpInfo{OpInfo::Minus, fromPos, fromPos + 1, mOperators.size()});
+                    }
+                    else
+                    {
+                        mOperators.emplace_back(OpInfo{OpInfo::Sub, fromPos, fromPos + 1, mOperators.size()});
+                    }
+                    break;
+                }
             case '/':
                 if((oldFrom != fromPos) && (mOperators.empty() || (mOperators.back().op < OpInfo::Match) && (mOperators.back().op > OpInfo::iNotMatch)))
                 {
@@ -336,14 +355,9 @@ std::shared_ptr<Predicate> PredicateParser::createPredicate(const std::string& f
         auto& opInfo = mOperators[idxLowerest];
         if(mOperators[idxLowerest].isUnary())
         {
-            if(idxLowerest != (idxOpTo - 1))
-            {
-                throw std::logic_error("! must be the last operator");
-            }
-
             auto pChild = createPredicate(fullExpression, idxLowerest + 1, idxOpTo, opInfo.to, to);
-            auto pNot = createUnary(opInfo, pChild);
-            return pNot;
+            auto pUnary = createUnary(opInfo, pChild);
+            return pUnary;
         }
         else
         {
@@ -353,7 +367,7 @@ std::shared_ptr<Predicate> PredicateParser::createPredicate(const std::string& f
             auto pArthemetic = createArthemeticOp(opInfo);
             if(nullptr != pArthemetic)
             {
-                auto pLeft = createOperand(fullExpression, idxOpFrom, idxLowerest -1, leftFrom, opInfo.from);
+                auto pLeft = createOperand(fullExpression, idxOpFrom, idxLowerest, leftFrom, opInfo.from);
                 auto pRight = createOperand(fullExpression, idxLowerest + 1, idxOpTo, opInfo.to, rightTo);
 
                 pArthemetic->setLeft(pLeft);
@@ -365,7 +379,7 @@ std::shared_ptr<Predicate> PredicateParser::createPredicate(const std::string& f
             auto pCompare = createCompOp(opInfo);
             if(nullptr != pCompare)
             {
-                auto pLeft = createOperand(fullExpression, idxOpFrom, idxLowerest -1, leftFrom, opInfo.from);
+                auto pLeft = createOperand(fullExpression, idxOpFrom, idxLowerest, leftFrom, opInfo.from);
                 auto pRight = createOperand(fullExpression, idxLowerest + 1, idxOpTo, opInfo.to, rightTo);
 
                 pCompare->setLeft(pLeft);
@@ -377,7 +391,7 @@ std::shared_ptr<Predicate> PredicateParser::createPredicate(const std::string& f
             auto pLogic = createLogicOp(opInfo);
             if(nullptr != pLogic)
             {
-                auto pLeft = createPredicate(fullExpression, idxOpFrom, idxLowerest -1, leftFrom, opInfo.from);
+                auto pLeft = createPredicate(fullExpression, idxOpFrom, idxLowerest, leftFrom, opInfo.from);
                 auto pRight = createPredicate(fullExpression, idxLowerest + 1, idxOpTo, opInfo.to, rightTo);
 
                 pLogic->setLeft(pLeft);
@@ -466,6 +480,15 @@ std::shared_ptr<Predicate> PredicateParser::createUnary(const OpInfo& opInfo, co
     {
     case OpInfo::Not:
         return std::make_shared<Not>(pChild);
+    case OpInfo::Minus:
+        {
+            auto pOperand = std::dynamic_pointer_cast<Operand>(pChild);
+            if(nullptr == pOperand)
+            {
+                throw std::logic_error("minus shoul apply to an operand");
+            }
+            return std::make_shared<MinusOperand>(pOperand);
+        }
     default:
         return nullptr;
     }

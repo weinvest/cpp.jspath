@@ -200,7 +200,7 @@ bool isBool(const std::string& str, size_t from, size_t to)
             return true;
         }
 
-        if('0' == str[0])
+        if('0' == str[from])
         {
             return true;
         }
@@ -256,14 +256,14 @@ bool isReal(const std::string& str, size_t from, size_t to)
 
 bool convert2Bool(const std::string& str, size_t from, size_t to)
 {
-    if(1 == str.length())
+    if(to == (1 + from))
     {
-        if('1' == str[0])
+        if('1' == str[from])
         {
             return true;
         }
 
-        if('0' == str[0])
+        if('0' == str[from])
         {
             return false;
         }
