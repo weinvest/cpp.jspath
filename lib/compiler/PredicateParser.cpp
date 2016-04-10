@@ -9,11 +9,11 @@
 #include "predicate/Comparator.h"
 namespace jspath
 {
-bool operator< (const OpInfo& lhs, const OpInfo& rhs)
+bool operator> (const OpInfo& lhs, const OpInfo& rhs)
 {
     if(std::abs(lhs.op - rhs.op) <= 16)
     {
-        return false;
+        return true;
     }
     else
     {
@@ -346,7 +346,7 @@ std::shared_ptr<Predicate> PredicateParser::createPredicate(const std::string& f
         auto idxLowerest = idxOpFrom;
         for(auto idxCur = idxLowerest + 1; idxCur < idxOpTo; ++idxCur)
         {
-            if(mOperators[idxLowerest] < mOperators[idxCur])
+            if(mOperators[idxLowerest] > mOperators[idxCur])
             {
                 idxLowerest = idxCur;
             }

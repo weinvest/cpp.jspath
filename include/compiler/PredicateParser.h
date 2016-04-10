@@ -61,7 +61,7 @@ struct OpInfo
     const size_t index; //index in mOperators which declared in PredicateParser
 
     bool isUnary() const { return op == Not || op == Minus; }
-    friend bool operator< (const OpInfo& lhs, const OpInfo& rhs);
+    friend bool operator> (const OpInfo& lhs, const OpInfo& rhs);
 };
 
 class Predicate;
