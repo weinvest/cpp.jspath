@@ -19,7 +19,14 @@ namespace jspath
 
     bool Operand::eval(const Context& cxt, const json& variables)
     {
-        return getBoolValue(cxt, variables);
+        try
+        {
+            return getBoolValue(cxt, variables);
+        }
+        catch(...)
+        {
+            return false;
+        }
     }
 
     const json& Operand::getJsonValue(const Context& cxt, const json& variables)

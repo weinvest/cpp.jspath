@@ -15,7 +15,7 @@ void Positional::apply(Context& cxt, const json& variables)
     }
 
 
-    auto size = cxt.getInput()->size();
+    int size = cxt.getInput()->size();
     int begin = mRange.begin(size);
     int end = mRange.end(size);
 
@@ -35,7 +35,7 @@ void Positional::apply(Context& cxt, const json& variables)
     }
     else if((begin > end) && (mRange.getStep() < 0))
     {
-        for(int iCur = begin; iCur > end && iCur >= 0; iCur += mRange.getStep())
+        for(int iCur = std::min(begin, size - 1); iCur > end && iCur >= 0; iCur += mRange.getStep())
         {
             cxt.getOutput()->push_back(cxt.getInput()->at(iCur));
         }
