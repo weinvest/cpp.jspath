@@ -439,7 +439,7 @@ std::shared_ptr<BinaryOperator<Operand, Predicate>> PredicateParser::createCompO
     switch (opInfo.op)
     {
     case OpInfo::Equal: return std::make_shared<Equal>();
-    case OpInfo::StrictlyEqual: std::make_shared<StrictlyEqual>();
+    case OpInfo::StrictlyEqual: return std::make_shared<StrictlyEqual>();
     case OpInfo::NonEqual: return std::make_shared<NonEqual>();
     case OpInfo::StrictlyNonEqual: return std::make_shared<StrictlyNonEqual>();
     case OpInfo::GreatThan: return std::make_shared<GreatThan>();
