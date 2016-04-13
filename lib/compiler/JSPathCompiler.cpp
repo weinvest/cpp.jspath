@@ -215,9 +215,9 @@ Compiler::Compiler()
     addTransaction(pDotState,     SlashEvent,        pRegexLocationState);
     addTransaction(pDotState,     QuoteEvent,        pQuoteLocationState);
     addTransaction(pDotState,     DotEvent,          pTwoDotLocationState);
-    addTransaction(pDotState,     OpenBracket,       pPositionalState);
+    //addTransaction(pDotState,     OpenBracket,       pPositionalState);
     addTransaction(pDotState,     OtherEvent,        pGenericLocationState);
-    addTransaction(pDotState,     OpenParenthesis,   pMultiLocationState);
+    //addTransaction(pDotState,     OpenParenthesis,   pMultiLocationState);
 
     //------------+---------------+------------------+-------------------
     addTransaction(pAnyState,     OpenParenthesis,   pMultiLocationState);
@@ -227,6 +227,9 @@ Compiler::Compiler()
     addTransaction(pAnyState,     OpenBrace,         pPredicateState);
     addTransaction(pAnyState,     ' ',               pSpaceState);
     addTransaction(pAnyState,     '\t',              pSpaceState);
+
+    //-------------
+    addTransaction(pTwoDotLocationState, OtherEvent, pGenericLocationState);
     //addTransaction()
 
 

@@ -2,7 +2,10 @@
 #include "predicate/Comparator.h"
 namespace jspath
 {
-int Compare(std::shared_ptr<Operand> op1, std::shared_ptr<Operand> op2, const Context& cxt, const json& variables, Operand::type t)
+int Compare(std::shared_ptr<Operand> op1, std::shared_ptr<Operand> op2
+    , const Context& cxt
+    , const json& variables
+    , Operand::type t)
 {
     switch(t)
     {
@@ -87,6 +90,16 @@ int Compare(std::shared_ptr<Operand> op1, std::shared_ptr<Operand> op2, const Co
 
     return false;
 }
+
+int CompareJson(std::shared_ptr<Operand> op1
+    , std::shared_ptr<Operand> op2
+    , const Context& cxt
+    , const json& variables
+    , Operand::type t1
+    , Operand::type t2)
+{
+    return false;
+}
 //================================CompareBase=========================
 Operand::type CompareBase::compareAt(const Context& cxt, const json& variables)
 {
@@ -120,19 +133,21 @@ bool Equal::eval(const Context &cxt, const json &variables)
     {
         return false;
     }
-    
+
     return 0 == Compare(mOperand1, mOperand2, cxt, variables, t);
 }
 
 //=================================strictly equal==============================
 bool StrictlyEqual::eval(const Context &cxt, const json &variables)
 {
-    if(mOperand1->getType(cxt, variables) != mOperand2->getType(cxt, variables))
+    auto t1 = mOperand1->getType(cxt, variables);
+    auto t2 = mOperand2->getType(cxt, variables);
+    if(t1 != t2)
     {
         return false;
     }
 
-    return 0 == Compare(mOperand1, mOperand2, cxt, variables, mOperand1->getType(cxt, variables));
+    return 0 == Compare(mOperand1, mOperand2, cxt, variables, t1);
 }
 
 //=================================non equal==============================
