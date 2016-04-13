@@ -50,7 +50,7 @@ int main(int argc, char** argv)
         json variables;
         if(0 != vm.count("substs"))
         {
-            variables = json(vm["substs"].as<std::string>());
+            variables = json::parse(vm["substs"].as<std::string>());
         }
 
         auto queryExpr = vm["query"].as<std::string>();
