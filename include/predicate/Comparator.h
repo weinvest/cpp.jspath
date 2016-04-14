@@ -1,6 +1,6 @@
 #ifndef _JSPATH_COMPARATOR_H
 #define _JSPATH_COMPARATOR_H
-
+#include <tuple>
 #include "predicate/Operand.h"
 #include "predicate/BinaryOperator.hpp"
 namespace jspath
@@ -9,7 +9,8 @@ namespace jspath
 class CompareBase: public BinaryOperator<Operand, Predicate>
 {
 public:
-    Operand::type compareAt(const Context& cxt, const json& variables);
+    typedef std::tuple<Operand::type, Operand::type, Operand::type> CompareAtT;
+    CompareAtT compareAt(const Context& cxt, const json& variables);
 };
 
 class Equal: public CompareBase

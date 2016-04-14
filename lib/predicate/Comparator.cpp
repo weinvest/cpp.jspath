@@ -1,5 +1,6 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "predicate/Comparator.h"
+#include "compiler/Utils.h"
 namespace jspath
 {
 int Compare(std::shared_ptr<Operand> op1, std::shared_ptr<Operand> op2
@@ -65,7 +66,7 @@ int Compare(std::shared_ptr<Operand> op1, std::shared_ptr<Operand> op2
                 {
                     if(*v1 == child)
                     {
-                        return true;
+                        return 0;
                     }
                 }
             }
@@ -78,63 +79,154 @@ int Compare(std::shared_ptr<Operand> op1, std::shared_ptr<Operand> op2
                 {
                     if(child1 == child2)
                     {
-                        return true;
+                        return 0;
                     }
                 }
             }
         }
 
-        return false;
+        return 1;
 	}
-    }
+    }//switch
 
-    return false;
+    return 1;
 }
 
-int CompareJson(std::shared_ptr<Operand> op1
+bool CompareJson(std::shared_ptr<Operand> op1
     , std::shared_ptr<Operand> op2
     , const Context& cxt
     , const json& variables
-    , Operand::type t1
-    , Operand::type t2)
+    , const CompareBase::CompareAtT& t
+    , bool isStrict = false)
 {
+    if(Operand::Json != std::get<1>(t))
+    {
+        std::shared_ptr<Operand> tmp(op1);
+        op1 = op2;
+        op2 = tmp;
+    }
+
+    const auto& v2 = op2->getJsonValue(cxt, variables);
+    if(!v2.is_array())
+    {
+        return false;
+    }
+
+    auto t1 = std::get<0>(t);
+    for(auto& child : v2)
+    {
+        if(child.is_primitive())
+        {
+            if(child.is_string() && Operand::String == t1)
+            {
+                if(child.get<std::string>() == op1->getStringValue(cxt, variables))
+                {
+                    return true;
+                }
+            }
+            else if(child.is_string())
+            {
+                if(isStrict)
+                {
+                    continue;
+                }
+
+                auto s = child.get<std::string>();
+                auto size = s.size();
+                switch (t1)
+                {
+                case Operand::Bool:
+                    if(isBool(s, 0, size) && convert2Bool(s, 0, size) == op1->getBoolValue(cxt, variables))
+                    {
+                        return true;
+                    }
+                    break;
+                case Operand::Integer:
+                    if(isInt(s, 0, size) && convert2Int(s, 0, size) == op1->getIntValue(cxt, variables))
+                    {
+                        return true;
+                    }
+                    break;
+                case Operand::Real:
+                    if(isReal(s, 0, size) && convert2Real(s, 0, size) == op1->getRealValue(cxt, variables))
+                    {
+                        return true;
+                    }
+                    break;
+                default:
+                    /* code */
+                    break;
+                }
+            }
+            else
+            {
+                if(isStrict)
+                {
+                    continue;
+                }
+
+                if(child.is_boolean()
+                    && op1->canConvert2(Operand::Bool, cxt, variables)
+                    && child.get<bool>() == op1->getBoolValue(cxt, variables))
+                {
+                    return true;
+                }
+                else if(child.is_number_integer()
+                    && op1->canConvert2(Operand::Integer, cxt, variables)
+                    && child.get<int>() == op1->getIntValue(cxt, variables))
+                {
+                    return true;
+                }
+                else if(child.is_number_float()
+                    && op1->canConvert2(Operand::Real, cxt, variables)
+                    && child.get<double>() == op1->getRealValue(cxt, variables))
+                {
+                    return true;
+                }
+            }
+        }
+    }
     return false;
 }
 //================================CompareBase=========================
-Operand::type CompareBase::compareAt(const Context& cxt, const json& variables)
+CompareBase::CompareAtT CompareBase::compareAt(const Context& cxt, const json& variables)
 {
     auto t1 = mOperand1->getType(cxt, variables);
     auto t2 = mOperand2->getType(cxt, variables);
     if(t1 == t2)
     {
-        return t1;
+        return std::make_tuple(t1, t2, t1);
     }
     else if(t1 < Operand::String && t2 < Operand::String)
     {
-        return t1 > t2 ? t1 : t2;
+        return std::make_tuple(t1, t2, t1 > t2 ? t1 : t2);
     }
     else if(Operand::String == t1 && (t2 < Operand::String) && mOperand1->canConvert2(t2, cxt, variables))
     {
-        return t2;
+        return std::make_tuple(t1, t2, t2);
     }
     else if(Operand::String == t2 && (t1 < Operand::String) && mOperand2->canConvert2(t1, cxt, variables))
     {
-        return t1;
+        return std::make_tuple(t1, t2, t1);
     }
 
-    return Operand::Unknown;
+    return std::make_tuple(t1, t2, Operand::Unknown);
 }
 
 //=================================equal==============================
 bool Equal::eval(const Context &cxt, const json &variables)
 {
     auto t = compareAt(cxt, variables);
-    if(Operand::Unknown == t)
+    if(Operand::Unknown == std::get<2>(t))
     {
+        if(Operand::Json == std::get<0>(t) || Operand::Json == std::get<1>(t))
+        {
+            return CompareJson(mOperand1, mOperand2, cxt, variables, t);
+        }
         return false;
     }
 
-    return 0 == Compare(mOperand1, mOperand2, cxt, variables, t);
+    return 0 == Compare(mOperand1, mOperand2, cxt, variables, std::get<2>(t));
 }
 
 //=================================strictly equal==============================
@@ -144,6 +236,10 @@ bool StrictlyEqual::eval(const Context &cxt, const json &variables)
     auto t2 = mOperand2->getType(cxt, variables);
     if(t1 != t2)
     {
+        if(Operand::Json == t1 || Operand::Json == t2)
+        {
+            return CompareJson(mOperand1, mOperand2, cxt, variables, std::make_tuple(t1, t2, Operand::Json), true);
+        }
         return false;
     }
 
@@ -154,69 +250,79 @@ bool StrictlyEqual::eval(const Context &cxt, const json &variables)
 bool NonEqual::eval(const Context &cxt, const json &variables)
 {
     auto t = compareAt(cxt, variables);
-    if(Operand::Unknown == t)
+    if(Operand::Unknown == std::get<2>(t))
     {
+        if(Operand::Json == std::get<0>(t) || Operand::Json == std::get<1>(t))
+        {
+            return !CompareJson(mOperand1, mOperand2, cxt, variables, t);
+        }
         return false;
     }
 
-    return 0 != Compare(mOperand1, mOperand2, cxt, variables, t);
+    return 0 != Compare(mOperand1, mOperand2, cxt, variables, std::get<2>(t));
 }
 
 //=================================strictly non equal==============================
 bool StrictlyNonEqual::eval(const Context &cxt, const json &variables)
 {
-    if(mOperand1->getType(cxt, variables) != mOperand2->getType(cxt, variables))
+    auto t1 = mOperand1->getType(cxt, variables);
+    auto t2 = mOperand2->getType(cxt, variables);
+    if(t1 != t2)
     {
-	    return true;
+        if(Operand::Json == t1 || Operand::Json == t2)
+        {
+            return !CompareJson(mOperand1, mOperand2, cxt, variables, std::make_tuple(t1, t2, Operand::Json), true);
+        }
+	    return false;
     }
-    return 0 != Compare(mOperand1, mOperand2, cxt, variables, mOperand1->getType(cxt, variables));
+    return 0 != Compare(mOperand1, mOperand2, cxt, variables, t1);
 }
 
 //=================================great than==============================
 bool GreatThan::eval(const Context &cxt, const json &variables)
 {
     auto t = compareAt(cxt, variables);
-    if(Operand::Unknown == t)
+    if(Operand::Unknown == std::get<2>(t))
     {
         return false;
     }
 
-    return Compare(mOperand1, mOperand2, cxt, variables, t) > 0;
+    return Compare(mOperand1, mOperand2, cxt, variables, std::get<2>(t)) > 0;
 }
 
 //=================================great equal==============================
 bool GreatEqual::eval(const Context &cxt, const json &variables)
 {
     auto t = compareAt(cxt, variables);
-    if(Operand::Unknown == t)
+    if(Operand::Unknown == std::get<2>(t))
     {
         return false;
     }
 
-    return Compare(mOperand1, mOperand2, cxt, variables, t) >= 0;
+    return Compare(mOperand1, mOperand2, cxt, variables, std::get<2>(t)) >= 0;
 }
 
 //=================================less than ==============================
 bool LessThan::eval(const Context &cxt, const json &variables)
 {
     auto t = compareAt(cxt, variables);
-    if(Operand::Unknown == t)
+    if(Operand::Unknown == std::get<2>(t))
     {
         return false;
     }
 
-    return Compare(mOperand1, mOperand2, cxt, variables, t) < 0;
+    return Compare(mOperand1, mOperand2, cxt, variables, std::get<2>(t)) < 0;
 }
 
 //=================================less equal ==============================
 bool LessEqual::eval(const Context &cxt, const json &variables)
 {
     auto t = compareAt(cxt, variables);
-    if(Operand::Unknown == t)
+    if(Operand::Unknown == std::get<2>(t))
     {
         return false;
     }
 
-    return Compare(mOperand1, mOperand2, cxt, variables, t) <= 0;
+    return Compare(mOperand1, mOperand2, cxt, variables, std::get<2>(t)) <= 0;
 }
 }
