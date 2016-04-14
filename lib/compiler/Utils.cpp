@@ -114,6 +114,24 @@ bool matchRange(std::stack<char>& unmatched, const std::string& input, size_t& f
     return true;
 }
 
+size_t skip2MatchParenthesis(std::stack<char>& unmatched, const std::string& input, size_t fromPos, size_t endPos)
+{
+    if(unmatched.empty())
+    {
+        return fromPos;
+    }
+
+    for(; fromPos < endPos; ++fromPos)
+    {
+        if(matchRange(unmatched, input, fromPos, endPos) && unmatched.empty())
+        {
+            return fromPos;
+        }
+    }
+
+    return fromPos;
+}
+
 size_t skipSpace(const std::string& input, size_t pos, size_t endPos)
 {
     while(pos < endPos && std::isspace(input[pos]))

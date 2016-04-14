@@ -533,14 +533,16 @@ std::shared_ptr<Operand> PredicateParser::createPrimitive(const std::string& ful
     }
     case '{':
     {
-        auto last = skip2(fullExpression, from, '}', to);
+        std::stack<char> unmatched;
+        unmatched.push('{');
+        auto last = skip2MatchParenthesis(unmatched, fullExpression, from + 1, to);
         auto str = fullExpression.substr(from, last - from + 1);
         if(last == to)
         {
             throw std::logic_error(str + " not a json");
         }
 
-        json value(str);
+        json value = json::parse(str);
         return std::make_shared<JsonOperand>(value);
     }
     case '/':
