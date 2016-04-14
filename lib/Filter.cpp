@@ -11,10 +11,17 @@ void Filter::doApply(Context& cxt, const json& variables)
 {
     for(auto& child : *cxt.getInput())
     {
-        Context tmpCxt(child, cxt.getRootInput());
-        if( mPredicate->eval(tmpCxt, variables))
+        try
         {
-            cxt.getOutput()->push_back(child);
+            Context tmpCxt(child, cxt.getRootInput());
+            if( mPredicate->eval(tmpCxt, variables))
+            {
+                cxt.getOutput()->push_back(child);
+            }
+        }
+        catch(...)
+        {
+            //if eval throw an exception, child will be filtered
         }
     }
 }

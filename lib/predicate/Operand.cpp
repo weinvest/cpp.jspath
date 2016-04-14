@@ -265,36 +265,60 @@ namespace jspath
     bool LocationOperand::canConvert2(type t, const Context& cxt, const json& variables)
     {
         makeSure(cxt, variables);
+        if(nullptr == mResult)
+        {
+            return false;
+        }
         return mResult->canConvert2(t, cxt, variables);
     }
 
     bool LocationOperand::getBoolValue(const Context& cxt, const json& variables)
     {
         makeSure(cxt, variables);
+        if(nullptr == mResult)
+        {
+            throw std::logic_error("LocationOperand::getBoolValue detect a null path");
+        }
         return mResult->getBoolValue(cxt, variables);
     }
 
     int LocationOperand::getIntValue(const Context& cxt, const json& variables)
     {
         makeSure(cxt, variables);
+        if(nullptr == mResult)
+        {
+            throw std::logic_error("LocationOperand::getIntValue detect a null path");
+        }
         return mResult->getIntValue(cxt, variables);
     }
 
     double LocationOperand::getRealValue(const Context& cxt, const json& variables)
     {
         makeSure(cxt, variables);
+        if(nullptr == mResult)
+        {
+            throw std::logic_error("LocationOperand::getRealnValue detect a null path");
+        }
         return mResult->getRealValue(cxt, variables);
     }
 
     const std::string& LocationOperand::getStringValue(const Context& cxt, const json& variables)
     {
         makeSure(cxt, variables);
+        if(nullptr == mResult)
+        {
+            throw std::logic_error("LocationOperand::getStringValue detect a null path");
+        }
         return mResult->getStringValue(cxt, variables);
     }
 
     const json& LocationOperand::getJsonValue(const Context& cxt, const json& variables)
     {
         makeSure(cxt, variables);
+        if(nullptr == mResult)
+        {
+            throw std::logic_error("LocationOperand::getJsonValue detect a null path");
+        }
         return mResult->getJsonValue(cxt, variables);
     }
 
