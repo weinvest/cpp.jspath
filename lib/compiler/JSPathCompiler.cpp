@@ -215,9 +215,9 @@ Compiler::Compiler()
     addTransaction(pDotState,     SlashEvent,        pRegexLocationState);
     addTransaction(pDotState,     QuoteEvent,        pQuoteLocationState);
     addTransaction(pDotState,     DotEvent,          pTwoDotLocationState);
-    //addTransaction(pDotState,     OpenBracket,       pPositionalState);
+    addTransaction(pDotState,     OpenBracket,       pPositionalState);
     addTransaction(pDotState,     OtherEvent,        pGenericLocationState);
-    //addTransaction(pDotState,     OpenParenthesis,   pMultiLocationState);
+    addTransaction(pDotState,     OpenParenthesis,   pMultiLocationState);
 
     //------------+---------------+------------------+-------------------
     addTransaction(pAnyState,     OpenParenthesis,   pMultiLocationState);
@@ -257,11 +257,15 @@ std::shared_ptr<Expression> Compiler::processEvent(Event event)
         itDestState = mCurrentSubState->find(event);
         if(mCurrentSubState->end() == itDestState)
         {
-            itDestState = mCurrentSubState->find(OtherEvent);
+            itDestState = mAnySubState->find(event);
+
+            if(mAnySubState->end() == itDestState)
+            {
+                itDestState = mCurrentSubState->find(OtherEvent);
+            }
         }
     }
-
-    if(nullptr == mCurrentSubState || (mCurrentSubState->end() == itDestState))
+    else
     {
         itDestState = mAnySubState->find(event);
     }

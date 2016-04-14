@@ -183,7 +183,7 @@ private:
     void makeSure(const Context& cxt, const json& variables) const;
 
     std::string mVariableName;
-    static thread_local std::shared_ptr<Operand> mResult; //TODO thread safe
+    mutable  std::shared_ptr<Operand> mResult; //TODO thread safe
     mutable uint32_t mCurrentContext; //TODO: thread safe
 };
 
