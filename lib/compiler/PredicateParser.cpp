@@ -26,7 +26,10 @@ PredicateParser::PredicateParser(bool rootParser)
 {}
 
 void PredicateParser::onEntry()
-{}
+{
+    mOperators.clear();
+    mResult.reset();
+}
 
 void PredicateParser::parseEqual(const std::string& fullExpression, size_t& fromPos)
 {
