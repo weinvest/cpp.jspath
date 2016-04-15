@@ -46,32 +46,21 @@ int Compare(std::shared_ptr<Operand> op1, std::shared_ptr<Operand> op2
         const auto* v1 = &op1->getJsonValue(cxt, variables);
         const auto* v2 = &op2->getJsonValue(cxt, variables);
 
-        if(v1->is_structured() && v2->is_primitive())
+        if((v1->is_primitive() && v2->is_primitive())
+            ||
+           (v1->is_object() && v2->is_object()))
+        {
+            return *v1 == *v2 ? 0 : 1;
+        }
+
+        if(v1->is_array() && !v2->is_array())
         {
             const auto* tmp = v2;
             v2 = v1;
             v1 = tmp;
         }
 
-        if(v1->is_primitive())
-        {
-            if(v2->is_primitive())
-            {
-                return *v1 == *v2;
-            }
-
-            if(v2->is_structured())
-            {
-                for(const auto& child : *v2)
-                {
-                    if(*v1 == child)
-                    {
-                        return 0;
-                    }
-                }
-            }
-        }
-        else
+        if(v1->is_array() && v2->is_array())
         {
             for(const auto& child1 : *v1)
             {
@@ -81,6 +70,16 @@ int Compare(std::shared_ptr<Operand> op1, std::shared_ptr<Operand> op2
                     {
                         return 0;
                     }
+                }
+            }
+        }
+        else if(v2->is_array())
+        {
+            for(const auto& child : *v2)
+            {
+                if(*v1 == child)
+                {
+                    return 0;
                 }
             }
         }
