@@ -272,7 +272,7 @@ bool StrictlyNonEqual::eval(const Context &cxt, const json &variables)
         {
             return !CompareJson(mOperand1, mOperand2, cxt, variables, std::make_tuple(t1, t2, Operand::Json), true);
         }
-	    return false;
+	    return true;
     }
     return 0 != Compare(mOperand1, mOperand2, cxt, variables, t1);
 }

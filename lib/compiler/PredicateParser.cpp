@@ -13,6 +13,10 @@ bool operator> (const OpInfo& lhs, const OpInfo& rhs)
 {
     if(std::abs(lhs.op - rhs.op) <= 16)
     {
+        if(lhs.op == rhs.op && OpInfo::Not == lhs.op)
+        {
+            return false;
+        }
         return true;
     }
     else
@@ -532,9 +536,10 @@ std::shared_ptr<Operand> PredicateParser::createPrimitive(const std::string& ful
         return std::make_shared<LocationOperand>(subExpression);
     }
     case '{':
+    case '[':
     {
         std::stack<char> unmatched;
-        unmatched.push('{');
+        unmatched.push(c);
         auto last = skip2MatchParenthesis(unmatched, fullExpression, from + 1, to);
         auto str = fullExpression.substr(from, last - from + 1);
         if(last == to)
@@ -557,7 +562,7 @@ std::shared_ptr<Operand> PredicateParser::createPrimitive(const std::string& ful
         return std::make_shared<VariableOperand>(variableName);
     }
     default:
-        if(isBool(fullExpression, from, to))
+        if(isBool(fullExpression, from, to) && '0' != fullExpression.at(from) && '1' != fullExpression.at(from))
         {
             bool v = convert2Bool(fullExpression, from, to);
             return std::make_shared<BoolOperand>(v);
