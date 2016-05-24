@@ -33,7 +33,7 @@ void RegexLocationPath::doApply(Context& cxt, const json& variables)
         {
             for(auto itChild = child.begin(); itChild != child.end(); ++itChild)
             {
-                if(regex_match(itChild.key(), what, mPattern))
+                if(itChild.value().is_structured() && regex_match(itChild.key(), what, mPattern))
                 {
                     add2(cxt, itChild.value());
                 }
@@ -54,4 +54,3 @@ void RegexLocationPath::add2(Context& cxt, json& ele)
     }
 }
 }//namespace jspath
-

@@ -43,7 +43,7 @@ namespace jspath
 
     bool BoolOperand::canConvert2(type t, const Context& cxt, const json& variables)
     {
-         return Operand::Integer == t || Operand::Real == t;
+         return Operand::Bool == t || Operand::Integer == t || Operand::Real == t;
     }
 
     bool BoolOperand::getBoolValue(const Context& cxt, const json& variables)
@@ -74,7 +74,7 @@ namespace jspath
 
     bool IntOperand::canConvert2(type t, const Context& cxt, const json& variables)
     {
-        return Operand::Bool == t || Operand::Real == t;
+        return Operand::Integer || Operand::Bool == t || Operand::Real == t;
     }
 
     bool IntOperand::getBoolValue(const Context& cxt, const json& variables)
@@ -105,7 +105,7 @@ namespace jspath
 
     bool RealOperand::canConvert2(type t, const Context& cxt, const json& variables)
     {
-        return Operand::Bool == t || Operand::Integer == t;
+        return Operand::Bool == t || Operand::Integer == t || Operand::Real;
     }
 
     bool RealOperand::getBoolValue(const Context& cxt, const json& variables)
@@ -136,18 +136,19 @@ namespace jspath
 
     bool StringOperand::canConvert2(type t, const Context& cxt, const json& variables)
     {
-        if(Operand::Bool == t)
-        {
-            return isBool(mValue, 0, mValue.length());
-        }
-        else if(Operand::Integer == t)
-        {
-            return isInt(mValue, 0, mValue.length());
-        }
-        else if(Operand::Real == t)
-        {
-            return isReal(mValue, 0, mValue.length());
-        }
+	switch(t)
+	{
+	    case Operand::Bool:
+                return isBool(mValue, 0, mValue.length());
+	    case Operand::Integer:
+                return isInt(mValue, 0, mValue.length());
+	    case Operand::Real:
+                return isReal(mValue, 0, mValue.length());
+	    case Operand::String:
+		return true;
+	    defult:
+                return false;
+	}
 
         return false;
     }
@@ -336,7 +337,7 @@ namespace jspath
 
     bool PredicateOperand::canConvert2(type t, const Context& cxt, const json& variables)
     {
-         return Operand::Integer == t || Operand::Real == t;
+         return Operand::Bool || Operand::Integer == t || Operand::Real == t;
     }
 
     bool PredicateOperand::getBoolValue(const Context& cxt, const json& variables)

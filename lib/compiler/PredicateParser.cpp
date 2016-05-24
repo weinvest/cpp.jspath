@@ -288,14 +288,8 @@ void PredicateParser::parse(const std::string& fullExpression, size_t& fromPos, 
             case '-':
                 {
                     size_t lastOpEnd = mOperators.empty() ? oldFrom : mOperators.back().to;
-                    bool isMinus = true;
-                    for(size_t cur = fromPos - 1; cur >= lastOpEnd; --cur)
-                    {
-                        if(!std::isspace(fullExpression[cur]))
-                        {
-                            isMinus = false;
-                        }
-                    }
+                    int from = fromPos - 1;
+                    bool isMinus = isSpace(fullExpression, from , lastOpEnd - 1, -1);
 
                     if(isMinus)
                     {
@@ -308,13 +302,24 @@ void PredicateParser::parse(const std::string& fullExpression, size_t& fromPos, 
                     break;
                 }
             case '/':
-                if((oldFrom != fromPos) && (mOperators.empty() || (mOperators.back().op < OpInfo::Match) && (mOperators.back().op > OpInfo::iNotMatch)))
                 {
-                    mOperators.emplace_back(OpInfo{OpInfo::Div, fromPos, fromPos + 1, mOperators.size()});
-                }
-                else
-                {
-                    fromPos = skip2(fullExpression, fromPos + 1, '/', endPos) + 1;
+                    auto lastOp = mOperators.empty() ? nullptr : &mOperators.back();
+                    size_t lastOpEnd = nullptr == lastOp ? oldFrom : lastOp->to;
+                    int from = fromPos - 1;
+                    bool allSpace = isSpace(fullExpression, from , lastOpEnd - 1, -1);
+                    if(nullptr != lastOp && (lastOp->op >= OpInfo::Match) && (lastOp->op <= OpInfo::iNotMatch) && lastOp->to == (from - 1))
+                    {
+                        
+                    }
+
+                    if((oldFrom != fromPos) && (mOperators.empty() || (mOperators.back().op < OpInfo::Match) && (mOperators.back().op > OpInfo::iNotMatch)))
+                    {
+                        mOperators.emplace_back(OpInfo{OpInfo::Div, fromPos, fromPos + 1, mOperators.size()});
+                    }
+                    else
+                    {
+                        fromPos = skip2(fullExpression, fromPos + 1, '/', endPos) + 1;
+                    }
                 }
                 break;
             case '%':

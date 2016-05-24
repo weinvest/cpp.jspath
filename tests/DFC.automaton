@@ -1,0 +1,2705 @@
+[
+    {
+        "Components": [
+            {
+                "Id": 6082, 
+                "Name": "BS_MA01", 
+                "Strategies": [
+                    {
+                        "BestSizeRatio": "0.5", 
+                        "EmitterType": "ConservativeEmitter", 
+                        "Enabled": true, 
+                        "FirstLayerSizeEWMA": 150, 
+                        "FirstLayerSizeRatio": "0.5", 
+                        "GTNBTolerance": "3", 
+                        "GTNBWaitTime": "15000", 
+                        "HCslip": "5", 
+                        "Id": 6083, 
+                        "Instruments": [
+                            {
+                                "CloseType": "CloseTodayPriority", 
+                                "InstrumentName": 3, 
+                                "IsConnect": true, 
+                                "Market": "XZ_MiniTap_2_H1_TapMarket"
+                            }
+                        ], 
+                        "IsDayTrade": true, 
+                        "IsNightTrade": false, 
+                        "LimitTrade": "0.3", 
+                        "LimitTrade2": "0.3", 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                        "MarketVolumeEWMA": 173, 
+                        "MarketVolumeRatio": "8", 
+                        "MaxBookPosition": "202", 
+                        "MaxPercent2Place": "0.1", 
+                        "MaxPositionSignal": 1, 
+                        "MinMaxPositionChangePercent": "0.2", 
+                        "MinQty2Place": "404", 
+                        "MinQty2PlaceSignal": 2, 
+                        "Name": "EHFV3_CF01_d", 
+                        "OrderType": "", 
+                        "Portfolio": 5885, 
+                        "PreHardCloseSpread": "0", 
+                        "Ranges": [
+                            {
+                                "Action": "BlockAll|CancelAll", 
+                                "END": "31:00.0", 
+                                "START": "29:55.0"
+                            }
+                        ], 
+                        "SpreadLimit": "3", 
+                        "SubStrategies": [
+                            416, 
+                            417, 
+                            418, 
+                            419, 
+                            511
+                        ], 
+                        "Type": "HeFeiV3", 
+                        "WorseSelectAversion": "1", 
+                        "XD": "202", 
+                        "XDayAtSoftOpen": 0, 
+                        "XDayCloseLowerLimit": 0, 
+                        "XN": "0", 
+                        "XNightAtSoftOpen": 0, 
+                        "XNinghtCloseLowerLimit": 0
+                    }, 
+                    {
+                        "BestSizeRatio": "0.5", 
+                        "EmitterType": "ConservativeEmitter", 
+                        "Enabled": true, 
+                        "FirstLayerSizeEWMA": 151, 
+                        "FirstLayerSizeRatio": "0.5", 
+                        "GTNBTolerance": "3", 
+                        "GTNBWaitTime": "15000", 
+                        "HCslip": "5", 
+                        "Id": 6084, 
+                        "Instruments": [
+                            {
+                                "CloseType": "CloseTodayPriority", 
+                                "InstrumentName": 4, 
+                                "IsConnect": true, 
+                                "Market": "XZ_MiniTap_2_H1_TapMarket"
+                            }
+                        ], 
+                        "IsDayTrade": true, 
+                        "IsNightTrade": false, 
+                        "LimitTrade": "0.3", 
+                        "LimitTrade2": "0.3", 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                        "MarketVolumeEWMA": 174, 
+                        "MarketVolumeRatio": "8", 
+                        "MaxBookPosition": "47", 
+                        "MaxPercent2Place": "0.1", 
+                        "MaxPositionSignal": 1, 
+                        "MinMaxPositionChangePercent": "0.2", 
+                        "MinQty2Place": "94", 
+                        "MinQty2PlaceSignal": 2, 
+                        "Name": "EHFV3_CF02_d", 
+                        "OrderType": "", 
+                        "Portfolio": 5886, 
+                        "PreHardCloseSpread": "0", 
+                        "Ranges": [
+                            {
+                                "Action": "BlockAll|CancelAll", 
+                                "END": "31:00.0", 
+                                "START": "29:55.0"
+                            }
+                        ], 
+                        "SpreadLimit": "3", 
+                        "SubStrategies": [
+                            423, 
+                            424, 
+                            425, 
+                            513
+                        ], 
+                        "Type": "HeFeiV3", 
+                        "WorseSelectAversion": "1", 
+                        "XD": "47", 
+                        "XDayAtSoftOpen": 0, 
+                        "XDayCloseLowerLimit": 0, 
+                        "XN": "0", 
+                        "XNightAtSoftOpen": 0, 
+                        "XNinghtCloseLowerLimit": 0
+                    }, 
+                    {
+                        "BestSizeRatio": "0.5", 
+                        "EmitterType": "ConservativeEmitter", 
+                        "Enabled": true, 
+                        "FirstLayerSizeEWMA": 152, 
+                        "FirstLayerSizeRatio": "0.5", 
+                        "GTNBTolerance": "3", 
+                        "GTNBWaitTime": "15000", 
+                        "HCslip": "5", 
+                        "Id": 6085, 
+                        "Instruments": [
+                            {
+                                "CloseType": "CloseTodayPriority", 
+                                "InstrumentName": 5, 
+                                "IsConnect": true, 
+                                "Market": "XZ_MiniTap_2_H1_TapMarket"
+                            }
+                        ], 
+                        "IsDayTrade": true, 
+                        "IsNightTrade": false, 
+                        "LimitTrade": "0.3", 
+                        "LimitTrade2": "0.3", 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                        "MarketVolumeEWMA": 175, 
+                        "MarketVolumeRatio": "8", 
+                        "MaxBookPosition": "10", 
+                        "MaxPercent2Place": "0.1", 
+                        "MaxPositionSignal": 1, 
+                        "MinMaxPositionChangePercent": "0.2", 
+                        "MinQty2Place": "20", 
+                        "MinQty2PlaceSignal": 2, 
+                        "Name": "EHFV3_CF03_d", 
+                        "OrderType": "", 
+                        "Portfolio": 5887, 
+                        "PreHardCloseSpread": "0", 
+                        "Ranges": [
+                            {
+                                "Action": "BlockAll|CancelAll", 
+                                "END": "31:00.0", 
+                                "START": "29:55.0"
+                            }
+                        ], 
+                        "SpreadLimit": "3", 
+                        "SubStrategies": [
+                            429, 
+                            430
+                        ], 
+                        "Type": "HeFeiV3", 
+                        "WorseSelectAversion": "1", 
+                        "XD": "10", 
+                        "XDayAtSoftOpen": 0, 
+                        "XDayCloseLowerLimit": 0, 
+                        "XN": "0", 
+                        "XNightAtSoftOpen": 0, 
+                        "XNinghtCloseLowerLimit": 0
+                    }, 
+                    {
+                        "BestSizeRatio": "0.5", 
+                        "EmitterType": "ConservativeEmitter", 
+                        "Enabled": true, 
+                        "FirstLayerSizeEWMA": 153, 
+                        "FirstLayerSizeRatio": "0.5", 
+                        "GTNBTolerance": "3", 
+                        "GTNBWaitTime": "15000", 
+                        "HCslip": "5", 
+                        "Id": 6086, 
+                        "Instruments": [
+                            {
+                                "CloseType": "CloseTodayPriority", 
+                                "InstrumentName": 6, 
+                                "IsConnect": true, 
+                                "Market": "XZ_MiniTap_2_H1_TapMarket"
+                            }
+                        ], 
+                        "IsDayTrade": true, 
+                        "IsNightTrade": false, 
+                        "LimitTrade": "0.3", 
+                        "LimitTrade2": "0.3", 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                        "MarketVolumeEWMA": 176, 
+                        "MarketVolumeRatio": "8", 
+                        "MaxBookPosition": "20", 
+                        "MaxPercent2Place": "0.1", 
+                        "MaxPositionSignal": 1, 
+                        "MinMaxPositionChangePercent": "0.2", 
+                        "MinQty2Place": "40", 
+                        "MinQty2PlaceSignal": 2, 
+                        "Name": "EHFV3_FG01_d", 
+                        "OrderType": "", 
+                        "Portfolio": 5888, 
+                        "PreHardCloseSpread": "0", 
+                        "Ranges": [
+                            {
+                                "Action": "BlockAll|CancelAll", 
+                                "END": "31:00.0", 
+                                "START": "29:55.0"
+                            }
+                        ], 
+                        "SpreadLimit": "3", 
+                        "SubStrategies": [
+                            503
+                        ], 
+                        "Type": "HeFeiV3", 
+                        "WorseSelectAversion": "1", 
+                        "XD": "20", 
+                        "XDayAtSoftOpen": 0, 
+                        "XDayCloseLowerLimit": 0, 
+                        "XN": "0", 
+                        "XNightAtSoftOpen": 0, 
+                        "XNinghtCloseLowerLimit": 0
+                    }, 
+                    {
+                        "BestSizeRatio": "0.5", 
+                        "EmitterType": "ConservativeEmitter", 
+                        "Enabled": true, 
+                        "FirstLayerSizeEWMA": 154, 
+                        "FirstLayerSizeRatio": "0.5", 
+                        "GTNBTolerance": "3", 
+                        "GTNBWaitTime": "15000", 
+                        "HCslip": "5", 
+                        "Id": 6087, 
+                        "Instruments": [
+                            {
+                                "CloseType": "CloseTodayPriority", 
+                                "InstrumentName": 7, 
+                                "IsConnect": true, 
+                                "Market": "XZ_MiniTap_2_H1_TapMarket"
+                            }
+                        ], 
+                        "IsDayTrade": true, 
+                        "IsNightTrade": false, 
+                        "LimitTrade": "0.3", 
+                        "LimitTrade2": "0.3", 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                        "MarketVolumeEWMA": 177, 
+                        "MarketVolumeRatio": "8", 
+                        "MaxBookPosition": "5", 
+                        "MaxPercent2Place": "0.1", 
+                        "MaxPositionSignal": 1, 
+                        "MinMaxPositionChangePercent": "0.2", 
+                        "MinQty2Place": "10", 
+                        "MinQty2PlaceSignal": 2, 
+                        "Name": "EHFV3_FG02_d", 
+                        "OrderType": "", 
+                        "Portfolio": 5889, 
+                        "PreHardCloseSpread": "0", 
+                        "Ranges": [
+                            {
+                                "Action": "BlockAll|CancelAll", 
+                                "END": "31:00.0", 
+                                "START": "29:55.0"
+                            }
+                        ], 
+                        "SpreadLimit": "3", 
+                        "SubStrategies": [
+                            505
+                        ], 
+                        "Type": "HeFeiV3", 
+                        "WorseSelectAversion": "1", 
+                        "XD": "5", 
+                        "XDayAtSoftOpen": 0, 
+                        "XDayCloseLowerLimit": 0, 
+                        "XN": "0", 
+                        "XNightAtSoftOpen": 0, 
+                        "XNinghtCloseLowerLimit": 0
+                    }, 
+                    {
+                        "BestSizeRatio": "0.5", 
+                        "EmitterType": "ConservativeEmitter", 
+                        "Enabled": true, 
+                        "FirstLayerSizeEWMA": 155, 
+                        "FirstLayerSizeRatio": "0.5", 
+                        "GTNBTolerance": "3", 
+                        "GTNBWaitTime": "15000", 
+                        "HCslip": "5", 
+                        "Id": 6088, 
+                        "Instruments": [
+                            {
+                                "CloseType": "CloseTodayPriority", 
+                                "InstrumentName": 8, 
+                                "IsConnect": true, 
+                                "Market": "XZ_MiniTap_2_H1_TapMarket"
+                            }
+                        ], 
+                        "IsDayTrade": true, 
+                        "IsNightTrade": false, 
+                        "LimitTrade": "0.3", 
+                        "LimitTrade2": "0.3", 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                        "MarketVolumeEWMA": 178, 
+                        "MarketVolumeRatio": "8", 
+                        "MaxBookPosition": "180", 
+                        "MaxPercent2Place": "0.1", 
+                        "MaxPositionSignal": 1, 
+                        "MinMaxPositionChangePercent": "0.2", 
+                        "MinQty2Place": "360", 
+                        "MinQty2PlaceSignal": 2, 
+                        "Name": "EHFV3_MA01_d", 
+                        "OrderType": "", 
+                        "Portfolio": 5890, 
+                        "PreHardCloseSpread": "0", 
+                        "Ranges": [
+                            {
+                                "Action": "BlockAll|CancelAll", 
+                                "END": "31:00.0", 
+                                "START": "29:55.0"
+                            }
+                        ], 
+                        "SpreadLimit": "3", 
+                        "SubStrategies": [
+                            432, 
+                            433, 
+                            434
+                        ], 
+                        "Type": "HeFeiV3", 
+                        "WorseSelectAversion": "1", 
+                        "XD": "180", 
+                        "XDayAtSoftOpen": 0, 
+                        "XDayCloseLowerLimit": 0, 
+                        "XN": "0", 
+                        "XNightAtSoftOpen": 0, 
+                        "XNinghtCloseLowerLimit": 0
+                    }, 
+                    {
+                        "BestSizeRatio": "0.5", 
+                        "EmitterType": "ConservativeEmitter", 
+                        "Enabled": true, 
+                        "FirstLayerSizeEWMA": 156, 
+                        "FirstLayerSizeRatio": "0.5", 
+                        "GTNBTolerance": "3", 
+                        "GTNBWaitTime": "15000", 
+                        "HCslip": "5", 
+                        "Id": 6089, 
+                        "Instruments": [
+                            {
+                                "CloseType": "CloseTodayPriority", 
+                                "InstrumentName": 9, 
+                                "IsConnect": true, 
+                                "Market": "XZ_MiniTap_2_H1_TapMarket"
+                            }
+                        ], 
+                        "IsDayTrade": true, 
+                        "IsNightTrade": false, 
+                        "LimitTrade": "0.3", 
+                        "LimitTrade2": "0.3", 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                        "MarketVolumeEWMA": 179, 
+                        "MarketVolumeRatio": "8", 
+                        "MaxBookPosition": "60", 
+                        "MaxPercent2Place": "0.1", 
+                        "MaxPositionSignal": 1, 
+                        "MinMaxPositionChangePercent": "0.2", 
+                        "MinQty2Place": "120", 
+                        "MinQty2PlaceSignal": 2, 
+                        "Name": "EHFV3_MA02_d", 
+                        "OrderType": "", 
+                        "Portfolio": 5891, 
+                        "PreHardCloseSpread": "0", 
+                        "Ranges": [
+                            {
+                                "Action": "BlockAll|CancelAll", 
+                                "END": "31:00.0", 
+                                "START": "29:55.0"
+                            }
+                        ], 
+                        "SpreadLimit": "3", 
+                        "SubStrategies": [
+                            438, 
+                            439, 
+                            440
+                        ], 
+                        "Type": "HeFeiV3", 
+                        "WorseSelectAversion": "1", 
+                        "XD": "60", 
+                        "XDayAtSoftOpen": 0, 
+                        "XDayCloseLowerLimit": 0, 
+                        "XN": "0", 
+                        "XNightAtSoftOpen": 0, 
+                        "XNinghtCloseLowerLimit": 0
+                    }, 
+                    {
+                        "BestSizeRatio": "0.5", 
+                        "EmitterType": "ConservativeEmitter", 
+                        "Enabled": true, 
+                        "FirstLayerSizeEWMA": 157, 
+                        "FirstLayerSizeRatio": "0.5", 
+                        "GTNBTolerance": "3", 
+                        "GTNBWaitTime": "15000", 
+                        "HCslip": "5", 
+                        "Id": 6090, 
+                        "Instruments": [
+                            {
+                                "CloseType": "CloseTodayPriority", 
+                                "InstrumentName": 10, 
+                                "IsConnect": true, 
+                                "Market": "XZ_MiniTap_2_H1_TapMarket"
+                            }
+                        ], 
+                        "IsDayTrade": true, 
+                        "IsNightTrade": false, 
+                        "LimitTrade": "0.3", 
+                        "LimitTrade2": "0.3", 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                        "MarketVolumeEWMA": 180, 
+                        "MarketVolumeRatio": "8", 
+                        "MaxBookPosition": "15", 
+                        "MaxPercent2Place": "0.1", 
+                        "MaxPositionSignal": 1, 
+                        "MinMaxPositionChangePercent": "0.2", 
+                        "MinQty2Place": "30", 
+                        "MinQty2PlaceSignal": 2, 
+                        "Name": "EHFV3_MA03_d", 
+                        "OrderType": "", 
+                        "Portfolio": 5892, 
+                        "PreHardCloseSpread": "0", 
+                        "Ranges": [
+                            {
+                                "Action": "BlockAll|CancelAll", 
+                                "END": "31:00.0", 
+                                "START": "29:55.0"
+                            }
+                        ], 
+                        "SpreadLimit": "3", 
+                        "SubStrategies": [
+                            444, 
+                            445, 
+                            446
+                        ], 
+                        "Type": "HeFeiV3", 
+                        "WorseSelectAversion": "1", 
+                        "XD": "15", 
+                        "XDayAtSoftOpen": 0, 
+                        "XDayCloseLowerLimit": 0, 
+                        "XN": "0", 
+                        "XNightAtSoftOpen": 0, 
+                        "XNinghtCloseLowerLimit": 0
+                    }, 
+                    {
+                        "BestSizeRatio": "0.5", 
+                        "EmitterType": "ConservativeEmitter", 
+                        "Enabled": true, 
+                        "FirstLayerSizeEWMA": 158, 
+                        "FirstLayerSizeRatio": "0.5", 
+                        "GTNBTolerance": "3", 
+                        "GTNBWaitTime": "15000", 
+                        "HCslip": "5", 
+                        "Id": 6091, 
+                        "Instruments": [
+                            {
+                                "CloseType": "CloseTodayPriority", 
+                                "InstrumentName": 11, 
+                                "IsConnect": true, 
+                                "Market": "XZ_MiniTap_2_H1_TapMarket"
+                            }
+                        ], 
+                        "IsDayTrade": true, 
+                        "IsNightTrade": false, 
+                        "LimitTrade": "0.3", 
+                        "LimitTrade2": "0.3", 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                        "MarketVolumeEWMA": 181, 
+                        "MarketVolumeRatio": "8", 
+                        "MaxBookPosition": "15", 
+                        "MaxPercent2Place": "0.1", 
+                        "MaxPositionSignal": 1, 
+                        "MinMaxPositionChangePercent": "0.2", 
+                        "MinQty2Place": "30", 
+                        "MinQty2PlaceSignal": 2, 
+                        "Name": "EHFV3_OI01_d", 
+                        "OrderType": "", 
+                        "Portfolio": 5893, 
+                        "PreHardCloseSpread": "0", 
+                        "Ranges": [
+                            {
+                                "Action": "BlockAll|CancelAll", 
+                                "END": "31:00.0", 
+                                "START": "29:55.0"
+                            }
+                        ], 
+                        "SpreadLimit": "3", 
+                        "SubStrategies": [
+                            494, 
+                            495, 
+                            515
+                        ], 
+                        "Type": "HeFeiV3", 
+                        "WorseSelectAversion": "1", 
+                        "XD": "15", 
+                        "XDayAtSoftOpen": 0, 
+                        "XDayCloseLowerLimit": 0, 
+                        "XN": "0", 
+                        "XNightAtSoftOpen": 0, 
+                        "XNinghtCloseLowerLimit": 0
+                    }, 
+                    {
+                        "BestSizeRatio": "0.5", 
+                        "EmitterType": "ConservativeEmitter", 
+                        "Enabled": true, 
+                        "FirstLayerSizeEWMA": 159, 
+                        "FirstLayerSizeRatio": "0.5", 
+                        "GTNBTolerance": "3", 
+                        "GTNBWaitTime": "15000", 
+                        "HCslip": "5", 
+                        "Id": 6092, 
+                        "Instruments": [
+                            {
+                                "CloseType": "CloseTodayPriority", 
+                                "InstrumentName": 12, 
+                                "IsConnect": true, 
+                                "Market": "XZ_MiniTap_2_H1_TapMarket"
+                            }
+                        ], 
+                        "IsDayTrade": true, 
+                        "IsNightTrade": false, 
+                        "LimitTrade": "0.3", 
+                        "LimitTrade2": "0.3", 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                        "MarketVolumeEWMA": 182, 
+                        "MarketVolumeRatio": "8", 
+                        "MaxBookPosition": "14", 
+                        "MaxPercent2Place": "0.1", 
+                        "MaxPositionSignal": 1, 
+                        "MinMaxPositionChangePercent": "0.2", 
+                        "MinQty2Place": "28", 
+                        "MinQty2PlaceSignal": 2, 
+                        "Name": "EHFV3_OI02_d", 
+                        "OrderType": "", 
+                        "Portfolio": 5894, 
+                        "PreHardCloseSpread": "0", 
+                        "Ranges": [
+                            {
+                                "Action": "BlockAll|CancelAll", 
+                                "END": "31:00.0", 
+                                "START": "29:55.0"
+                            }
+                        ], 
+                        "SpreadLimit": "3", 
+                        "SubStrategies": [
+                            499, 
+                            500, 
+                            501, 
+                            517
+                        ], 
+                        "Type": "HeFeiV3", 
+                        "WorseSelectAversion": "1", 
+                        "XD": "14", 
+                        "XDayAtSoftOpen": 0, 
+                        "XDayCloseLowerLimit": 0, 
+                        "XN": "0", 
+                        "XNightAtSoftOpen": 0, 
+                        "XNinghtCloseLowerLimit": 0
+                    }, 
+                    {
+                        "BestSizeRatio": "0.5", 
+                        "EmitterType": "ConservativeEmitter", 
+                        "Enabled": true, 
+                        "FirstLayerSizeEWMA": 160, 
+                        "FirstLayerSizeRatio": "0.5", 
+                        "GTNBTolerance": "3", 
+                        "GTNBWaitTime": "15000", 
+                        "HCslip": "5", 
+                        "Id": 6093, 
+                        "Instruments": [
+                            {
+                                "CloseType": "CloseTodayPriority", 
+                                "InstrumentName": 13, 
+                                "IsConnect": true, 
+                                "Market": "XZ_MiniTap_2_H1_TapMarket"
+                            }
+                        ], 
+                        "IsDayTrade": true, 
+                        "IsNightTrade": false, 
+                        "LimitTrade": "0.3", 
+                        "LimitTrade2": "0.3", 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                        "MarketVolumeEWMA": 183, 
+                        "MarketVolumeRatio": "8", 
+                        "MaxBookPosition": "442", 
+                        "MaxPercent2Place": "0.1", 
+                        "MaxPositionSignal": 1, 
+                        "MinMaxPositionChangePercent": "0.2", 
+                        "MinQty2Place": "884", 
+                        "MinQty2PlaceSignal": 2, 
+                        "Name": "EHFV3_RM01_d", 
+                        "OrderType": "", 
+                        "Portfolio": 5895, 
+                        "PreHardCloseSpread": "0", 
+                        "Ranges": [
+                            {
+                                "Action": "BlockAll|CancelAll", 
+                                "END": "31:00.0", 
+                                "START": "29:55.0"
+                            }
+                        ], 
+                        "SpreadLimit": "3", 
+                        "SubStrategies": [
+                            466, 
+                            467, 
+                            468, 
+                            518
+                        ], 
+                        "Type": "HeFeiV3", 
+                        "WorseSelectAversion": "1", 
+                        "XD": "442", 
+                        "XDayAtSoftOpen": 0, 
+                        "XDayCloseLowerLimit": 0, 
+                        "XN": "0", 
+                        "XNightAtSoftOpen": 0, 
+                        "XNinghtCloseLowerLimit": 0
+                    }, 
+                    {
+                        "BestSizeRatio": "0.5", 
+                        "EmitterType": "ConservativeEmitter", 
+                        "Enabled": true, 
+                        "FirstLayerSizeEWMA": 161, 
+                        "FirstLayerSizeRatio": "0.5", 
+                        "GTNBTolerance": "3", 
+                        "GTNBWaitTime": "15000", 
+                        "HCslip": "5", 
+                        "Id": 6094, 
+                        "Instruments": [
+                            {
+                                "CloseType": "CloseTodayPriority", 
+                                "InstrumentName": 14, 
+                                "IsConnect": true, 
+                                "Market": "XZ_MiniTap_2_H1_TapMarket"
+                            }
+                        ], 
+                        "IsDayTrade": true, 
+                        "IsNightTrade": false, 
+                        "LimitTrade": "0.3", 
+                        "LimitTrade2": "0.3", 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                        "MarketVolumeEWMA": 184, 
+                        "MarketVolumeRatio": "8", 
+                        "MaxBookPosition": "120", 
+                        "MaxPercent2Place": "0.1", 
+                        "MaxPositionSignal": 1, 
+                        "MinMaxPositionChangePercent": "0.2", 
+                        "MinQty2Place": "240", 
+                        "MinQty2PlaceSignal": 2, 
+                        "Name": "EHFV3_RM02_d", 
+                        "OrderType": "", 
+                        "Portfolio": 5855, 
+                        "PreHardCloseSpread": "0", 
+                        "Ranges": [
+                            {
+                                "Action": "BlockAll|CancelAll", 
+                                "END": "31:00.0", 
+                                "START": "29:55.0"
+                            }
+                        ], 
+                        "SpreadLimit": "3", 
+                        "SubStrategies": [
+                            471, 
+                            472, 
+                            473
+                        ], 
+                        "Type": "HeFeiV3", 
+                        "WorseSelectAversion": "1", 
+                        "XD": "120", 
+                        "XDayAtSoftOpen": 0, 
+                        "XDayCloseLowerLimit": 0, 
+                        "XN": "0", 
+                        "XNightAtSoftOpen": 0, 
+                        "XNinghtCloseLowerLimit": 0
+                    }, 
+                    {
+                        "BestSizeRatio": "0.5", 
+                        "EmitterType": "ConservativeEmitter", 
+                        "Enabled": true, 
+                        "FirstLayerSizeEWMA": 162, 
+                        "FirstLayerSizeRatio": "0.5", 
+                        "GTNBTolerance": "3", 
+                        "GTNBWaitTime": "15000", 
+                        "HCslip": "5", 
+                        "Id": 6095, 
+                        "Instruments": [
+                            {
+                                "CloseType": "CloseTodayPriority", 
+                                "InstrumentName": 15, 
+                                "IsConnect": true, 
+                                "Market": "XZ_MiniTap_2_H1_TapMarket"
+                            }
+                        ], 
+                        "IsDayTrade": true, 
+                        "IsNightTrade": false, 
+                        "LimitTrade": "0.3", 
+                        "LimitTrade2": "0.3", 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                        "MarketVolumeEWMA": 185, 
+                        "MarketVolumeRatio": "8", 
+                        "MaxBookPosition": "4", 
+                        "MaxPercent2Place": "0.1", 
+                        "MaxPositionSignal": 1, 
+                        "MinMaxPositionChangePercent": "0.2", 
+                        "MinQty2Place": "8", 
+                        "MinQty2PlaceSignal": 2, 
+                        "Name": "EHFV3_RM03_d", 
+                        "OrderType": "", 
+                        "Portfolio": 5856, 
+                        "PreHardCloseSpread": "0", 
+                        "Ranges": [
+                            {
+                                "Action": "BlockAll|CancelAll", 
+                                "END": "31:00.0", 
+                                "START": "29:55.0"
+                            }
+                        ], 
+                        "SpreadLimit": "3", 
+                        "SubStrategies": [
+                            476
+                        ], 
+                        "Type": "HeFeiV3", 
+                        "WorseSelectAversion": "1", 
+                        "XD": "4", 
+                        "XDayAtSoftOpen": 0, 
+                        "XDayCloseLowerLimit": 0, 
+                        "XN": "0", 
+                        "XNightAtSoftOpen": 0, 
+                        "XNinghtCloseLowerLimit": 0
+                    }, 
+                    {
+                        "BestSizeRatio": "0.5", 
+                        "EmitterType": "ConservativeEmitter", 
+                        "Enabled": true, 
+                        "FirstLayerSizeEWMA": 163, 
+                        "FirstLayerSizeRatio": "0.5", 
+                        "GTNBTolerance": "3", 
+                        "GTNBWaitTime": "15000", 
+                        "HCslip": "5", 
+                        "Id": 6096, 
+                        "Instruments": [
+                            {
+                                "CloseType": "CloseTodayPriority", 
+                                "InstrumentName": 16, 
+                                "IsConnect": true, 
+                                "Market": "XZ_MiniTap_2_H1_TapMarket"
+                            }
+                        ], 
+                        "IsDayTrade": true, 
+                        "IsNightTrade": false, 
+                        "LimitTrade": "0.3", 
+                        "LimitTrade2": "0.3", 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                        "MarketVolumeEWMA": 186, 
+                        "MarketVolumeRatio": "8", 
+                        "MaxBookPosition": "200", 
+                        "MaxPercent2Place": "0.1", 
+                        "MaxPositionSignal": 1, 
+                        "MinMaxPositionChangePercent": "0.2", 
+                        "MinQty2Place": "400", 
+                        "MinQty2PlaceSignal": 2, 
+                        "Name": "EHFV3_SR01_d", 
+                        "OrderType": "", 
+                        "Portfolio": 5896, 
+                        "PreHardCloseSpread": "0", 
+                        "Ranges": [
+                            {
+                                "Action": "BlockAll|CancelAll", 
+                                "END": "31:00.0", 
+                                "START": "29:55.0"
+                            }
+                        ], 
+                        "SpreadLimit": "3", 
+                        "SubStrategies": [
+                            449, 
+                            450, 
+                            451
+                        ], 
+                        "Type": "HeFeiV3", 
+                        "WorseSelectAversion": "1", 
+                        "XD": "200", 
+                        "XDayAtSoftOpen": 0, 
+                        "XDayCloseLowerLimit": 0, 
+                        "XN": "0", 
+                        "XNightAtSoftOpen": 0, 
+                        "XNinghtCloseLowerLimit": 0
+                    }, 
+                    {
+                        "BestSizeRatio": "0.5", 
+                        "EmitterType": "ConservativeEmitter", 
+                        "Enabled": true, 
+                        "FirstLayerSizeEWMA": 164, 
+                        "FirstLayerSizeRatio": "0.5", 
+                        "GTNBTolerance": "3", 
+                        "GTNBWaitTime": "15000", 
+                        "HCslip": "5", 
+                        "Id": 6097, 
+                        "Instruments": [
+                            {
+                                "CloseType": "CloseTodayPriority", 
+                                "InstrumentName": 17, 
+                                "IsConnect": true, 
+                                "Market": "XZ_MiniTap_2_H1_TapMarket"
+                            }
+                        ], 
+                        "IsDayTrade": true, 
+                        "IsNightTrade": false, 
+                        "LimitTrade": "0.3", 
+                        "LimitTrade2": "0.3", 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                        "MarketVolumeEWMA": 187, 
+                        "MarketVolumeRatio": "8", 
+                        "MaxBookPosition": "62", 
+                        "MaxPercent2Place": "0.1", 
+                        "MaxPositionSignal": 1, 
+                        "MinMaxPositionChangePercent": "0.2", 
+                        "MinQty2Place": "124", 
+                        "MinQty2PlaceSignal": 2, 
+                        "Name": "EHFV3_SR02_d", 
+                        "OrderType": "", 
+                        "Portfolio": 5897, 
+                        "PreHardCloseSpread": "0", 
+                        "Ranges": [
+                            {
+                                "Action": "BlockAll|CancelAll", 
+                                "END": "31:00.0", 
+                                "START": "29:55.0"
+                            }
+                        ], 
+                        "SpreadLimit": "3", 
+                        "SubStrategies": [
+                            455, 
+                            456, 
+                            457, 
+                            522
+                        ], 
+                        "Type": "HeFeiV3", 
+                        "WorseSelectAversion": "1", 
+                        "XD": "62", 
+                        "XDayAtSoftOpen": 0, 
+                        "XDayCloseLowerLimit": 0, 
+                        "XN": "0", 
+                        "XNightAtSoftOpen": 0, 
+                        "XNinghtCloseLowerLimit": 0
+                    }, 
+                    {
+                        "BestSizeRatio": "0.5", 
+                        "EmitterType": "ConservativeEmitter", 
+                        "Enabled": true, 
+                        "FirstLayerSizeEWMA": 165, 
+                        "FirstLayerSizeRatio": "0.5", 
+                        "GTNBTolerance": "3", 
+                        "GTNBWaitTime": "15000", 
+                        "HCslip": "5", 
+                        "Id": 6098, 
+                        "Instruments": [
+                            {
+                                "CloseType": "CloseTodayPriority", 
+                                "InstrumentName": 18, 
+                                "IsConnect": true, 
+                                "Market": "XZ_MiniTap_2_H1_TapMarket"
+                            }
+                        ], 
+                        "IsDayTrade": true, 
+                        "IsNightTrade": false, 
+                        "LimitTrade": "0.3", 
+                        "LimitTrade2": "0.3", 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                        "MarketVolumeEWMA": 188, 
+                        "MarketVolumeRatio": "8", 
+                        "MaxBookPosition": "9", 
+                        "MaxPercent2Place": "0.1", 
+                        "MaxPositionSignal": 1, 
+                        "MinMaxPositionChangePercent": "0.2", 
+                        "MinQty2Place": "18", 
+                        "MinQty2PlaceSignal": 2, 
+                        "Name": "EHFV3_SR03_d", 
+                        "OrderType": "", 
+                        "Portfolio": 5898, 
+                        "PreHardCloseSpread": "0", 
+                        "Ranges": [
+                            {
+                                "Action": "BlockAll|CancelAll", 
+                                "END": "31:00.0", 
+                                "START": "29:55.0"
+                            }
+                        ], 
+                        "SpreadLimit": "3", 
+                        "SubStrategies": [
+                            461, 
+                            462, 
+                            463
+                        ], 
+                        "Type": "HeFeiV3", 
+                        "WorseSelectAversion": "1", 
+                        "XD": "9", 
+                        "XDayAtSoftOpen": 0, 
+                        "XDayCloseLowerLimit": 0, 
+                        "XN": "0", 
+                        "XNightAtSoftOpen": 0, 
+                        "XNinghtCloseLowerLimit": 0
+                    }, 
+                    {
+                        "BestSizeRatio": "0.5", 
+                        "EmitterType": "ConservativeEmitter", 
+                        "Enabled": true, 
+                        "FirstLayerSizeEWMA": 166, 
+                        "FirstLayerSizeRatio": "0.5", 
+                        "GTNBTolerance": "3", 
+                        "GTNBWaitTime": "15000", 
+                        "HCslip": "5", 
+                        "Id": 6099, 
+                        "Instruments": [
+                            {
+                                "CloseType": "CloseTodayPriority", 
+                                "InstrumentName": 19, 
+                                "IsConnect": true, 
+                                "Market": "XZ_MiniTap_2_H1_TapMarket"
+                            }
+                        ], 
+                        "IsDayTrade": true, 
+                        "IsNightTrade": false, 
+                        "LimitTrade": "0.3", 
+                        "LimitTrade2": "0.3", 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                        "MarketVolumeEWMA": 189, 
+                        "MarketVolumeRatio": "8", 
+                        "MaxBookPosition": "202", 
+                        "MaxPercent2Place": "0.1", 
+                        "MaxPositionSignal": 1, 
+                        "MinMaxPositionChangePercent": "0.2", 
+                        "MinQty2Place": "404", 
+                        "MinQty2PlaceSignal": 2, 
+                        "Name": "EHFV3_TA01_d", 
+                        "OrderType": "", 
+                        "Portfolio": 5899, 
+                        "PreHardCloseSpread": "0", 
+                        "Ranges": [
+                            {
+                                "Action": "BlockAll|CancelAll", 
+                                "END": "31:00.0", 
+                                "START": "29:55.0"
+                            }
+                        ], 
+                        "SpreadLimit": "3", 
+                        "SubStrategies": [
+                            478, 
+                            479, 
+                            524
+                        ], 
+                        "Type": "HeFeiV3", 
+                        "WorseSelectAversion": "1", 
+                        "XD": "202", 
+                        "XDayAtSoftOpen": 0, 
+                        "XDayCloseLowerLimit": 0, 
+                        "XN": "0", 
+                        "XNightAtSoftOpen": 0, 
+                        "XNinghtCloseLowerLimit": 0
+                    }, 
+                    {
+                        "BestSizeRatio": "0.5", 
+                        "EmitterType": "ConservativeEmitter", 
+                        "Enabled": true, 
+                        "FirstLayerSizeEWMA": 167, 
+                        "FirstLayerSizeRatio": "0.5", 
+                        "GTNBTolerance": "3", 
+                        "GTNBWaitTime": "15000", 
+                        "HCslip": "5", 
+                        "Id": 6100, 
+                        "Instruments": [
+                            {
+                                "CloseType": "CloseTodayPriority", 
+                                "InstrumentName": 20, 
+                                "IsConnect": true, 
+                                "Market": "XZ_MiniTap_2_H1_TapMarket"
+                            }
+                        ], 
+                        "IsDayTrade": true, 
+                        "IsNightTrade": false, 
+                        "LimitTrade": "0.3", 
+                        "LimitTrade2": "0.3", 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                        "MarketVolumeEWMA": 190, 
+                        "MarketVolumeRatio": "8", 
+                        "MaxBookPosition": "37", 
+                        "MaxPercent2Place": "0.1", 
+                        "MaxPositionSignal": 1, 
+                        "MinMaxPositionChangePercent": "0.2", 
+                        "MinQty2Place": "74", 
+                        "MinQty2PlaceSignal": 2, 
+                        "Name": "EHFV3_TA02_d", 
+                        "OrderType": "", 
+                        "Portfolio": 5900, 
+                        "PreHardCloseSpread": "0", 
+                        "Ranges": [
+                            {
+                                "Action": "BlockAll|CancelAll", 
+                                "END": "31:00.0", 
+                                "START": "29:55.0"
+                            }
+                        ], 
+                        "SpreadLimit": "3", 
+                        "SubStrategies": [
+                            482, 
+                            483, 
+                            526
+                        ], 
+                        "Type": "HeFeiV3", 
+                        "WorseSelectAversion": "1", 
+                        "XD": "37", 
+                        "XDayAtSoftOpen": 0, 
+                        "XDayCloseLowerLimit": 0, 
+                        "XN": "0", 
+                        "XNightAtSoftOpen": 0, 
+                        "XNinghtCloseLowerLimit": 0
+                    }, 
+                    {
+                        "BestSizeRatio": "0.5", 
+                        "EmitterType": "ConservativeEmitter", 
+                        "Enabled": true, 
+                        "FirstLayerSizeEWMA": 168, 
+                        "FirstLayerSizeRatio": "0.5", 
+                        "GTNBTolerance": "3", 
+                        "GTNBWaitTime": "15000", 
+                        "HCslip": "5", 
+                        "Id": 6101, 
+                        "Instruments": [
+                            {
+                                "CloseType": "CloseTodayPriority", 
+                                "InstrumentName": 21, 
+                                "IsConnect": true, 
+                                "Market": "XZ_MiniTap_2_H1_TapMarket"
+                            }
+                        ], 
+                        "IsDayTrade": true, 
+                        "IsNightTrade": false, 
+                        "LimitTrade": "0.3", 
+                        "LimitTrade2": "0.3", 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                        "MarketVolumeEWMA": 191, 
+                        "MarketVolumeRatio": "8", 
+                        "MaxBookPosition": "20", 
+                        "MaxPercent2Place": "0.1", 
+                        "MaxPositionSignal": 1, 
+                        "MinMaxPositionChangePercent": "0.2", 
+                        "MinQty2Place": "40", 
+                        "MinQty2PlaceSignal": 2, 
+                        "Name": "EHFV3_TA03_d", 
+                        "OrderType": "", 
+                        "Portfolio": 5901, 
+                        "PreHardCloseSpread": "0", 
+                        "Ranges": [
+                            {
+                                "Action": "BlockAll|CancelAll", 
+                                "END": "31:00.0", 
+                                "START": "29:55.0"
+                            }
+                        ], 
+                        "SpreadLimit": "3", 
+                        "SubStrategies": [
+                            486, 
+                            487
+                        ], 
+                        "Type": "HeFeiV3", 
+                        "WorseSelectAversion": "1", 
+                        "XD": "20", 
+                        "XDayAtSoftOpen": 0, 
+                        "XDayCloseLowerLimit": 0, 
+                        "XN": "0", 
+                        "XNightAtSoftOpen": 0, 
+                        "XNinghtCloseLowerLimit": 0
+                    }, 
+                    {
+                        "BestSizeRatio": "0.5", 
+                        "EmitterType": "ConservativeEmitter", 
+                        "Enabled": true, 
+                        "FirstLayerSizeEWMA": 169, 
+                        "FirstLayerSizeRatio": "0.5", 
+                        "GTNBTolerance": "3", 
+                        "GTNBWaitTime": "15000", 
+                        "HCslip": "5", 
+                        "Id": 6102, 
+                        "Instruments": [
+                            {
+                                "CloseType": "CloseTodayPriority", 
+                                "InstrumentName": 22, 
+                                "IsConnect": true, 
+                                "Market": "XZ_MiniTap_2_H1_TapMarket"
+                            }
+                        ], 
+                        "IsDayTrade": true, 
+                        "IsNightTrade": false, 
+                        "LimitTrade": "0.3", 
+                        "LimitTrade2": "0.3", 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                        "MarketVolumeEWMA": 192, 
+                        "MarketVolumeRatio": "8", 
+                        "MaxBookPosition": "5", 
+                        "MaxPercent2Place": "0.1", 
+                        "MaxPositionSignal": 1, 
+                        "MinMaxPositionChangePercent": "0.2", 
+                        "MinQty2Place": "10", 
+                        "MinQty2PlaceSignal": 2, 
+                        "Name": "EHFV3_WH01_d", 
+                        "OrderType": "", 
+                        "Portfolio": 5902, 
+                        "PreHardCloseSpread": "0", 
+                        "Ranges": [
+                            {
+                                "Action": "BlockAll|CancelAll", 
+                                "END": "31:00.0", 
+                                "START": "29:55.0"
+                            }
+                        ], 
+                        "SpreadLimit": "3", 
+                        "SubStrategies": [
+                            507, 
+                            527
+                        ], 
+                        "Type": "HeFeiV3", 
+                        "WorseSelectAversion": "1", 
+                        "XD": "5", 
+                        "XDayAtSoftOpen": 0, 
+                        "XDayCloseLowerLimit": 0, 
+                        "XN": "0", 
+                        "XNightAtSoftOpen": 0, 
+                        "XNinghtCloseLowerLimit": 0
+                    }, 
+                    {
+                        "BestSizeRatio": "0.5", 
+                        "EmitterType": "ConservativeEmitter", 
+                        "Enabled": true, 
+                        "FirstLayerSizeEWMA": 170, 
+                        "FirstLayerSizeRatio": "0.5", 
+                        "GTNBTolerance": "3", 
+                        "GTNBWaitTime": "15000", 
+                        "HCslip": "5", 
+                        "Id": 6103, 
+                        "Instruments": [
+                            {
+                                "CloseType": "CloseTodayPriority", 
+                                "InstrumentName": 23, 
+                                "IsConnect": true, 
+                                "Market": "XZ_MiniTap_2_H1_TapMarket"
+                            }
+                        ], 
+                        "IsDayTrade": true, 
+                        "IsNightTrade": false, 
+                        "LimitTrade": "0.3", 
+                        "LimitTrade2": "0.3", 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                        "MarketVolumeEWMA": 193, 
+                        "MarketVolumeRatio": "8", 
+                        "MaxBookPosition": "2", 
+                        "MaxPercent2Place": "0.1", 
+                        "MaxPositionSignal": 1, 
+                        "MinMaxPositionChangePercent": "0.2", 
+                        "MinQty2Place": "4", 
+                        "MinQty2PlaceSignal": 2, 
+                        "Name": "EHFV3_WH02_d", 
+                        "OrderType": "", 
+                        "Portfolio": 5977, 
+                        "PreHardCloseSpread": "0", 
+                        "Ranges": [
+                            {
+                                "Action": "BlockAll|CancelAll", 
+                                "END": "31:00.0", 
+                                "START": "29:55.0"
+                            }
+                        ], 
+                        "SpreadLimit": "3", 
+                        "SubStrategies": [
+                            528
+                        ], 
+                        "Type": "HeFeiV3", 
+                        "WorseSelectAversion": "1", 
+                        "XD": "2", 
+                        "XDayAtSoftOpen": 0, 
+                        "XDayCloseLowerLimit": 0, 
+                        "XN": "0", 
+                        "XNightAtSoftOpen": 0, 
+                        "XNinghtCloseLowerLimit": 0
+                    }, 
+                    {
+                        "BestSizeRatio": "0.5", 
+                        "EmitterType": "ConservativeEmitter", 
+                        "Enabled": true, 
+                        "FirstLayerSizeEWMA": 171, 
+                        "FirstLayerSizeRatio": "0.5", 
+                        "GTNBTolerance": "3", 
+                        "GTNBWaitTime": "15000", 
+                        "HCslip": "5", 
+                        "Id": 6104, 
+                        "Instruments": [
+                            {
+                                "CloseType": "CloseTodayPriority", 
+                                "InstrumentName": 24, 
+                                "IsConnect": true, 
+                                "Market": "XZ_MiniTap_2_H1_TapMarket"
+                            }
+                        ], 
+                        "IsDayTrade": true, 
+                        "IsNightTrade": false, 
+                        "LimitTrade": "0.3", 
+                        "LimitTrade2": "0.3", 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                        "MarketVolumeEWMA": 194, 
+                        "MarketVolumeRatio": "8", 
+                        "MaxBookPosition": "20", 
+                        "MaxPercent2Place": "0.1", 
+                        "MaxPositionSignal": 1, 
+                        "MinMaxPositionChangePercent": "0.2", 
+                        "MinQty2Place": "40", 
+                        "MinQty2PlaceSignal": 2, 
+                        "Name": "EHFV3_ZC01_d", 
+                        "OrderType": "", 
+                        "Portfolio": 5903, 
+                        "PreHardCloseSpread": "0", 
+                        "Ranges": [
+                            {
+                                "Action": "BlockAll|CancelAll", 
+                                "END": "31:00.0", 
+                                "START": "29:55.0"
+                            }
+                        ], 
+                        "SpreadLimit": "3", 
+                        "SubStrategies": [
+                            490, 
+                            491
+                        ], 
+                        "Type": "HeFeiV3", 
+                        "WorseSelectAversion": "1", 
+                        "XD": "20", 
+                        "XDayAtSoftOpen": 0, 
+                        "XDayCloseLowerLimit": 0, 
+                        "XN": "0", 
+                        "XNightAtSoftOpen": 0, 
+                        "XNinghtCloseLowerLimit": 0
+                    }, 
+                    {
+                        "BestSizeRatio": "0.5", 
+                        "EmitterType": "ConservativeEmitter", 
+                        "Enabled": true, 
+                        "FirstLayerSizeEWMA": 172, 
+                        "FirstLayerSizeRatio": "0.5", 
+                        "GTNBTolerance": "3", 
+                        "GTNBWaitTime": "15000", 
+                        "HCslip": "5", 
+                        "Id": 6105, 
+                        "Instruments": [
+                            {
+                                "CloseType": "CloseTodayPriority", 
+                                "InstrumentName": 25, 
+                                "IsConnect": true, 
+                                "Market": "XZ_MiniTap_2_H1_TapMarket"
+                            }
+                        ], 
+                        "IsDayTrade": true, 
+                        "IsNightTrade": false, 
+                        "LimitTrade": "0.3", 
+                        "LimitTrade2": "0.3", 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                        "MarketVolumeEWMA": 195, 
+                        "MarketVolumeRatio": "8", 
+                        "MaxBookPosition": "6", 
+                        "MaxPercent2Place": "0.1", 
+                        "MaxPositionSignal": 1, 
+                        "MinMaxPositionChangePercent": "0.2", 
+                        "MinQty2Place": "12", 
+                        "MinQty2PlaceSignal": 2, 
+                        "Name": "EHFV3_ZC02_d", 
+                        "OrderType": "", 
+                        "Portfolio": 5975, 
+                        "PreHardCloseSpread": "0", 
+                        "Ranges": [
+                            {
+                                "Action": "BlockAll|CancelAll", 
+                                "END": "31:00.0", 
+                                "START": "29:55.0"
+                            }
+                        ], 
+                        "SpreadLimit": "3", 
+                        "SubStrategies": [
+                            508, 
+                            509
+                        ], 
+                        "Type": "HeFeiV3", 
+                        "WorseSelectAversion": "1", 
+                        "XD": "6", 
+                        "XDayAtSoftOpen": 0, 
+                        "XDayCloseLowerLimit": 0, 
+                        "XN": "0", 
+                        "XNightAtSoftOpen": 0, 
+                        "XNinghtCloseLowerLimit": 0
+                    }, 
+                    {
+                        "BestSizeRatio": "0.5", 
+                        "EmitterType": "ConservativeEmitter", 
+                        "Enabled": true, 
+                        "FirstLayerSizeEWMA": 150, 
+                        "FirstLayerSizeRatio": "0.5", 
+                        "GTNBTolerance": "3", 
+                        "GTNBWaitTime": "15000", 
+                        "HCslip": "5", 
+                        "Id": 6106, 
+                        "Instruments": [
+                            {
+                                "CloseType": "CloseTodayPriority", 
+                                "InstrumentName": 3, 
+                                "IsConnect": true, 
+                                "Market": "XZ_MiniTap_2_H1_TapMarket"
+                            }
+                        ], 
+                        "IsDayTrade": false, 
+                        "IsNightTrade": true, 
+                        "LimitTrade": "0.3", 
+                        "LimitTrade2": "0.3", 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                        "MarketVolumeEWMA": 173, 
+                        "MarketVolumeRatio": "8", 
+                        "MaxBookPosition": "32", 
+                        "MaxPercent2Place": "0.1", 
+                        "MaxPositionSignal": 1, 
+                        "MinMaxPositionChangePercent": "0.2", 
+                        "MinQty2Place": "64", 
+                        "MinQty2PlaceSignal": 2, 
+                        "Name": "EHFV3_CF01_n", 
+                        "OrderType": "", 
+                        "Portfolio": 5885, 
+                        "PreHardCloseSpread": "0", 
+                        "Ranges": [
+                            {
+                                "Action": "BlockAll|CancelAll", 
+                                "END": "31:00.0", 
+                                "START": "29:55.0"
+                            }
+                        ], 
+                        "SpreadLimit": "3", 
+                        "SubStrategies": [
+                            420, 
+                            421, 
+                            422, 
+                            512
+                        ], 
+                        "Type": "HeFeiV3", 
+                        "WorseSelectAversion": "1", 
+                        "XD": "0", 
+                        "XDayAtSoftOpen": 0, 
+                        "XDayCloseLowerLimit": 0, 
+                        "XN": "32", 
+                        "XNightAtSoftOpen": 0, 
+                        "XNinghtCloseLowerLimit": 0
+                    }, 
+                    {
+                        "BestSizeRatio": "0.5", 
+                        "EmitterType": "ConservativeEmitter", 
+                        "Enabled": true, 
+                        "FirstLayerSizeEWMA": 151, 
+                        "FirstLayerSizeRatio": "0.5", 
+                        "GTNBTolerance": "3", 
+                        "GTNBWaitTime": "15000", 
+                        "HCslip": "5", 
+                        "Id": 6107, 
+                        "Instruments": [
+                            {
+                                "CloseType": "CloseTodayPriority", 
+                                "InstrumentName": 4, 
+                                "IsConnect": true, 
+                                "Market": "XZ_MiniTap_2_H1_TapMarket"
+                            }
+                        ], 
+                        "IsDayTrade": false, 
+                        "IsNightTrade": true, 
+                        "LimitTrade": "0.3", 
+                        "LimitTrade2": "0.3", 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                        "MarketVolumeEWMA": 174, 
+                        "MarketVolumeRatio": "8", 
+                        "MaxBookPosition": "15", 
+                        "MaxPercent2Place": "0.1", 
+                        "MaxPositionSignal": 1, 
+                        "MinMaxPositionChangePercent": "0.2", 
+                        "MinQty2Place": "30", 
+                        "MinQty2PlaceSignal": 2, 
+                        "Name": "EHFV3_CF02_n", 
+                        "OrderType": "", 
+                        "Portfolio": 5886, 
+                        "PreHardCloseSpread": "0", 
+                        "Ranges": [
+                            {
+                                "Action": "BlockAll|CancelAll", 
+                                "END": "31:00.0", 
+                                "START": "29:55.0"
+                            }
+                        ], 
+                        "SpreadLimit": "3", 
+                        "SubStrategies": [
+                            426, 
+                            427, 
+                            428
+                        ], 
+                        "Type": "HeFeiV3", 
+                        "WorseSelectAversion": "1", 
+                        "XD": "0", 
+                        "XDayAtSoftOpen": 0, 
+                        "XDayCloseLowerLimit": 0, 
+                        "XN": "15", 
+                        "XNightAtSoftOpen": 0, 
+                        "XNinghtCloseLowerLimit": 0
+                    }, 
+                    {
+                        "BestSizeRatio": "0.5", 
+                        "EmitterType": "ConservativeEmitter", 
+                        "Enabled": true, 
+                        "FirstLayerSizeEWMA": 152, 
+                        "FirstLayerSizeRatio": "0.5", 
+                        "GTNBTolerance": "3", 
+                        "GTNBWaitTime": "15000", 
+                        "HCslip": "5", 
+                        "Id": 6108, 
+                        "Instruments": [
+                            {
+                                "CloseType": "CloseTodayPriority", 
+                                "InstrumentName": 5, 
+                                "IsConnect": true, 
+                                "Market": "XZ_MiniTap_2_H1_TapMarket"
+                            }
+                        ], 
+                        "IsDayTrade": false, 
+                        "IsNightTrade": true, 
+                        "LimitTrade": "0.3", 
+                        "LimitTrade2": "0.3", 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                        "MarketVolumeEWMA": 175, 
+                        "MarketVolumeRatio": "8", 
+                        "MaxBookPosition": "3", 
+                        "MaxPercent2Place": "0.1", 
+                        "MaxPositionSignal": 1, 
+                        "MinMaxPositionChangePercent": "0.2", 
+                        "MinQty2Place": "6", 
+                        "MinQty2PlaceSignal": 2, 
+                        "Name": "EHFV3_CF03_n", 
+                        "OrderType": "", 
+                        "Portfolio": 5887, 
+                        "PreHardCloseSpread": "0", 
+                        "Ranges": [
+                            {
+                                "Action": "BlockAll|CancelAll", 
+                                "END": "31:00.0", 
+                                "START": "29:55.0"
+                            }
+                        ], 
+                        "SpreadLimit": "3", 
+                        "SubStrategies": [
+                            431
+                        ], 
+                        "Type": "HeFeiV3", 
+                        "WorseSelectAversion": "1", 
+                        "XD": "0", 
+                        "XDayAtSoftOpen": 0, 
+                        "XDayCloseLowerLimit": 0, 
+                        "XN": "3", 
+                        "XNightAtSoftOpen": 0, 
+                        "XNinghtCloseLowerLimit": 0
+                    }, 
+                    {
+                        "BestSizeRatio": "0.5", 
+                        "EmitterType": "ConservativeEmitter", 
+                        "Enabled": true, 
+                        "FirstLayerSizeEWMA": 153, 
+                        "FirstLayerSizeRatio": "0.5", 
+                        "GTNBTolerance": "3", 
+                        "GTNBWaitTime": "15000", 
+                        "HCslip": "5", 
+                        "Id": 6109, 
+                        "Instruments": [
+                            {
+                                "CloseType": "CloseTodayPriority", 
+                                "InstrumentName": 6, 
+                                "IsConnect": true, 
+                                "Market": "XZ_MiniTap_2_H1_TapMarket"
+                            }
+                        ], 
+                        "IsDayTrade": false, 
+                        "IsNightTrade": true, 
+                        "LimitTrade": "0.3", 
+                        "LimitTrade2": "0.3", 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                        "MarketVolumeEWMA": 176, 
+                        "MarketVolumeRatio": "8", 
+                        "MaxBookPosition": "2", 
+                        "MaxPercent2Place": "0.1", 
+                        "MaxPositionSignal": 1, 
+                        "MinMaxPositionChangePercent": "0.2", 
+                        "MinQty2Place": "4", 
+                        "MinQty2PlaceSignal": 2, 
+                        "Name": "EHFV3_FG01_n", 
+                        "OrderType": "", 
+                        "Portfolio": 5888, 
+                        "PreHardCloseSpread": "0", 
+                        "Ranges": [
+                            {
+                                "Action": "BlockAll|CancelAll", 
+                                "END": "31:00.0", 
+                                "START": "29:55.0"
+                            }
+                        ], 
+                        "SpreadLimit": "3", 
+                        "SubStrategies": [
+                            504
+                        ], 
+                        "Type": "HeFeiV3", 
+                        "WorseSelectAversion": "1", 
+                        "XD": "0", 
+                        "XDayAtSoftOpen": 0, 
+                        "XDayCloseLowerLimit": 0, 
+                        "XN": "2", 
+                        "XNightAtSoftOpen": 0, 
+                        "XNinghtCloseLowerLimit": 0
+                    }, 
+                    {
+                        "BestSizeRatio": "0.5", 
+                        "EmitterType": "ConservativeEmitter", 
+                        "Enabled": true, 
+                        "FirstLayerSizeEWMA": 154, 
+                        "FirstLayerSizeRatio": "0.5", 
+                        "GTNBTolerance": "3", 
+                        "GTNBWaitTime": "15000", 
+                        "HCslip": "5", 
+                        "Id": 6110, 
+                        "Instruments": [
+                            {
+                                "CloseType": "CloseTodayPriority", 
+                                "InstrumentName": 7, 
+                                "IsConnect": true, 
+                                "Market": "XZ_MiniTap_2_H1_TapMarket"
+                            }
+                        ], 
+                        "IsDayTrade": false, 
+                        "IsNightTrade": true, 
+                        "LimitTrade": "0.3", 
+                        "LimitTrade2": "0.3", 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                        "MarketVolumeEWMA": 177, 
+                        "MarketVolumeRatio": "8", 
+                        "MaxBookPosition": "2", 
+                        "MaxPercent2Place": "0.1", 
+                        "MaxPositionSignal": 1, 
+                        "MinMaxPositionChangePercent": "0.2", 
+                        "MinQty2Place": "4", 
+                        "MinQty2PlaceSignal": 2, 
+                        "Name": "EHFV3_FG02_n", 
+                        "OrderType": "", 
+                        "Portfolio": 5889, 
+                        "PreHardCloseSpread": "0", 
+                        "Ranges": [
+                            {
+                                "Action": "BlockAll|CancelAll", 
+                                "END": "31:00.0", 
+                                "START": "29:55.0"
+                            }
+                        ], 
+                        "SpreadLimit": "3", 
+                        "SubStrategies": [
+                            506
+                        ], 
+                        "Type": "HeFeiV3", 
+                        "WorseSelectAversion": "1", 
+                        "XD": "0", 
+                        "XDayAtSoftOpen": 0, 
+                        "XDayCloseLowerLimit": 0, 
+                        "XN": "2", 
+                        "XNightAtSoftOpen": 0, 
+                        "XNinghtCloseLowerLimit": 0
+                    }, 
+                    {
+                        "BestSizeRatio": "0.5", 
+                        "EmitterType": "ConservativeEmitter", 
+                        "Enabled": true, 
+                        "FirstLayerSizeEWMA": 155, 
+                        "FirstLayerSizeRatio": "0.5", 
+                        "GTNBTolerance": "3", 
+                        "GTNBWaitTime": "15000", 
+                        "HCslip": "5", 
+                        "Id": 6111, 
+                        "Instruments": [
+                            {
+                                "CloseType": "CloseTodayPriority", 
+                                "InstrumentName": 8, 
+                                "IsConnect": true, 
+                                "Market": "XZ_MiniTap_2_H1_TapMarket"
+                            }
+                        ], 
+                        "IsDayTrade": false, 
+                        "IsNightTrade": true, 
+                        "LimitTrade": "0.3", 
+                        "LimitTrade2": "0.3", 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                        "MarketVolumeEWMA": 178, 
+                        "MarketVolumeRatio": "8", 
+                        "MaxBookPosition": "62", 
+                        "MaxPercent2Place": "0.1", 
+                        "MaxPositionSignal": 1, 
+                        "MinMaxPositionChangePercent": "0.2", 
+                        "MinQty2Place": "124", 
+                        "MinQty2PlaceSignal": 2, 
+                        "Name": "EHFV3_MA01_n", 
+                        "OrderType": "", 
+                        "Portfolio": 5890, 
+                        "PreHardCloseSpread": "0", 
+                        "Ranges": [
+                            {
+                                "Action": "BlockAll|CancelAll", 
+                                "END": "31:00.0", 
+                                "START": "29:55.0"
+                            }
+                        ], 
+                        "SpreadLimit": "3", 
+                        "SubStrategies": [
+                            435, 
+                            436, 
+                            437, 
+                            514
+                        ], 
+                        "Type": "HeFeiV3", 
+                        "WorseSelectAversion": "1", 
+                        "XD": "0", 
+                        "XDayAtSoftOpen": 0, 
+                        "XDayCloseLowerLimit": 0, 
+                        "XN": "62", 
+                        "XNightAtSoftOpen": 0, 
+                        "XNinghtCloseLowerLimit": 0
+                    }, 
+                    {
+                        "BestSizeRatio": "0.5", 
+                        "EmitterType": "ConservativeEmitter", 
+                        "Enabled": true, 
+                        "FirstLayerSizeEWMA": 156, 
+                        "FirstLayerSizeRatio": "0.5", 
+                        "GTNBTolerance": "3", 
+                        "GTNBWaitTime": "15000", 
+                        "HCslip": "5", 
+                        "Id": 6112, 
+                        "Instruments": [
+                            {
+                                "CloseType": "CloseTodayPriority", 
+                                "InstrumentName": 9, 
+                                "IsConnect": true, 
+                                "Market": "XZ_MiniTap_2_H1_TapMarket"
+                            }
+                        ], 
+                        "IsDayTrade": false, 
+                        "IsNightTrade": true, 
+                        "LimitTrade": "0.3", 
+                        "LimitTrade2": "0.3", 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                        "MarketVolumeEWMA": 179, 
+                        "MarketVolumeRatio": "8", 
+                        "MaxBookPosition": "15", 
+                        "MaxPercent2Place": "0.1", 
+                        "MaxPositionSignal": 1, 
+                        "MinMaxPositionChangePercent": "0.2", 
+                        "MinQty2Place": "30", 
+                        "MinQty2PlaceSignal": 2, 
+                        "Name": "EHFV3_MA02_n", 
+                        "OrderType": "", 
+                        "Portfolio": 5891, 
+                        "PreHardCloseSpread": "0", 
+                        "Ranges": [
+                            {
+                                "Action": "BlockAll|CancelAll", 
+                                "END": "31:00.0", 
+                                "START": "29:55.0"
+                            }
+                        ], 
+                        "SpreadLimit": "3", 
+                        "SubStrategies": [
+                            441, 
+                            442, 
+                            443
+                        ], 
+                        "Type": "HeFeiV3", 
+                        "WorseSelectAversion": "1", 
+                        "XD": "0", 
+                        "XDayAtSoftOpen": 0, 
+                        "XDayCloseLowerLimit": 0, 
+                        "XN": "15", 
+                        "XNightAtSoftOpen": 0, 
+                        "XNinghtCloseLowerLimit": 0
+                    }, 
+                    {
+                        "BestSizeRatio": "0.5", 
+                        "EmitterType": "ConservativeEmitter", 
+                        "Enabled": true, 
+                        "FirstLayerSizeEWMA": 157, 
+                        "FirstLayerSizeRatio": "0.5", 
+                        "GTNBTolerance": "3", 
+                        "GTNBWaitTime": "15000", 
+                        "HCslip": "5", 
+                        "Id": 6113, 
+                        "Instruments": [
+                            {
+                                "CloseType": "CloseTodayPriority", 
+                                "InstrumentName": 10, 
+                                "IsConnect": true, 
+                                "Market": "XZ_MiniTap_2_H1_TapMarket"
+                            }
+                        ], 
+                        "IsDayTrade": false, 
+                        "IsNightTrade": true, 
+                        "LimitTrade": "0.3", 
+                        "LimitTrade2": "0.3", 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                        "MarketVolumeEWMA": 180, 
+                        "MarketVolumeRatio": "8", 
+                        "MaxBookPosition": "6", 
+                        "MaxPercent2Place": "0.1", 
+                        "MaxPositionSignal": 1, 
+                        "MinMaxPositionChangePercent": "0.2", 
+                        "MinQty2Place": "12", 
+                        "MinQty2PlaceSignal": 2, 
+                        "Name": "EHFV3_MA03_n", 
+                        "OrderType": "", 
+                        "Portfolio": 5892, 
+                        "PreHardCloseSpread": "0", 
+                        "Ranges": [
+                            {
+                                "Action": "BlockAll|CancelAll", 
+                                "END": "31:00.0", 
+                                "START": "29:55.0"
+                            }
+                        ], 
+                        "SpreadLimit": "3", 
+                        "SubStrategies": [
+                            447, 
+                            448
+                        ], 
+                        "Type": "HeFeiV3", 
+                        "WorseSelectAversion": "1", 
+                        "XD": "0", 
+                        "XDayAtSoftOpen": 0, 
+                        "XDayCloseLowerLimit": 0, 
+                        "XN": "6", 
+                        "XNightAtSoftOpen": 0, 
+                        "XNinghtCloseLowerLimit": 0
+                    }, 
+                    {
+                        "BestSizeRatio": "0.5", 
+                        "EmitterType": "ConservativeEmitter", 
+                        "Enabled": true, 
+                        "FirstLayerSizeEWMA": 158, 
+                        "FirstLayerSizeRatio": "0.5", 
+                        "GTNBTolerance": "3", 
+                        "GTNBWaitTime": "15000", 
+                        "HCslip": "5", 
+                        "Id": 6114, 
+                        "Instruments": [
+                            {
+                                "CloseType": "CloseTodayPriority", 
+                                "InstrumentName": 11, 
+                                "IsConnect": true, 
+                                "Market": "XZ_MiniTap_2_H1_TapMarket"
+                            }
+                        ], 
+                        "IsDayTrade": false, 
+                        "IsNightTrade": true, 
+                        "LimitTrade": "0.3", 
+                        "LimitTrade2": "0.3", 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                        "MarketVolumeEWMA": 181, 
+                        "MarketVolumeRatio": "8", 
+                        "MaxBookPosition": "23", 
+                        "MaxPercent2Place": "0.1", 
+                        "MaxPositionSignal": 1, 
+                        "MinMaxPositionChangePercent": "0.2", 
+                        "MinQty2Place": "46", 
+                        "MinQty2PlaceSignal": 2, 
+                        "Name": "EHFV3_OI01_n", 
+                        "OrderType": "", 
+                        "Portfolio": 5893, 
+                        "PreHardCloseSpread": "0", 
+                        "Ranges": [
+                            {
+                                "Action": "BlockAll|CancelAll", 
+                                "END": "31:00.0", 
+                                "START": "29:55.0"
+                            }
+                        ], 
+                        "SpreadLimit": "3", 
+                        "SubStrategies": [
+                            496, 
+                            497, 
+                            498, 
+                            516
+                        ], 
+                        "Type": "HeFeiV3", 
+                        "WorseSelectAversion": "1", 
+                        "XD": "0", 
+                        "XDayAtSoftOpen": 0, 
+                        "XDayCloseLowerLimit": 0, 
+                        "XN": "23", 
+                        "XNightAtSoftOpen": 0, 
+                        "XNinghtCloseLowerLimit": 0
+                    }, 
+                    {
+                        "BestSizeRatio": "0.5", 
+                        "EmitterType": "ConservativeEmitter", 
+                        "Enabled": true, 
+                        "FirstLayerSizeEWMA": 159, 
+                        "FirstLayerSizeRatio": "0.5", 
+                        "GTNBTolerance": "3", 
+                        "GTNBWaitTime": "15000", 
+                        "HCslip": "5", 
+                        "Id": 6115, 
+                        "Instruments": [
+                            {
+                                "CloseType": "CloseTodayPriority", 
+                                "InstrumentName": 12, 
+                                "IsConnect": true, 
+                                "Market": "XZ_MiniTap_2_H1_TapMarket"
+                            }
+                        ], 
+                        "IsDayTrade": false, 
+                        "IsNightTrade": true, 
+                        "LimitTrade": "0.3", 
+                        "LimitTrade2": "0.3", 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                        "MarketVolumeEWMA": 182, 
+                        "MarketVolumeRatio": "8", 
+                        "MaxBookPosition": "3", 
+                        "MaxPercent2Place": "0.1", 
+                        "MaxPositionSignal": 1, 
+                        "MinMaxPositionChangePercent": "0.2", 
+                        "MinQty2Place": "6", 
+                        "MinQty2PlaceSignal": 2, 
+                        "Name": "EHFV3_OI02_n", 
+                        "OrderType": "", 
+                        "Portfolio": 5894, 
+                        "PreHardCloseSpread": "0", 
+                        "Ranges": [
+                            {
+                                "Action": "BlockAll|CancelAll", 
+                                "END": "31:00.0", 
+                                "START": "29:55.0"
+                            }
+                        ], 
+                        "SpreadLimit": "3", 
+                        "SubStrategies": [
+                            502
+                        ], 
+                        "Type": "HeFeiV3", 
+                        "WorseSelectAversion": "1", 
+                        "XD": "0", 
+                        "XDayAtSoftOpen": 0, 
+                        "XDayCloseLowerLimit": 0, 
+                        "XN": "3", 
+                        "XNightAtSoftOpen": 0, 
+                        "XNinghtCloseLowerLimit": 0
+                    }, 
+                    {
+                        "BestSizeRatio": "0.5", 
+                        "EmitterType": "ConservativeEmitter", 
+                        "Enabled": true, 
+                        "FirstLayerSizeEWMA": 160, 
+                        "FirstLayerSizeRatio": "0.5", 
+                        "GTNBTolerance": "3", 
+                        "GTNBWaitTime": "15000", 
+                        "HCslip": "5", 
+                        "Id": 6116, 
+                        "Instruments": [
+                            {
+                                "CloseType": "CloseTodayPriority", 
+                                "InstrumentName": 13, 
+                                "IsConnect": true, 
+                                "Market": "XZ_MiniTap_2_H1_TapMarket"
+                            }
+                        ], 
+                        "IsDayTrade": false, 
+                        "IsNightTrade": true, 
+                        "LimitTrade": "0.3", 
+                        "LimitTrade2": "0.3", 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                        "MarketVolumeEWMA": 183, 
+                        "MarketVolumeRatio": "8", 
+                        "MaxBookPosition": "102", 
+                        "MaxPercent2Place": "0.1", 
+                        "MaxPositionSignal": 1, 
+                        "MinMaxPositionChangePercent": "0.2", 
+                        "MinQty2Place": "204", 
+                        "MinQty2PlaceSignal": 2, 
+                        "Name": "EHFV3_RM01_n", 
+                        "OrderType": "", 
+                        "Portfolio": 5895, 
+                        "PreHardCloseSpread": "0", 
+                        "Ranges": [
+                            {
+                                "Action": "BlockAll|CancelAll", 
+                                "END": "31:00.0", 
+                                "START": "29:55.0"
+                            }
+                        ], 
+                        "SpreadLimit": "3", 
+                        "SubStrategies": [
+                            469, 
+                            470, 
+                            519
+                        ], 
+                        "Type": "HeFeiV3", 
+                        "WorseSelectAversion": "1", 
+                        "XD": "0", 
+                        "XDayAtSoftOpen": 0, 
+                        "XDayCloseLowerLimit": 0, 
+                        "XN": "102", 
+                        "XNightAtSoftOpen": 0, 
+                        "XNinghtCloseLowerLimit": 0
+                    }, 
+                    {
+                        "BestSizeRatio": "0.5", 
+                        "EmitterType": "ConservativeEmitter", 
+                        "Enabled": true, 
+                        "FirstLayerSizeEWMA": 161, 
+                        "FirstLayerSizeRatio": "0.5", 
+                        "GTNBTolerance": "3", 
+                        "GTNBWaitTime": "15000", 
+                        "HCslip": "5", 
+                        "Id": 6117, 
+                        "Instruments": [
+                            {
+                                "CloseType": "CloseTodayPriority", 
+                                "InstrumentName": 14, 
+                                "IsConnect": true, 
+                                "Market": "XZ_MiniTap_2_H1_TapMarket"
+                            }
+                        ], 
+                        "IsDayTrade": false, 
+                        "IsNightTrade": true, 
+                        "LimitTrade": "0.3", 
+                        "LimitTrade2": "0.3", 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                        "MarketVolumeEWMA": 184, 
+                        "MarketVolumeRatio": "8", 
+                        "MaxBookPosition": "22", 
+                        "MaxPercent2Place": "0.1", 
+                        "MaxPositionSignal": 1, 
+                        "MinMaxPositionChangePercent": "0.2", 
+                        "MinQty2Place": "44", 
+                        "MinQty2PlaceSignal": 2, 
+                        "Name": "EHFV3_RM02_n", 
+                        "OrderType": "", 
+                        "Portfolio": 5855, 
+                        "PreHardCloseSpread": "0", 
+                        "Ranges": [
+                            {
+                                "Action": "BlockAll|CancelAll", 
+                                "END": "31:00.0", 
+                                "START": "29:55.0"
+                            }
+                        ], 
+                        "SpreadLimit": "3", 
+                        "SubStrategies": [
+                            474, 
+                            475, 
+                            520
+                        ], 
+                        "Type": "HeFeiV3", 
+                        "WorseSelectAversion": "1", 
+                        "XD": "0", 
+                        "XDayAtSoftOpen": 0, 
+                        "XDayCloseLowerLimit": 0, 
+                        "XN": "22", 
+                        "XNightAtSoftOpen": 0, 
+                        "XNinghtCloseLowerLimit": 0
+                    }, 
+                    {
+                        "BestSizeRatio": "0.5", 
+                        "EmitterType": "ConservativeEmitter", 
+                        "Enabled": true, 
+                        "FirstLayerSizeEWMA": 162, 
+                        "FirstLayerSizeRatio": "0.5", 
+                        "GTNBTolerance": "3", 
+                        "GTNBWaitTime": "15000", 
+                        "HCslip": "5", 
+                        "Id": 6118, 
+                        "Instruments": [
+                            {
+                                "CloseType": "CloseTodayPriority", 
+                                "InstrumentName": 15, 
+                                "IsConnect": true, 
+                                "Market": "XZ_MiniTap_2_H1_TapMarket"
+                            }
+                        ], 
+                        "IsDayTrade": false, 
+                        "IsNightTrade": true, 
+                        "LimitTrade": "0.3", 
+                        "LimitTrade2": "0.3", 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                        "MarketVolumeEWMA": 185, 
+                        "MarketVolumeRatio": "8", 
+                        "MaxBookPosition": "4", 
+                        "MaxPercent2Place": "0.1", 
+                        "MaxPositionSignal": 1, 
+                        "MinMaxPositionChangePercent": "0.2", 
+                        "MinQty2Place": "8", 
+                        "MinQty2PlaceSignal": 2, 
+                        "Name": "EHFV3_RM03_n", 
+                        "OrderType": "", 
+                        "Portfolio": 5856, 
+                        "PreHardCloseSpread": "0", 
+                        "Ranges": [
+                            {
+                                "Action": "BlockAll|CancelAll", 
+                                "END": "31:00.0", 
+                                "START": "29:55.0"
+                            }
+                        ], 
+                        "SpreadLimit": "3", 
+                        "SubStrategies": [
+                            477
+                        ], 
+                        "Type": "HeFeiV3", 
+                        "WorseSelectAversion": "1", 
+                        "XD": "0", 
+                        "XDayAtSoftOpen": 0, 
+                        "XDayCloseLowerLimit": 0, 
+                        "XN": "4", 
+                        "XNightAtSoftOpen": 0, 
+                        "XNinghtCloseLowerLimit": 0
+                    }, 
+                    {
+                        "BestSizeRatio": "0.5", 
+                        "EmitterType": "ConservativeEmitter", 
+                        "Enabled": true, 
+                        "FirstLayerSizeEWMA": 163, 
+                        "FirstLayerSizeRatio": "0.5", 
+                        "GTNBTolerance": "3", 
+                        "GTNBWaitTime": "15000", 
+                        "HCslip": "5", 
+                        "Id": 6119, 
+                        "Instruments": [
+                            {
+                                "CloseType": "CloseTodayPriority", 
+                                "InstrumentName": 16, 
+                                "IsConnect": true, 
+                                "Market": "XZ_MiniTap_2_H1_TapMarket"
+                            }
+                        ], 
+                        "IsDayTrade": false, 
+                        "IsNightTrade": true, 
+                        "LimitTrade": "0.3", 
+                        "LimitTrade2": "0.3", 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                        "MarketVolumeEWMA": 186, 
+                        "MarketVolumeRatio": "8", 
+                        "MaxBookPosition": "182", 
+                        "MaxPercent2Place": "0.1", 
+                        "MaxPositionSignal": 1, 
+                        "MinMaxPositionChangePercent": "0.2", 
+                        "MinQty2Place": "364", 
+                        "MinQty2PlaceSignal": 2, 
+                        "Name": "EHFV3_SR01_n", 
+                        "OrderType": "", 
+                        "Portfolio": 5896, 
+                        "PreHardCloseSpread": "0", 
+                        "Ranges": [
+                            {
+                                "Action": "BlockAll|CancelAll", 
+                                "END": "31:00.0", 
+                                "START": "29:55.0"
+                            }
+                        ], 
+                        "SpreadLimit": "3", 
+                        "SubStrategies": [
+                            452, 
+                            453, 
+                            454, 
+                            521
+                        ], 
+                        "Type": "HeFeiV3", 
+                        "WorseSelectAversion": "1", 
+                        "XD": "0", 
+                        "XDayAtSoftOpen": 0, 
+                        "XDayCloseLowerLimit": 0, 
+                        "XN": "182", 
+                        "XNightAtSoftOpen": 0, 
+                        "XNinghtCloseLowerLimit": 0
+                    }, 
+                    {
+                        "BestSizeRatio": "0.5", 
+                        "EmitterType": "ConservativeEmitter", 
+                        "Enabled": true, 
+                        "FirstLayerSizeEWMA": 164, 
+                        "FirstLayerSizeRatio": "0.5", 
+                        "GTNBTolerance": "3", 
+                        "GTNBWaitTime": "15000", 
+                        "HCslip": "5", 
+                        "Id": 6120, 
+                        "Instruments": [
+                            {
+                                "CloseType": "CloseTodayPriority", 
+                                "InstrumentName": 17, 
+                                "IsConnect": true, 
+                                "Market": "XZ_MiniTap_2_H1_TapMarket"
+                            }
+                        ], 
+                        "IsDayTrade": false, 
+                        "IsNightTrade": true, 
+                        "LimitTrade": "0.3", 
+                        "LimitTrade2": "0.3", 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                        "MarketVolumeEWMA": 187, 
+                        "MarketVolumeRatio": "8", 
+                        "MaxBookPosition": "47", 
+                        "MaxPercent2Place": "0.1", 
+                        "MaxPositionSignal": 1, 
+                        "MinMaxPositionChangePercent": "0.2", 
+                        "MinQty2Place": "94", 
+                        "MinQty2PlaceSignal": 2, 
+                        "Name": "EHFV3_SR02_n", 
+                        "OrderType": "", 
+                        "Portfolio": 5897, 
+                        "PreHardCloseSpread": "0", 
+                        "Ranges": [
+                            {
+                                "Action": "BlockAll|CancelAll", 
+                                "END": "31:00.0", 
+                                "START": "29:55.0"
+                            }
+                        ], 
+                        "SpreadLimit": "3", 
+                        "SubStrategies": [
+                            458, 
+                            459, 
+                            460, 
+                            523
+                        ], 
+                        "Type": "HeFeiV3", 
+                        "WorseSelectAversion": "1", 
+                        "XD": "0", 
+                        "XDayAtSoftOpen": 0, 
+                        "XDayCloseLowerLimit": 0, 
+                        "XN": "47", 
+                        "XNightAtSoftOpen": 0, 
+                        "XNinghtCloseLowerLimit": 0
+                    }, 
+                    {
+                        "BestSizeRatio": "0.5", 
+                        "EmitterType": "ConservativeEmitter", 
+                        "Enabled": true, 
+                        "FirstLayerSizeEWMA": 165, 
+                        "FirstLayerSizeRatio": "0.5", 
+                        "GTNBTolerance": "3", 
+                        "GTNBWaitTime": "15000", 
+                        "HCslip": "5", 
+                        "Id": 6121, 
+                        "Instruments": [
+                            {
+                                "CloseType": "CloseTodayPriority", 
+                                "InstrumentName": 18, 
+                                "IsConnect": true, 
+                                "Market": "XZ_MiniTap_2_H1_TapMarket"
+                            }
+                        ], 
+                        "IsDayTrade": false, 
+                        "IsNightTrade": true, 
+                        "LimitTrade": "0.3", 
+                        "LimitTrade2": "0.3", 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                        "MarketVolumeEWMA": 188, 
+                        "MarketVolumeRatio": "8", 
+                        "MaxBookPosition": "6", 
+                        "MaxPercent2Place": "0.1", 
+                        "MaxPositionSignal": 1, 
+                        "MinMaxPositionChangePercent": "0.2", 
+                        "MinQty2Place": "12", 
+                        "MinQty2PlaceSignal": 2, 
+                        "Name": "EHFV3_SR03_n", 
+                        "OrderType": "", 
+                        "Portfolio": 5898, 
+                        "PreHardCloseSpread": "0", 
+                        "Ranges": [
+                            {
+                                "Action": "BlockAll|CancelAll", 
+                                "END": "31:00.0", 
+                                "START": "29:55.0"
+                            }
+                        ], 
+                        "SpreadLimit": "3", 
+                        "SubStrategies": [
+                            464, 
+                            465
+                        ], 
+                        "Type": "HeFeiV3", 
+                        "WorseSelectAversion": "1", 
+                        "XD": "0", 
+                        "XDayAtSoftOpen": 0, 
+                        "XDayCloseLowerLimit": 0, 
+                        "XN": "6", 
+                        "XNightAtSoftOpen": 0, 
+                        "XNinghtCloseLowerLimit": 0
+                    }, 
+                    {
+                        "BestSizeRatio": "0.5", 
+                        "EmitterType": "ConservativeEmitter", 
+                        "Enabled": true, 
+                        "FirstLayerSizeEWMA": 166, 
+                        "FirstLayerSizeRatio": "0.5", 
+                        "GTNBTolerance": "3", 
+                        "GTNBWaitTime": "15000", 
+                        "HCslip": "5", 
+                        "Id": 6122, 
+                        "Instruments": [
+                            {
+                                "CloseType": "CloseTodayPriority", 
+                                "InstrumentName": 19, 
+                                "IsConnect": true, 
+                                "Market": "XZ_MiniTap_2_H1_TapMarket"
+                            }
+                        ], 
+                        "IsDayTrade": false, 
+                        "IsNightTrade": true, 
+                        "LimitTrade": "0.3", 
+                        "LimitTrade2": "0.3", 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                        "MarketVolumeEWMA": 189, 
+                        "MarketVolumeRatio": "8", 
+                        "MaxBookPosition": "62", 
+                        "MaxPercent2Place": "0.1", 
+                        "MaxPositionSignal": 1, 
+                        "MinMaxPositionChangePercent": "0.2", 
+                        "MinQty2Place": "124", 
+                        "MinQty2PlaceSignal": 2, 
+                        "Name": "EHFV3_TA01_n", 
+                        "OrderType": "", 
+                        "Portfolio": 5899, 
+                        "PreHardCloseSpread": "0", 
+                        "Ranges": [
+                            {
+                                "Action": "BlockAll|CancelAll", 
+                                "END": "31:00.0", 
+                                "START": "29:55.0"
+                            }
+                        ], 
+                        "SpreadLimit": "3", 
+                        "SubStrategies": [
+                            480, 
+                            481, 
+                            525
+                        ], 
+                        "Type": "HeFeiV3", 
+                        "WorseSelectAversion": "1", 
+                        "XD": "0", 
+                        "XDayAtSoftOpen": 0, 
+                        "XDayCloseLowerLimit": 0, 
+                        "XN": "62", 
+                        "XNightAtSoftOpen": 0, 
+                        "XNinghtCloseLowerLimit": 0
+                    }, 
+                    {
+                        "BestSizeRatio": "0.5", 
+                        "EmitterType": "ConservativeEmitter", 
+                        "Enabled": true, 
+                        "FirstLayerSizeEWMA": 167, 
+                        "FirstLayerSizeRatio": "0.5", 
+                        "GTNBTolerance": "3", 
+                        "GTNBWaitTime": "15000", 
+                        "HCslip": "5", 
+                        "Id": 6123, 
+                        "Instruments": [
+                            {
+                                "CloseType": "CloseTodayPriority", 
+                                "InstrumentName": 20, 
+                                "IsConnect": true, 
+                                "Market": "XZ_MiniTap_2_H1_TapMarket"
+                            }
+                        ], 
+                        "IsDayTrade": false, 
+                        "IsNightTrade": true, 
+                        "LimitTrade": "0.3", 
+                        "LimitTrade2": "0.3", 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                        "MarketVolumeEWMA": 190, 
+                        "MarketVolumeRatio": "8", 
+                        "MaxBookPosition": "20", 
+                        "MaxPercent2Place": "0.1", 
+                        "MaxPositionSignal": 1, 
+                        "MinMaxPositionChangePercent": "0.2", 
+                        "MinQty2Place": "40", 
+                        "MinQty2PlaceSignal": 2, 
+                        "Name": "EHFV3_TA02_n", 
+                        "OrderType": "", 
+                        "Portfolio": 5900, 
+                        "PreHardCloseSpread": "0", 
+                        "Ranges": [
+                            {
+                                "Action": "BlockAll|CancelAll", 
+                                "END": "31:00.0", 
+                                "START": "29:55.0"
+                            }
+                        ], 
+                        "SpreadLimit": "3", 
+                        "SubStrategies": [
+                            484, 
+                            485
+                        ], 
+                        "Type": "HeFeiV3", 
+                        "WorseSelectAversion": "1", 
+                        "XD": "0", 
+                        "XDayAtSoftOpen": 0, 
+                        "XDayCloseLowerLimit": 0, 
+                        "XN": "20", 
+                        "XNightAtSoftOpen": 0, 
+                        "XNinghtCloseLowerLimit": 0
+                    }, 
+                    {
+                        "BestSizeRatio": "0.5", 
+                        "EmitterType": "ConservativeEmitter", 
+                        "Enabled": true, 
+                        "FirstLayerSizeEWMA": 168, 
+                        "FirstLayerSizeRatio": "0.5", 
+                        "GTNBTolerance": "3", 
+                        "GTNBWaitTime": "15000", 
+                        "HCslip": "5", 
+                        "Id": 6124, 
+                        "Instruments": [
+                            {
+                                "CloseType": "CloseTodayPriority", 
+                                "InstrumentName": 21, 
+                                "IsConnect": true, 
+                                "Market": "XZ_MiniTap_2_H1_TapMarket"
+                            }
+                        ], 
+                        "IsDayTrade": false, 
+                        "IsNightTrade": true, 
+                        "LimitTrade": "0.3", 
+                        "LimitTrade2": "0.3", 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                        "MarketVolumeEWMA": 191, 
+                        "MarketVolumeRatio": "8", 
+                        "MaxBookPosition": "12", 
+                        "MaxPercent2Place": "0.1", 
+                        "MaxPositionSignal": 1, 
+                        "MinMaxPositionChangePercent": "0.2", 
+                        "MinQty2Place": "24", 
+                        "MinQty2PlaceSignal": 2, 
+                        "Name": "EHFV3_TA03_n", 
+                        "OrderType": "", 
+                        "Portfolio": 5901, 
+                        "PreHardCloseSpread": "0", 
+                        "Ranges": [
+                            {
+                                "Action": "BlockAll|CancelAll", 
+                                "END": "31:00.0", 
+                                "START": "29:55.0"
+                            }
+                        ], 
+                        "SpreadLimit": "3", 
+                        "SubStrategies": [
+                            488, 
+                            489
+                        ], 
+                        "Type": "HeFeiV3", 
+                        "WorseSelectAversion": "1", 
+                        "XD": "0", 
+                        "XDayAtSoftOpen": 0, 
+                        "XDayCloseLowerLimit": 0, 
+                        "XN": "12", 
+                        "XNightAtSoftOpen": 0, 
+                        "XNinghtCloseLowerLimit": 0
+                    }, 
+                    {
+                        "BestSizeRatio": "0.5", 
+                        "EmitterType": "ConservativeEmitter", 
+                        "Enabled": true, 
+                        "FirstLayerSizeEWMA": 171, 
+                        "FirstLayerSizeRatio": "0.5", 
+                        "GTNBTolerance": "3", 
+                        "GTNBWaitTime": "15000", 
+                        "HCslip": "5", 
+                        "Id": 6125, 
+                        "Instruments": [
+                            {
+                                "CloseType": "CloseTodayPriority", 
+                                "InstrumentName": 24, 
+                                "IsConnect": true, 
+                                "Market": "XZ_MiniTap_2_H1_TapMarket"
+                            }
+                        ], 
+                        "IsDayTrade": false, 
+                        "IsNightTrade": true, 
+                        "LimitTrade": "0.3", 
+                        "LimitTrade2": "0.3", 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                        "MarketVolumeEWMA": 194, 
+                        "MarketVolumeRatio": "8", 
+                        "MaxBookPosition": "22", 
+                        "MaxPercent2Place": "0.1", 
+                        "MaxPositionSignal": 1, 
+                        "MinMaxPositionChangePercent": "0.2", 
+                        "MinQty2Place": "44", 
+                        "MinQty2PlaceSignal": 2, 
+                        "Name": "EHFV3_ZC01_n", 
+                        "OrderType": "", 
+                        "Portfolio": 5903, 
+                        "PreHardCloseSpread": "0", 
+                        "Ranges": [
+                            {
+                                "Action": "BlockAll|CancelAll", 
+                                "END": "31:00.0", 
+                                "START": "29:55.0"
+                            }
+                        ], 
+                        "SpreadLimit": "3", 
+                        "SubStrategies": [
+                            492, 
+                            493, 
+                            529
+                        ], 
+                        "Type": "HeFeiV3", 
+                        "WorseSelectAversion": "1", 
+                        "XD": "0", 
+                        "XDayAtSoftOpen": 0, 
+                        "XDayCloseLowerLimit": 0, 
+                        "XN": "22", 
+                        "XNightAtSoftOpen": 0, 
+                        "XNinghtCloseLowerLimit": 0
+                    }, 
+                    {
+                        "BestSizeRatio": "0.5", 
+                        "EmitterType": "ConservativeEmitter", 
+                        "Enabled": true, 
+                        "FirstLayerSizeEWMA": 172, 
+                        "FirstLayerSizeRatio": "0.5", 
+                        "GTNBTolerance": "3", 
+                        "GTNBWaitTime": "15000", 
+                        "HCslip": "5", 
+                        "Id": 6126, 
+                        "Instruments": [
+                            {
+                                "CloseType": "CloseTodayPriority", 
+                                "InstrumentName": 25, 
+                                "IsConnect": true, 
+                                "Market": "XZ_MiniTap_2_H1_TapMarket"
+                            }
+                        ], 
+                        "IsDayTrade": false, 
+                        "IsNightTrade": true, 
+                        "LimitTrade": "0.3", 
+                        "LimitTrade2": "0.3", 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                        "MarketVolumeEWMA": 195, 
+                        "MarketVolumeRatio": "8", 
+                        "MaxBookPosition": "5", 
+                        "MaxPercent2Place": "0.1", 
+                        "MaxPositionSignal": 1, 
+                        "MinMaxPositionChangePercent": "0.2", 
+                        "MinQty2Place": "10", 
+                        "MinQty2PlaceSignal": 2, 
+                        "Name": "EHFV3_ZC02_n", 
+                        "OrderType": "", 
+                        "Portfolio": 5975, 
+                        "PreHardCloseSpread": "0", 
+                        "Ranges": [
+                            {
+                                "Action": "BlockAll|CancelAll", 
+                                "END": "31:00.0", 
+                                "START": "29:55.0"
+                            }
+                        ], 
+                        "SpreadLimit": "3", 
+                        "SubStrategies": [
+                            510, 
+                            530
+                        ], 
+                        "Type": "HeFeiV3", 
+                        "WorseSelectAversion": "1", 
+                        "XD": "0", 
+                        "XDayAtSoftOpen": 0, 
+                        "XDayCloseLowerLimit": 0, 
+                        "XN": "5", 
+                        "XNightAtSoftOpen": 0, 
+                        "XNinghtCloseLowerLimit": 0
+                    }
+                ], 
+                "Type": "BasketStrategy"
+            }
+        ], 
+        "Id": 6131, 
+        "Name": "DFC", 
+        "Strategies": [
+            {
+                "EmitterType": "ConservativeEmitter", 
+                "Enabled": true, 
+                "GTNBTolerance": "3", 
+                "GTNBWaitTime": "15000", 
+                "HCslip": "5", 
+                "Id": 6127, 
+                "Instruments": [
+                    {
+                        "CloseType": "CloseTodayPriority", 
+                        "InstrumentName": 19, 
+                        "IsConnect": false, 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket"
+                    }
+                ], 
+                "IsDayTrade": true, 
+                "IsNightTrade": true, 
+                "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                "MatchStrategyId": 6082, 
+                "MatchType": "", 
+                "MinMaxPositionChangePercent": "", 
+                "Name": "hz_TA01_MP1", 
+                "OrderType": "", 
+                "Portfolio": 6054, 
+                "PreHardCloseSpread": 0, 
+                "Ranges": [], 
+                "Signal": 414, 
+                "Type": "HongZe", 
+                "XD": "1", 
+                "XN": "1"
+            }, 
+            {
+                "EmitterType": "ConservativeEmitter", 
+                "Enabled": true, 
+                "GTNBTolerance": "3", 
+                "GTNBWaitTime": "15000", 
+                "HCslip": "5", 
+                "Id": 6128, 
+                "Instruments": [
+                    {
+                        "CloseType": "CloseTodayPriority", 
+                        "InstrumentName": 8, 
+                        "IsConnect": false, 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket"
+                    }
+                ], 
+                "IsDayTrade": true, 
+                "IsNightTrade": true, 
+                "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                "MatchStrategyId": 6082, 
+                "MatchType": "", 
+                "MinMaxPositionChangePercent": "", 
+                "Name": "hz_MA01_MP1", 
+                "OrderType": "", 
+                "Portfolio": 6080, 
+                "PreHardCloseSpread": 0, 
+                "Ranges": [], 
+                "Signal": 415, 
+                "Type": "HongZe", 
+                "XD": "1", 
+                "XN": "1"
+            }, 
+            {
+                "CloseDays": [
+                    "20150308", 
+                    "20150308"
+                ], 
+                "CloseTime": "14:59:50", 
+                "DealOptimizer": 1457, 
+                "EmitterType": "ConservativeEmitter", 
+                "Enabled": true, 
+                "GTNBTolerance": "3", 
+                "GTNBWaitTime": "15000", 
+                "HCslip": "5", 
+                "Id": 6129, 
+                "ImmediatelyLimit": "0.0006", 
+                "Instruments": [
+                    {
+                        "InstrumentName": 72, 
+                        "IsConnect": false, 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket"
+                    }, 
+                    {
+                        "InstrumentName": 74, 
+                        "IsConnect": false, 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket"
+                    }, 
+                    {
+                        "InstrumentName": 73, 
+                        "IsConnect": false, 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket"
+                    }, 
+                    {
+                        "InstrumentName": 75, 
+                        "IsConnect": false, 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket"
+                    }
+                ], 
+                "IsDayTrade": true, 
+                "IsNightTrade": true, 
+                "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                "MatchStrategyId": 6082, 
+                "MatchType": "test", 
+                "MinMaxPositionChangePercent": "0.1", 
+                "Name": "Q_MA01_MP1", 
+                "Optimizer": 1456, 
+                "OrderType": "", 
+                "Portfolio": 2716, 
+                "PreHardCloseSpread": "0", 
+                "Ranges": [
+                    {
+                        "Action": "BlockAll|CancelAll", 
+                        "END": "23:31:00.000", 
+                        "START": "23:29:55.000"
+                    }
+                ], 
+                "Type": "Quark", 
+                "XD": "1", 
+                "XN": "0"
+            }, 
+            {
+                "EmitterType": "ConservativeEmitter", 
+                "Enabled": true, 
+                "GTNBTolerance": "3", 
+                "GTNBWaitTime": "15000", 
+                "HCslip": "5", 
+                "Id": 6130, 
+                "Instruments": [
+                    {
+                        "CloseType": "CloseTodayPriority", 
+                        "InstrumentName": 72, 
+                        "IsConnect": false, 
+                        "LessOptimizer": 1896, 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                        "MinEdgeDist": 4.0, 
+                        "MoreOptimizer": 1892
+                    }, 
+                    {
+                        "CloseType": "CloseTodayPriority", 
+                        "InstrumentName": 74, 
+                        "IsConnect": false, 
+                        "LessOptimizer": 1898, 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                        "MinEdgeDist": 8.0, 
+                        "MoreOptimizer": 1894
+                    }, 
+                    {
+                        "CloseType": "CloseTodayPriority", 
+                        "InstrumentName": 73, 
+                        "IsConnect": false, 
+                        "LessOptimizer": 1897, 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                        "MinEdgeDist": 4.0, 
+                        "MoreOptimizer": 1893
+                    }, 
+                    {
+                        "CloseType": "CloseTodayPriority", 
+                        "InstrumentName": 75, 
+                        "IsConnect": false, 
+                        "LessOptimizer": 1899, 
+                        "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                        "MinEdgeDist": 8.0, 
+                        "MoreOptimizer": 1895
+                    }
+                ], 
+                "IsDayTrade": true, 
+                "IsNightTrade": true, 
+                "Market": "XZ_MiniTap_2_H1_TapMarket", 
+                "MatchType": "CustomeMatching", 
+                "MaxDepth2Place": "10", 
+                "MaxOrderPlaceEdge": "0.02", 
+                "MaxPosition4Place": "2000000", 
+                "MaxRiskPosition4Place": "6000000", 
+                "MinDepth2Keep": "5", 
+                "MinEdgeDist": "0", 
+                "MinMaxPositionChangePercent": "0.1", 
+                "Name": "QAM_MA01_MP1", 
+                "OrderPlaceEdge": "0.003", 
+                "OrderType": "OTGFD", 
+                "Portfolio": 2716, 
+                "PreHardCloseSpread": "0", 
+                "QuarkId": 6129, 
+                "Ranges": [
+                    {
+                        "Action": "BlockAll|CancelAll", 
+                        "END": "23:31:00.000", 
+                        "START": "23:29:55.000"
+                    }
+                ], 
+                "RiskPortfolio": 5, 
+                "RiskaversionFactor": "0.0005", 
+                "SecurityLimit": "1", 
+                "Type": "QuarkAMM", 
+                "XD": "1", 
+                "XN": "0"
+            }
+        ], 
+        "Type": "Automaton"
+    }
+]

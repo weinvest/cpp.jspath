@@ -365,4 +365,17 @@ double convert2Real(const std::string& str, size_t from, size_t to)
 
     throw std::logic_error(str + " could not be interpreted as real");
 }
+
+bool isSpace(const std::string& str, int& from, int to, int step)
+{
+    for(; from != to; from += step)
+    {
+        if(!std::isspace(str[from]))
+        {
+            return false;
+        }
+    }
+    
+    return true;
+}
 }

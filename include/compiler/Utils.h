@@ -17,6 +17,7 @@ namespace jspath
     bool isBool(const std::string& str, size_t from, size_t to);
     bool isInt(const std::string& str, size_t from, size_t to);
     bool isReal(const std::string& str, size_t from, size_t to);
+    bool isSpace(const std::string& str, int& from, int to, int step);
 
     bool convert2Bool(const std::string& str, size_t from, size_t to);
     int convert2Int(const std::string& str, size_t from, size_t to);
