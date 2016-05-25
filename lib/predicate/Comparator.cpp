@@ -123,17 +123,17 @@ bool CompareJson(std::shared_ptr<Operand> op1
                     return true;
                 }
             }
-            else if(child.is_boolean() && Operand::Bool == t1)
+            else if((child.is_boolean() && Operand::Bool == t1) && (child.get<bool>() == op1->getBoolValue(cxt, variables)))
             {
-                return child.get<bool>() == op1->getBoolValue(cxt, variables);
+                return true;
             }
-            else if(child.is_number_integer() && Operand::Integer == t1)
+            else if((child.is_number_integer() && Operand::Integer == t1) && (child.get<int>() == op1->getIntValue(cxt, variables)))
             {
-                return child.get<int>() == op1->getIntValue(cxt, variables);
+                return true;
             }
-            else if(child.is_number_float() && Operand::Real == t1)
+            else if((child.is_number_float() && Operand::Real == t1) && (child.get<double>() == op1->getRealValue(cxt, variables)))
             {
-                return child.get<double>() == op1->getRealValue(cxt, variables);
+                return true;
             }
             else if(isStrict)
             {
