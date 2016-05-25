@@ -123,13 +123,24 @@ bool CompareJson(std::shared_ptr<Operand> op1
                     return true;
                 }
             }
+            else if(child.is_boolean() && Operand::Bool == t1)
+            {
+                return child.get<bool>() == op1->getBoolValue(cxt, variables);
+            }
+            else if(child.is_number_integer() && Operand::Integer == t1)
+            {
+                return child.get<int>() == op1->getIntValue(cxt, variables);
+            }
+            else if(child.is_number_float() && Operand::Real == t1)
+            {
+                return child.get<double>() == op1->getRealValue(cxt, variables);
+            }
+            else if(isStrict)
+            {
+                continue;
+            }
             else if(child.is_string())
             {
-                if(isStrict)
-                {
-                    continue;
-                }
-
                 auto s = child.get<std::string>();
                 auto size = s.size();
                 switch (t1)
@@ -159,11 +170,6 @@ bool CompareJson(std::shared_ptr<Operand> op1
             }
             else
             {
-                if(isStrict)
-                {
-                    continue;
-                }
-
                 if(child.is_boolean()
                     && op1->canConvert2(Operand::Bool, cxt, variables)
                     && child.get<bool>() == op1->getBoolValue(cxt, variables))
